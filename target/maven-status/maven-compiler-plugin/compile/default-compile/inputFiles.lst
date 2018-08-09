@@ -1,0 +1,17 @@
+/home/fedor/IdeaProjects/sweater/src/main/java/com/example/sweater/controller/MainController.java
+/home/fedor/IdeaProjects/sweater/src/main/java/com/example/sweater/controller/UserConroller.java
+/home/fedor/IdeaProjects/sweater/src/main/java/com/example/sweater/repos/MessageRepo.java
+/home/fedor/IdeaProjects/sweater/src/main/java/com/example/sweater/service/UserService.java
+/home/fedor/IdeaProjects/sweater/src/main/java/com/example/sweater/config/EncriptionConfig.java
+/home/fedor/IdeaProjects/sweater/src/main/java/com/example/sweater/domain/dto/CaptchaResponseDto.java
+/home/fedor/IdeaProjects/sweater/src/main/java/com/example/sweater/Application.java
+/home/fedor/IdeaProjects/sweater/src/main/java/com/example/sweater/domain/Role.java
+/home/fedor/IdeaProjects/sweater/src/main/java/com/example/sweater/config/MailConfig.java
+/home/fedor/IdeaProjects/sweater/src/main/java/com/example/sweater/config/MvcConfig.java
+/home/fedor/IdeaProjects/sweater/src/main/java/com/example/sweater/repos/UserRepo.java
+/home/fedor/IdeaProjects/sweater/src/main/java/com/example/sweater/controller/RegistrationController.java
+/home/fedor/IdeaProjects/sweater/src/main/java/com/example/sweater/service/MailSender.java
+/home/fedor/IdeaProjects/sweater/src/main/java/com/example/sweater/controller/ControllerUtils.java
+/home/fedor/IdeaProjects/sweater/src/main/java/com/example/sweater/domain/User.java
+/home/fedor/IdeaProjects/sweater/src/main/java/com/example/sweater/config/WebSecurityConfig.java
+/home/fedor/IdeaProjects/sweater/src/main/java/com/example/sweater/domain/Message.java
