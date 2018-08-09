@@ -1,7 +1,9 @@
 package com.example.sweater.controller;
 
+import com.example.sweater.domain.Category;
 import com.example.sweater.domain.Message;
 import com.example.sweater.domain.User;
+import com.example.sweater.repos.CategoryRepo;
 import com.example.sweater.repos.MessageRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -31,6 +33,9 @@ public class CategoryController {
     @Autowired
     private MessageRepo messageRepo;
 
+    @Autowired
+    private CategoryRepo categoryRepo;
+
     @Value("${upload.path}")
     private String uploadPath;
 
@@ -39,53 +44,53 @@ public class CategoryController {
         return "greeting";
     }
 
-    @GetMapping("/Categories")
+    @GetMapping("/categories")
     public String main(@RequestParam(required = false, defaultValue = "") String filter, Model model) {
-        Iterable<Message> messages = messageRepo.findAll();
+        Iterable<Category> categories = categoryRepo.findAll();
 
         if (filter != null && !filter.isEmpty()) {
-            messages = messageRepo.findByTag(filter);
+            categories = categoryRepo.findByCategoryname(filter);
         } else {
-            messages = messageRepo.findAll();
+            categories = categoryRepo.findAll();
         }
 
-        model.addAttribute("messages", messages);
+        model.addAttribute("categories", categories);
         model.addAttribute("filter", filter);
 
-        return "Categories";
+        return "categories";
     }
 
-    @PostMapping("/Categories")
+    @PostMapping("/categories")
     public String add(
             @AuthenticationPrincipal User user,
-            @Valid Message message,
+            @Valid Category category,
             BindingResult bindingResult,
             Model model,
             @RequestParam("file") MultipartFile file
     ) throws IOException {
-        message.setAuthor(user);
+        //message.setAuthor(user);
 
         if (bindingResult.hasErrors()) {
             Map<String, String> errorsMap = ControllerUtils.getErrors(bindingResult);
 
             model.mergeAttributes(errorsMap);
-            model.addAttribute("message", message);
+            model.addAttribute("category", category);
         } else {
-            saveFile(message, file);
+            saveFile(category, file);
 
-            model.addAttribute("message", null);
+            model.addAttribute("category", null);
 
-            messageRepo.save(message);
+            categoryRepo.save(category);
         }
 
-        Iterable<Message> messages = messageRepo.findAll();
+        Iterable<Category> categories = categoryRepo.findAll();
 
-        model.addAttribute("messages", messages);
+        model.addAttribute("categories", categories);
 
-        return "Categories";
+        return "categories";
     }
 
-    private void saveFile(@Valid Message message, @RequestParam("file") MultipartFile file) throws IOException {
+    private void saveFile(@Valid Category category, @RequestParam("file") MultipartFile file) throws IOException {
         if (file != null && !file.getOriginalFilename().isEmpty()) {
             File uploadDir = new File(uploadPath);
 
@@ -98,7 +103,7 @@ public class CategoryController {
 
             file.transferTo(new File(uploadPath + "/" + resultFilename));
 
-            message.setFilename(resultFilename);
+            category.setFilename(resultFilename);
         }
     }
 
@@ -141,7 +146,7 @@ public class CategoryController {
                 message.setTag(tag);
             }
 
-            saveFile(message, file);
+//            saveFile(message, file);
 
             messageRepo.save(message);
         }

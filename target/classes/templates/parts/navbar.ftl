@@ -14,10 +14,10 @@
             </li>
             <#if user??>
                 <li class="nav-item">
-                    <a class="nav-link" href="/Categories">Categories</a>
+                    <a class="nav-link" href="/categories">Categories</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="/user-messages/${currentUserId}">My Messages</a>
+                    <a class="nav-link" href="/user-messages/${currentUserId}">My Stats</a>
                 </li>
             </#if>
             <#if isAdmin>
