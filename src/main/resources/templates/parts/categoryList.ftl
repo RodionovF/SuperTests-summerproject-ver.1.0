@@ -13,12 +13,11 @@
                     <#--<i>#${message.tag}</i>-->
                 </div>
                 <div class="card-footer text-muted">
-                    ${category.categoryname}
                     <#--<a href="/user-messages/${message.author.id}">${message.authorName}</a>-->
                     <#--<#if message.author.id == currentUserId>-->
-                        <#--<a class="btn btn-primary" href="/user-messages/${message.author.id}?message=${message.id}">-->
-                            <#--Edit-->
-                        <#--</a>-->
+                        <a class="btn btn-primary" href="/categories/${category.categoryname}?message=${category.categoryname}">
+                            ${category.categoryname}
+                        </a>
                     <#--</#if>-->
                 </div>
             </div>
