@@ -15,7 +15,7 @@
                 <div class="card-footer text-muted">
                     <#--<a href="/user-messages/${message.author.id}">${message.authorName}</a>-->
                     <#--<#if message.author.id == currentUserId>-->
-                        <a class="btn btn-primary" href="/categories/${category.categoryname}?message=${category.categoryname}">
+                        <a class="btn btn-primary" href="/categories/${category.category_id}" >
                             ${category.categoryname}
                         </a>
                     <#--</#if>-->

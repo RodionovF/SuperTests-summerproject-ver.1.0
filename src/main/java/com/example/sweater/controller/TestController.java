@@ -1,5 +1,6 @@
 package com.example.sweater.controller;
 
+import com.example.sweater.domain.Category;
 import com.example.sweater.domain.Message;
 import com.example.sweater.domain.User;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
@@ -19,11 +20,12 @@ import java.util.Set;
 public class TestController {
 
     @GetMapping("/categories/{category}")
-    public String userMessges(
+    public String testsMain(
 //            @AuthenticationPrincipal User currentUser,
-//            @PathVariable User user,
-//            Model model,
-//            @RequestParam(required = false) Message message
+            Model model,
+            @PathVariable Category category
+            //@RequestParam(name = "category") Category categorys
+            //@RequestParam(required = false) Message message
     ) {
 //        Set<Message> messages = user.getMessages();
 //
@@ -32,35 +34,17 @@ public class TestController {
 //        model.addAttribute("subscribersCount", user.getSubscribers().size());
 //        model.addAttribute("isSubscriber", user.getSubscribers().contains(currentUser));
 //        model.addAttribute("messages", messages);
-//        model.addAttribute("message", message);
+        model.addAttribute("category", category);
 //        model.addAttribute("isCurrentUser", currentUser.equals(user));
 
         return "tests";
     }
 
-    @PostMapping("/categories/{category}")
-    public String updateMessage(
-//            @AuthenticationPrincipal User currentUser,
-//            @PathVariable Long user,
-//            @RequestParam("id") Message message,
-//            @RequestParam("text") String text,
-//            @RequestParam("tag") String tag,
-//            @RequestParam("file") MultipartFile file
-    ) throws IOException {
-//        if (message.getAuthor().equals(currentUser)) {
-//            if (!StringUtils.isEmpty(text)) {
-//                message.setText(text);
-//            }
-//
-//            if (!StringUtils.isEmpty(tag)) {
-//                message.setTag(tag);
-//            }
-//
-////            saveFile(message, file);
-//
-//
-//        }
+    @PostMapping("categories/{category}/create-mode")
+    public String testsCreating(
 
-        return "redirect:/categories/{category}";
+    ) {
+        return "testCreating";
     }
+
 }

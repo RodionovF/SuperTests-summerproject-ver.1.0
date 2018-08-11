@@ -24,8 +24,8 @@ public class Category {
 
     }
 
-    public Category(String name) {
-        this.categoryname = name ;
+    public Category(String category) {
+        this.categoryname = category ;
     }
 
     public Long getCategory_id() {

@@ -3,7 +3,7 @@
 
 
 <@c.page>
-<div class="form-row">
+<div class="form-row mt-3">
     <div class="form-group col-md-6">
         <form method="get" action="/categories" class="form-inline">
             <input type="text" name="filter" class="form-control" value="${filter?ifExists}"

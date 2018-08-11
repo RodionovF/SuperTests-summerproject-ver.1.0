@@ -6,7 +6,7 @@
         <form method="post" enctype="multipart/form-data">
             <div class="form-group">
                 <input type="text" class="form-control ${(textError??)?string('is-invalid', '')}"
-                       value="<#if category??>${category.categoryname}</#if>" name="categoryname" placeholder="Введите название категории" />
+                       value="<#if category??>${category.categoryname}</#if>" name="categoryname" placeholder="Enter category name" />
                 <#if textError??>
                     <div class="invalid-feedback">
                         ${textError}

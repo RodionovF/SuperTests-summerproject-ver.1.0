@@ -45,7 +45,10 @@ public class CategoryController {
     }
 
     @GetMapping("/categories")
-    public String main(@RequestParam(required = false, defaultValue = "") String filter, Model model) {
+    public String main(
+            @RequestParam(required = false, defaultValue = "") String filter,
+            Model model
+    ) {
         Iterable<Category> categories = categoryRepo.findAll();
 
         if (filter != null && !filter.isEmpty()) {
@@ -90,7 +93,10 @@ public class CategoryController {
         return "categories";
     }
 
-    private void saveFile(@Valid Category category, @RequestParam("file") MultipartFile file) throws IOException {
+    private void saveFile(
+            @Valid Category category,
+            @RequestParam("file") MultipartFile file
+    ) throws IOException {
         if (file != null && !file.getOriginalFilename().isEmpty()) {
             File uploadDir = new File(uploadPath);
 
@@ -106,7 +112,6 @@ public class CategoryController {
             category.setFilename(resultFilename);
         }
     }
-
 
     @GetMapping("/user-messages/{user}")
     public String userMessges(
