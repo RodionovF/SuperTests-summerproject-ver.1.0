@@ -40,11 +40,21 @@ public class TestController {
         return "tests";
     }
 
-    @PostMapping("categories/{category}/create-mode")
-    public String testsCreating(
+    @GetMapping("categories/{category}/create-mode")
+    public String testsView(
 
     ) {
-        return "testCreating";
+        return  "testsCreating";
     }
+
+    @PostMapping("categories/{category}/create-mode")
+    public String testsCreating(
+            @PathVariable Category category
+    ) {
+        return  "redirect:/categories/" + category.getCategory_id();
+    }
+
+
+
 
 }

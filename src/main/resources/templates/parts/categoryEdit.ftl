@@ -29,7 +29,7 @@
                 </div>
             </div>
             <input type="hidden" name="_csrf" value="${_csrf.token}" />
-            <input type="hidden" name="id" value="<#if category??>${category.id}</#if>" />
+            <input type="hidden" name="id" value="<#if category??>${category.category_id}</#if>" />
             <div class="form-group">
                 <button type="submit" class="btn btn-primary">Save category</button>
             </div>

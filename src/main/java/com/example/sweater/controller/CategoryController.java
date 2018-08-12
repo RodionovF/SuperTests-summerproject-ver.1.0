@@ -113,49 +113,37 @@ public class CategoryController {
         }
     }
 
-    @GetMapping("/user-messages/{user}")
-    public String userMessges(
+    @GetMapping("/edit-category/{category}")
+    public String editCategorys(
             @AuthenticationPrincipal User currentUser,
-            @PathVariable User user,
             Model model,
-            @RequestParam(required = false) Message message
+            @PathVariable Category category
     ) {
-        Set<Message> messages = user.getMessages();
+        Iterable<Category> categories = categoryRepo.findAll();
+        model.addAttribute("categories", categories);
+        model.addAttribute("category", category);
 
-        model.addAttribute("userChannel", user);
-        model.addAttribute("subscriptionsCount", user.getSubscriptions().size());
-        model.addAttribute("subscribersCount", user.getSubscribers().size());
-        model.addAttribute("isSubscriber", user.getSubscribers().contains(currentUser));
-        model.addAttribute("messages", messages);
-        model.addAttribute("message", message);
-        model.addAttribute("isCurrentUser", currentUser.equals(user));
 
         return "userMessages";
     }
 
-    @PostMapping("/user-messages/{user}")
-    public String updateMessage(
-            @AuthenticationPrincipal User currentUser,
-            @PathVariable Long user,
-            @RequestParam("id") Message message,
-            @RequestParam("text") String text,
-            @RequestParam("tag") String tag,
+    @PostMapping("/edit-category/{category}")
+    public String updateCategory(
+            @PathVariable Category category,
+            @RequestParam("categoryname") String categoryname,
             @RequestParam("file") MultipartFile file
     ) throws IOException {
-        if (message.getAuthor().equals(currentUser)) {
-            if (!StringUtils.isEmpty(text)) {
-                message.setText(text);
-            }
 
-            if (!StringUtils.isEmpty(tag)) {
-                message.setTag(tag);
-            }
-
-//            saveFile(message, file);
-
-            messageRepo.save(message);
+        if (!StringUtils.isEmpty(categoryname)) {
+            category.setCategoryname(categoryname);
         }
 
-        return "redirect:/user-messages/" + user;
+
+        saveFile(category, file);
+
+        categoryRepo.save(category);
+
+
+        return "redirect:/edit-category/" + category.getCategory_id();
     }
 }
