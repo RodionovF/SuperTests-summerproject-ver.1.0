@@ -1,13 +1,14 @@
-<#import "parts/common.ftl" as c>
 <#include "parts/security.ftl">
+<#import "parts/common.ftl" as c>
+
 
 <@c.page>
 <#--<h3>${userChannel.username}</h3>-->
     <#--<#if !isCurrentUser>-->
         <#--<#if isSubscriber>-->
-        <#--<a class="btn btn-info" href="/user/unsubscribe/${userChannel.id}">Unsubscribe</a>-->
+<#--<a class="btn btn-info" href="/user/unsubscribe/${userChannel.id}">Unsubscribe</a>-->
         <#--<#else>-->
-        <#--<a class="btn btn-info" href="/user/subscribe/${userChannel.id}">Subscribe</a>-->
+<#--<a class="btn btn-info" href="/user/subscribe/${userChannel.id}">Subscribe</a>-->
         <#--</#if>-->
     <#--</#if>-->
 <#--<div class="container my-3">-->
@@ -39,4 +40,4 @@
     <#include "parts/categoryEdit.ftl" />
 
     <#include "parts/categoryList.ftl" />
-</@c.page>
+</@c.page>>

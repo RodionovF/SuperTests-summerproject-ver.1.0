@@ -12,7 +12,7 @@
         <a href="#" class="list-group-item list-group-item-action list-group-item-info my-3">Vestibulum at eros</a>
     </div>
     <div class="col-6">
-        //
+
     </div>
     <div class="col">
         <a class="btn btn-dark my-3" href="/categories/${category.category_id}/create-mode">Create new Test</a>

@@ -32,7 +32,7 @@ alter table if exists user_role
     add constraint user_role_user_fk
 foreign key (user_id) references usr;
 
---////////////////////////////////////////////////
+-----------------------------------------------------------
 
  create table preference_categories
  (
@@ -90,20 +90,22 @@ create unique index if not exists users_id_uindex
 	on users (user_id)
 ;
 
-create table if not exists tests
+-----------------------------------------------------------
+
+create table tests
 (
-	test_id serial not null
+	test_id int8 not null
 		constraint tests_pkey
 			primary key,
-	testname varchar not null,
-	author_id integer not null
+	testname varchar(255) not null,
+	author_id int8 not null
 		constraint tests_users_user_id_fk
-			references users
+			references usr
 				on update cascade on delete cascade,
-	num_of_questions varchar not null,
-	image_path_start varchar,
-	image_path_end varchar,
-	category_id integer not null
+	num_of_questions int8 not null,
+	image_path_start varchar(255),
+	image_path_end varchar(255),
+	category_id int8 not null
 		constraint tests_categories_category_id_fk
 			references preference_categories
 				on update cascade on delete cascade
@@ -117,17 +119,17 @@ create unique index if not exists tests_test_id_uindex
 	on tests (test_id)
 ;
 
-create table if not exists questions
+create table questions
 (
-	question_id serial not null
+	question_id int8 not null
 		constraint questions_pkey
 			primary key,
-	test_id integer not null
+	test_id int8  not null
 		constraint questions_tests_test_id_fk
 			references tests
 				on update cascade on delete cascade,
-	question varchar not null,
-	image_path varchar
+	question varchar(2048) not null,
+	image_path varchar(255)
 )
 ;
 
@@ -138,16 +140,16 @@ create unique index if not exists questions_question_id_uindex
 	on questions (question_id)
 ;
 
-create table if not exists answers
+create table answers
 (
-	answer_id serial not null
+	answer_id int8 not null
 		constraint answers_pkey
 			primary key,
-	question_id integer not null
+	question_id int8 not null
 		constraint answers_questions_question_id_fk
 			references questions
 				on update cascade on delete cascade,
-	answer varchar,
+	answer varchar(255) not null,
 	corectness boolean not null
 )
 ;
@@ -158,6 +160,8 @@ alter table answers owner to postgres
 create unique index if not exists answers_answer_id_uindex
 	on answers (answer_id)
 ;
+
+-----------------------------------------------------------
 
 create table if not exists stat_of_tests
 (
