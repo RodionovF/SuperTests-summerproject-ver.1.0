@@ -1,0 +1,65 @@
+package com.example.sweater.domain;
+
+import org.hibernate.validator.constraints.Length;
+
+import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
+
+@Entity
+@Table(name = "questions")
+public class Question {
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long question_id;
+
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "test_id")
+    private Test test_id;
+
+
+    @NotBlank(message = "Please fill the question")
+    @Length(max = 2048, message = "Question too long (more than 255)")
+    private String question;
+
+    private String image_path;
+
+    public Question() {
+
+    }
+
+    public Question(String question){
+        this.question = question;
+    }
+
+    public Long getQuestion_id() {
+        return question_id;
+    }
+
+    public void setQuestion_id(Long question_id) {
+        this.question_id = question_id;
+    }
+
+    public Test getTest_id() {
+        return test_id;
+    }
+
+    public void setTest_id(Test test_id) {
+        this.test_id = test_id;
+    }
+
+    public String getQuestion() {
+        return question;
+    }
+
+    public void setQuestion(String question) {
+        this.question = question;
+    }
+
+    public String getImage_path() {
+        return image_path;
+    }
+
+    public void setImage_path(String image_path) {
+        this.image_path = image_path;
+    }
+}
