@@ -1,9 +1,7 @@
 package com.example.sweater.controller;
 
-import com.example.sweater.domain.Category;
-import com.example.sweater.domain.Question;
-import com.example.sweater.domain.Test;
-import com.example.sweater.domain.User;
+import com.example.sweater.domain.*;
+import com.example.sweater.repos.AnswerRepo;
 import com.example.sweater.repos.QuestionRepo;
 import com.example.sweater.repos.TestRepo;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,6 +31,9 @@ public class TestController {
 
     @Autowired
     private QuestionRepo questionRepo;
+
+    @Autowired
+    private AnswerRepo answerRepo;
 
     @Value("${upload.path}")
     private String uploadPath;
@@ -64,7 +65,9 @@ public class TestController {
             @RequestParam("image1") MultipartFile image1,
             @RequestParam("image2") MultipartFile image2,
             @RequestParam("question") List<String> listQuestion,
-            @RequestParam("questionimage") List<MultipartFile> listQuestionImage
+            @RequestParam("questionimage") List<MultipartFile> listQuestionImage,
+            @RequestParam("answer") List<String> listAnswer,
+            @RequestParam("counter") List<Long> counter
     ) throws IOException {
         Test test = new Test(testname);
         test.setAuthor_id(user);
@@ -79,7 +82,16 @@ public class TestController {
             question.setTest_id(test);
             saveQuestionFile(question, listQuestionImage.get(i));
             questionRepo.save(question);
-        }
+
+
+           for (int j = 0; j < counter.get(i); j++) {
+               Answer answer = new Answer(listAnswer.get(j));
+               answer.setQuestion_id(question);
+               answerRepo.save(answer);
+           }
+
+
+     }
 
         return "redirect:/categories/" + category.getCategory_id();
     }
