@@ -1,49 +1,46 @@
 <div class="container">
 
 
-
     <form method="post" enctype="multipart/form-data">
-    <#--<div class="form-group">-->
-    <#--<input  type="text" name="testname" class="form-control" placeholder="Enter testname">-->
-    <#--</div>-->
-    <#--<div class="form-group">-->
-    <#--<input type="text" class="form-control"-->
-    <#--value="<#if message??>${message.tag}</#if>" name="tag" placeholder="Тэг">-->
-    <#--<#if tagError??>-->
-    <#--<div class="invalid-feedback">-->
-    <#--${tagError}-->
-    <#--</div>-->
-    <#--</#if>-->
-    <#--</div>-->
         <div class="form-group">
             <div class="custom-file">
-                <input  type="text" name="testname" class="form-control" placeholder="Enter testname">
-                <input type="text" readonly class="form-control-plaintext" id="output3" value="1" name="num_of_questions">
-                <input type="file" name="file">
-                <input type="hidden" name="_csrf" value="${_csrf.token}" />
+                <div class="container">
+                    <div class="row">
+                        <div class="col">
+                            <input type="text" name="testname" class="form-control" placeholder="Enter testname">
+                        </div>
+                        <div class="col">
+                            <form class="form-inline">
+                                <label>Number of question = </label>
+                                <input type="text" readonly class="form-control-plaintext" id="output3" value="1"
+                                       name="num_of_questions">
+                            </form>
+                        </div>
+                    </div>
+                </div>
 
+                <div class="form-group  my-3">
+                    <input type="file" name="image1">
+                    <input type="file" name="image2">
+                    <input type="hidden" name="_csrf" value="${_csrf.token}"/>
+
+                </div>
             </div>
-        </div>
 
-        <div class="form-group">
-            <button type="submit" class="btn btn-dark my-3">Save test</button>
-        </div>
+            <div class="form-group  my-3">
+                <button type="submit" class="btn btn-dark my-3">Save test</button>
+            </div>
     </form>
 
 
-
-
-
-
-<#---->
 <#--<form method="post" enctype="multipart/form-data">-->
 <#--<div class="container">-->
 <#--<div class="row">-->
 <#--<div class="col">-->
 <#--<div class="form-group col-md-6">-->
-<#--<input type="hidden" name="_csrf" value="${_csrf.token}" />-->
+<#--<input type="hidden" name="_csrf" value="${_csrf.token}"/>-->
 <#--<label id="output1">Enter testname</label>-->
-<#--<input  type="text" name="testname" class="form-control" placeholder="Enter testname">-->
+<#--<input type="text" name="testname" class="form-control" placeholder="Enter testname">-->
 <#--</div>-->
 <#--</div>-->
 
@@ -53,8 +50,9 @@
 <#--<div class="form-group row">-->
 <#--<label class="col-sm-10 col-form-label">Number of question = </label>-->
 <#--<div class="col-sm-10">-->
-<#--<input type="hidden" name="_csrf" value="${_csrf.token}" />-->
-<#--<input type="text" readonly class="form-control-plaintext" id="output3" value="1" name="num_of_questions">-->
+<#--<input type="hidden" name="_csrf" value="${_csrf.token}"/>-->
+<#--<input type="text" readonly class="form-control-plaintext" id="output3" value="1"-->
+<#--name="num_of_questions">-->
 <#--</div>-->
 <#--</div>-->
 <#--</form>-->
@@ -67,18 +65,20 @@
 <#--<div class="form-group">-->
 <#--<div class="custom-file">-->
 <#--<input type="file" name="file">-->
-<#--<input type="hidden" name="_csrf" value="${_csrf.token}" />-->
+<#--<input type="hidden" name="_csrf" value="${_csrf.token}"/>-->
 
-<#--&lt;#&ndash;<input type="file" name="file" id="customFile">&ndash;&gt;-->
-<#--&lt;#&ndash;<label class="custom-file-label" for="customFile">Choose image</label>&ndash;&gt;-->
+<#--<input type="file" name="file" id="customFile">-->
+<#--<label class="custom-file-label" for="customFile">Choose image</label>-->
 <#--</div>-->
 <#--</div>-->
 <#--</form>-->
 <#--<div class="custom-file">-->
-<#--&lt;#&ndash;<input type="hidden" name="_csrf" value="${_csrf.token}" />&ndash;&gt;-->
+<#--<input type="hidden" name="_csrf" value="${_csrf.token}"/>-->
 <#--<input type="file" name="image_path_start" id="customFile1">-->
 <#--<label class="custom-file-label" for="customFile1">Choose image for begining of test</label>-->
 <#--</div>-->
+
+
 </div>
 
     <div class="form-group">
@@ -98,7 +98,8 @@
                    aria-controls="collapseExample">
                     Question editor
                 </a>
-                <span class="input-group-btn"><button type="button" class="btn btn-success btn-addd">Add ✚</button></span>
+                <span class="input-group-btn"><button type="button"
+                                                      class="btn btn-success btn-addd">Add ✚</button></span>
 
 
                 <div class="collapse" id="collapseExample">
@@ -131,7 +132,7 @@
 
                         <div class="form-group">
                             <div class="custom-file">
-                                <input type="hidden" name="_csrf" value="${_csrf.token}" />
+                                <input type="hidden" name="_csrf" value="${_csrf.token}"/>
                                 <input type="file" name="file" id="customFile">
                                 <label class="custom-file-label" for="customFile">Choose image</label>
                             </div>

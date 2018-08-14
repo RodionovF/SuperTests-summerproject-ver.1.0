@@ -33,21 +33,10 @@ public class TestController {
 
     @GetMapping("/categories/{category}")
     public String testsMain(
-//            @AuthenticationPrincipal User currentUser,
             Model model,
             @PathVariable Category category
-            //@RequestParam(name = "category") Category categorys
-            //@RequestParam(required = false) Message message
     ) {
-//        Set<Message> messages = user.getMessages();
-//
-//        model.addAttribute("userChannel", user);
-//        model.addAttribute("subscriptionsCount", user.getSubscriptions().size());
-//        model.addAttribute("subscribersCount", user.getSubscribers().size());
-//        model.addAttribute("isSubscriber", user.getSubscribers().contains(currentUser));
-//        model.addAttribute("messages", messages);
         model.addAttribute("category", category);
-//        model.addAttribute("isCurrentUser", currentUser.equals(user));
 
         return "tests";
     }
@@ -66,49 +55,27 @@ public class TestController {
             Model model,
             @RequestParam("testname") String testname,
             @RequestParam("num_of_questions") Long num_of_questions,
-            @RequestParam("file") MultipartFile file
-            //@RequestParam("file") MultipartFile file,
-            //@RequestParam("file") MultipartFile file
+            @RequestParam("image1") MultipartFile image1,
+            @RequestParam("image2") MultipartFile image2
     ) throws IOException {
-//        if (bindingResult.hasErrors()) {
-//            Map<String, String> errorsMap = ControllerUtils.getErrors(bindingResult);
-//
-//            model.mergeAttributes(errorsMap);
-//        } else {
         Test test = new Test(testname);
         test.setAuthor_id(user);
         test.setNum_of_questions(num_of_questions);
         test.setCategory_id(category);
-        saveFile(test, file);
+        saveFile(test, image1, image2);
 
         testRepo.save(test);
-//        }
         model.addAttribute("category", category);
-        return "redirect:/categories/"+ category.getCategory_id();
-        //return "redirect:/categories/" + category.getCategory_id()+"/create-mode";
+
+        return "redirect:/categories/" + category.getCategory_id();
     }
 
     private void saveFile(
             @Valid Test test,
-            //@RequestParam("file") MultipartFile file,
-            @RequestParam("file") MultipartFile file
+            @RequestParam("image1") MultipartFile image1,
+            @RequestParam("image2") MultipartFile image2
     ) throws IOException {
-//        if (file != null && !file.getOriginalFilename().isEmpty()) {
-//            File uploadDir = new File(uploadPath);
-//
-//            if (!uploadDir.exists()) {
-//                uploadDir.mkdir();
-//            }
-//
-//            String uuidFile = UUID.randomUUID().toString();
-//            String resultFilename = uuidFile + "." + file.getOriginalFilename();
-//
-//            file.transferTo(new File(uploadPath + "/" + resultFilename));
-//
-//            test.setImage_path_start(resultFilename);
-//        }
-
-        if (file != null && !file.getOriginalFilename().isEmpty()) {
+        if (image2 != null && !image2.getOriginalFilename().isEmpty()) {
             File uploadDir = new File(uploadPath);
 
             if (!uploadDir.exists()) {
@@ -116,45 +83,29 @@ public class TestController {
             }
 
             String uuidFile = UUID.randomUUID().toString();
-            String resultFilename = uuidFile + "." + file.getOriginalFilename();
+            String resultFilename = uuidFile + "." + image2.getOriginalFilename();
 
-            file.transferTo(new File(uploadPath + "/" + resultFilename));
+            image2.transferTo(new File(uploadPath + "/" + resultFilename));
+
+            test.setImage_path_start(resultFilename);
+        }
+
+        if (image1 != null && !image1.getOriginalFilename().isEmpty()) {
+            File uploadDir = new File(uploadPath);
+
+            if (!uploadDir.exists()) {
+                uploadDir.mkdir();
+            }
+
+            String uuidFile = UUID.randomUUID().toString();
+            String resultFilename = uuidFile + "." + image1.getOriginalFilename();
+
+            image1.transferTo(new File(uploadPath + "/" + resultFilename));
 
             test.setImage_path_end(resultFilename);
         }
 
     }
-
-
-//    @PostMapping("/main")
-//    public String add(
-//            @AuthenticationPrincipal User user,
-//            @Valid Message message,
-//            BindingResult bindingResult,
-//            Model model,
-//            @RequestParam("file") MultipartFile file
-//    ) throws IOException {
-//        message.setAuthor(user);
-//
-//        if (bindingResult.hasErrors()) {
-//            Map<String, String> errorsMap = ControllerUtils.getErrors(bindingResult);
-//
-//            model.mergeAttributes(errorsMap);
-//            model.addAttribute("message", message);
-//        } else {
-//            saveFile(message, file);
-//
-//            model.addAttribute("message", null);
-//
-//            messageRepo.save(message);
-//        }
-//
-//        Iterable<Message> messages = messageRepo.findAll();
-//
-//        model.addAttribute("messages", messages);
-//
-//        return "main";
-//    }
 
 
 }
