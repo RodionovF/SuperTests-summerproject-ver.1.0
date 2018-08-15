@@ -9,7 +9,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -20,7 +20,6 @@ import javax.validation.Valid;
 import java.io.File;
 import java.io.IOException;
 import java.util.List;
-import java.util.Map;
 import java.util.UUID;
 
 @Controller
@@ -43,6 +42,9 @@ public class TestController {
             Model model,
             @PathVariable Category category
     ) {
+        Iterable<Test> tests = testRepo.findAll();
+
+        model.addAttribute("tests", tests);
         model.addAttribute("category", category);
 
         return "tests";
@@ -67,7 +69,8 @@ public class TestController {
             @RequestParam("question") List<String> listQuestion,
             @RequestParam("questionimage") List<MultipartFile> listQuestionImage,
             @RequestParam("answer") List<String> listAnswer,
-            @RequestParam("counter") List<Long> counter
+            @RequestParam("counter") List<Long> counter,
+            @RequestParam List<String> active
     ) throws IOException {
         Test test = new Test(testname);
         test.setAuthor_id(user);
@@ -75,24 +78,39 @@ public class TestController {
         test.setCategory_id(category);
         saveTestsFile(test, image1, image2);
         testRepo.save(test);
-        model.addAttribute("category", category);
 
-       for (int i = 0; i < listQuestion.size(); i++) {
+        int k = 0;
+        int p = 0;
+        int count = 0;
+        for (int i = 0; i < listQuestion.size(); i++) {
             Question question = new Question(listQuestion.get(i));
-            question.setTest_id(test);
+            question.setTestid(test);
             saveQuestionFile(question, listQuestionImage.get(i));
             questionRepo.save(question);
 
 
-           for (int j = 0; j < counter.get(i); j++) {
-               Answer answer = new Answer(listAnswer.get(j));
-               answer.setQuestion_id(question);
-               answerRepo.save(answer);
-           }
+            count += counter.get(i);
 
 
-     }
+            for (int j = p; j < count; j++, k++, p++) {
+                Answer answer = new Answer(listAnswer.get(j));
+                answer.setQuestion_id(question);
 
+                String isActive = active.get(k);
+                if (isActive.equals("1")) {
+                    answer.setCorectness(true);
+                    k++;
+                } else
+                    answer.setCorectness(false);
+
+                answerRepo.save(answer);
+            }
+
+
+        }
+
+        model.addAttribute("test", test);
+        model.addAttribute("category", category);
         return "redirect:/categories/" + category.getCategory_id();
     }
 
@@ -113,7 +131,7 @@ public class TestController {
 
             image2.transferTo(new File(uploadPath + "/" + resultFilename));
 
-            test.setImage_path_start(resultFilename);
+            test.setImage_path_end(resultFilename);
         }
 
         if (image1 != null && !image1.getOriginalFilename().isEmpty()) {
@@ -128,7 +146,7 @@ public class TestController {
 
             image1.transferTo(new File(uploadPath + "/" + resultFilename));
 
-            test.setImage_path_end(resultFilename);
+            test.setImage_path_start(resultFilename);
         }
     }
 
@@ -151,6 +169,26 @@ public class TestController {
 
             question.setImage_path(resultFilename);
         }
+    }
+
+    @GetMapping("categories/{category}/{test}")
+    public String passTest(
+            Model model,
+            @PathVariable Category category,
+            @PathVariable Test test
+    ) throws IOException {
+        Iterable<Question> questions = questionRepo.findByTestid(test);
+        Iterable<Answer> answers = null;
+
+//        for (Question question : questions) {
+//            answers = answerRepo.findByQuestion_id(question);
+////        }
+
+        model.addAttribute("test", test);
+        model.addAttribute("category", category);
+        model.addAttribute("questions", questions);
+        //       model.addAttribute("answers", answers);
+        return "testsPassing";
     }
 
 

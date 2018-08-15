@@ -28,7 +28,7 @@
                 </div>
             </div>
         <#else>
-            No message
+            No category
         </#list>
         </div>
     </div>

@@ -52,12 +52,15 @@
 
                                 <div class="container-fluid">
                                     <div class="form-group input-group mb-3">
-                                    <#--<div class="input-group-prepend">-->
-                                    <#--<div class="input-group-text">-->
-                                    <#--<input type="checkbox" aria-label="Checkbox for following text input">-->
-                                    <#--</div>-->
-                                    <#--</div>-->
-                                        <input type="text" name="answer" class="form-control my-3"
+                                        <div class="input-group-prepend">
+                                            <div class="input-group-text my-3">
+
+                                                <input type="checkbox" name="active" value="1" aria-label="Checkbox for following text input" />
+                                                <input type="hidden" value="0" name="active"/>
+
+                                            </div>
+                                        </div>
+                                        <input type="text" name="answer" id="output2" class="form-control my-3"
                                                aria-label="Text input with checkbox"
                                                placeholder="Enter the answer">
 

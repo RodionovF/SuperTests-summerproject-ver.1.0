@@ -22,7 +22,7 @@
                 .toggleClass('btn-danger')
                 .toggleClass('btn-remove')
                 .html('✖');
-        field_new.find('input').val('');
+        field_new.find('#output2').val('');
         field_new.insertAfter(field);
     });
     $(document).on('click', '.btn-remove', function(event) {

@@ -12,9 +12,9 @@ public class Question {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long question_id;
 
-    @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "test_id")
-    private Test test_id;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "testid")
+    private Test testid;
 
 
     @NotBlank(message = "Please fill the question")
@@ -39,12 +39,12 @@ public class Question {
         this.question_id = question_id;
     }
 
-    public Test getTest_id() {
-        return test_id;
+    public Test getTestid() {
+        return testid;
     }
 
-    public void setTest_id(Test test_id) {
-        this.test_id = test_id;
+    public void setTestid(Test testid) {
+        this.testid = testid;
     }
 
     public String getQuestion() {
