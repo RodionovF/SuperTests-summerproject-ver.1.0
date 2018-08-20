@@ -1,37 +1,63 @@
-<a class="btn btn-primary" data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
-    Category editor
+<a class="btn btn-primary mt-3" data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false"
+   aria-controls="collapseExample">
+    <#if category??>
+        Редактор категории
+    <#else>
+        Добавить категорию
+    </#if>
 </a>
 <div class="collapse <#if category??>show</#if>" id="collapseExample">
     <div class="form-group mt-3">
         <form method="post" enctype="multipart/form-data">
-            <div class="form-group">
-                <input type="text" class="form-control ${(textError??)?string('is-invalid', '')}"
-                       value="<#if category??>${category.categoryname}</#if>" name="categoryname" placeholder="Enter the category name" />
+
+            <div class="form-group row">
+                <label class="col-sm-2 col-form-label">Имя категории :</label>
+                <div class="col-sm-6">
+                    <input type="text" class="form-control ${(textError??)?string('is-invalid', '')}"
+                           value="<#if category??>${category.categoryname}</#if>" name="categoryname"
+                           placeholder="Enter the category name"/>
                 <#if textError??>
                     <div class="invalid-feedback">
                         ${textError}
                     </div>
                 </#if>
-            </div>
-            <#--<div class="form-group">-->
-                <#--<input type="text" class="form-control"-->
-                       <#--value="<#if message??>${message.tag}</#if>" name="tag" placeholder="Тэг">-->
-                <#--<#if tagError??>-->
-                    <#--<div class="invalid-feedback">-->
-                        <#--${tagError}-->
-                    <#--</div>-->
-                <#--</#if>-->
-            <#--</div>-->
-            <div class="form-group">
-                <div class="custom-file">
-                    <input type="file" name="file" id="customFile">
-                    <label class="custom-file-label" for="customFile">Choose image</label>
                 </div>
             </div>
-            <input type="hidden" name="_csrf" value="${_csrf.token}" />
-            <input type="hidden" name="id" value="<#if category??>${category.category_id}</#if>" />
+        <#--<div class="form-group">-->
+        <#--<input type="text" class="form-control"-->
+        <#--value="<#if message??>${message.tag}</#if>" name="tag" placeholder="Тэг">-->
+        <#--<#if tagError??>-->
+        <#--<div class="invalid-feedback">-->
+        <#--${tagError}-->
+        <#--</div>-->
+        <#--</#if>-->
+        <#--</div>-->
+
+            <div class="form-group row">
+                <label class="col-sm-2 col-form-label">Имя категории :</label>
+                <div class="col-sm-6">
+                    <div class="inputBtnSection">
+                        <input id="uploadFile" class="disableInputField" placeholder="Choose File" disabled="disabled"/>
+
+
+                        <label class="fileUpload">
+                            <input name="file" id="uploadBtn" type="file" class="upload"/>
+                            <span class="uploadBtn">Выбрать файл ...</span>
+                        </label>
+                    </div>
+                </div>
+            </div>
+
+        <#--<div class="form-group">-->
+        <#--<div class="custom-file">-->
+        <#--<input type="file" name="file" id="customFile">-->
+        <#--<label class="custom-file-label" for="customFile">Choose image</label>-->
+        <#--</div>-->
+        <#--</div>-->
+            <input type="hidden" name="_csrf" value="${_csrf.token}"/>
+            <input type="hidden" name="id" value="<#if category??>${category.categoryId}</#if>"/>
             <div class="form-group">
-                <button type="submit" class="btn btn-primary">Save category</button>
+                <button type="submit" class="btn btn-primary">Сохранить категорию</button>
             </div>
         </form>
     </div>

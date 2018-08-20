@@ -3,7 +3,7 @@
 
 <@c.page>
 
-<h5>Hello, <#if user??>${name}<#else>guest</#if>!</h5>
-<div>This is just an application with all kinds of tests.</div>
+<h5>Здравствуйте, <#if user??>${name}<#else>гость</#if>!</h5>
+<div>Это развлекательное приложение служит для прохождения и создания тестов.</div>
 </@c.page>
 

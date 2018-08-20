@@ -13,8 +13,8 @@ public class Question {
     private Long question_id;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "testid")
-    private Test testid;
+    @JoinColumn(name = "testId")
+    private Test testId;
 
 
     @NotBlank(message = "Please fill the question")
@@ -39,12 +39,12 @@ public class Question {
         this.question_id = question_id;
     }
 
-    public Test getTestid() {
-        return testid;
+    public Test getTestId() {
+        return testId;
     }
 
-    public void setTestid(Test testid) {
-        this.testid = testid;
+    public void setTestId(Test testId) {
+        this.testId = testId;
     }
 
     public String getQuestion() {

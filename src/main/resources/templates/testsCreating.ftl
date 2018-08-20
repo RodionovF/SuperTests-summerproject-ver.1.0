@@ -31,6 +31,9 @@
         $(this).closest('.form-group').remove();
     });
     var count = 1;
+
+
+
     $(document).on('click', '.btn-addd', function (event) {
         var number = ++count;
         $('#output3').val(function(i, val) { return number; });

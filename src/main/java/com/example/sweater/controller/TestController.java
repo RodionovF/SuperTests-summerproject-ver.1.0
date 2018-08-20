@@ -9,7 +9,6 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -42,7 +41,7 @@ public class TestController {
             Model model,
             @PathVariable Category category
     ) {
-        Iterable<Test> tests = testRepo.findAll();
+        Iterable<Test> tests = testRepo.findByCategoryId(category);
 
         model.addAttribute("tests", tests);
         model.addAttribute("category", category);
@@ -75,7 +74,7 @@ public class TestController {
         Test test = new Test(testname);
         test.setAuthor_id(user);
         test.setNum_of_questions(num_of_questions);
-        test.setCategory_id(category);
+        test.setCategoryId(category);
         saveTestsFile(test, image1, image2);
         testRepo.save(test);
 
@@ -84,7 +83,7 @@ public class TestController {
         int count = 0;
         for (int i = 0; i < listQuestion.size(); i++) {
             Question question = new Question(listQuestion.get(i));
-            question.setTestid(test);
+            question.setTestId(test);
             saveQuestionFile(question, listQuestionImage.get(i));
             questionRepo.save(question);
 

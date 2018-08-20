@@ -38,7 +38,7 @@ foreign key (user_id) references usr;
  (
  	categoryname varchar(255) not null,
  	filename varchar(255),
- 	category_id int8 not null
+ 	categoryId int8 not null
  		constraint categories_pk
  			primary key
  )
@@ -48,7 +48,7 @@ foreign key (user_id) references usr;
  ;
 
 create unique index if not exists categories_category_id_uindex
-	on preference_categories (category_id)
+	on preference_categories (categoryId)
 ;
 
 create table if not exists roles
@@ -72,7 +72,7 @@ create table if not exists users
 	email varchar,
 	pass varchar not null,
 	username varchar not null,
-	category_id integer
+	categoryId integer
 		constraint users_categories_category_id_fk
 			references preference_categories
 				on update cascade on delete cascade,
@@ -105,7 +105,7 @@ create table tests
 	num_of_questions int8 not null,
 	image_path_start varchar(255),
 	image_path_end varchar(255),
-	category_id int8 not null
+	categoryId int8 not null
 		constraint tests_categories_category_id_fk
 			references preference_categories
 				on update cascade on delete cascade
@@ -124,7 +124,7 @@ create table questions
 	question_id int8 not null
 		constraint questions_pkey
 			primary key,
-	testid int8  not null
+	testId int8  not null
 		constraint questions_tests_test_id_fk
 			references tests
 				on update cascade on delete cascade,
@@ -168,7 +168,7 @@ create table if not exists stat_of_tests
 	stat_test_id serial not null
 		constraint stat_of_tests_pkey
 			primary key,
-	testid integer not null
+	testId integer not null
 		constraint stat_of_tests_tests_test_id_fk
 			references tests
 				on update cascade on delete cascade,
