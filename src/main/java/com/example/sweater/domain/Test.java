@@ -27,8 +27,8 @@ public class Test {
     private String image_path_end;
 
     @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "category_id")
-    private Category category_id;
+    @JoinColumn(name = "categoryId")
+    private Category categoryId;
 
     public Test() {
 
@@ -86,11 +86,11 @@ public class Test {
         this.image_path_end = image_path_end;
     }
 
-    public Category getCategory_id() {
-        return category_id;
+    public Category getCategoryId() {
+        return categoryId;
     }
 
-    public void setCategory_id(Category category_id) {
-        this.category_id = category_id;
+    public void setCategoryId(Category categoryId) {
+        this.categoryId = categoryId;
     }
 }

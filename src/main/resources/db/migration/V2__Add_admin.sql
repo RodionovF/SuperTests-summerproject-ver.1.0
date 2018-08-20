@@ -4,5 +4,5 @@ Insert into usr (id, username, password, active)
 Insert into user_role (user_id, roles)
   values(1,'USER'), (1,'ADMIN'), (1,'CREATER');
 
--- Insert into preference_categories (category_id, filename, categoryname)
+-- Insert into preference_categories (categoryId, filename, categoryname)
 --   values (1, 'sport.jpg', 'sport');

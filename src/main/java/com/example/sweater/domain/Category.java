@@ -9,7 +9,7 @@ import javax.persistence.*;
 public class Category {
     @Id
     @GeneratedValue(strategy=GenerationType.AUTO)
-    private Long category_id;
+    private Long categoryId;
 
     @Length(max = 255, message = "Message too long (more than 255)")
     private String categoryname;
@@ -28,12 +28,12 @@ public class Category {
         this.categoryname = category ;
     }
 
-    public Long getCategory_id() {
-        return category_id;
+    public Long getCategoryId() {
+        return categoryId;
     }
 
-    public void setCategory_id(Long category_id) {
-        this.category_id = category_id;
+    public void setCategoryId(Long categoryId) {
+        this.categoryId = categoryId;
     }
 
     public String getCategoryname() {

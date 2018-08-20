@@ -9,6 +9,6 @@ import java.util.List;
 
 public interface QuestionRepo extends CrudRepository<Question, Long> {
 
-    List<Question> findByTestid(Test testid);
+    List<Question> findByTestId(Test testId);
 
 }

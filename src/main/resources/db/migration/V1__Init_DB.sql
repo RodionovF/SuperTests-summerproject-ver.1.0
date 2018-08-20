@@ -124,7 +124,7 @@ create table questions
 	question_id int8 not null
 		constraint questions_pkey
 			primary key,
-	testid int8  not null
+	test_id int8  not null
 		constraint questions_tests_test_id_fk
 			references tests
 				on update cascade on delete cascade,
@@ -168,7 +168,7 @@ create table if not exists stat_of_tests
 	stat_test_id serial not null
 		constraint stat_of_tests_pkey
 			primary key,
-	testid integer not null
+	testId integer not null
 		constraint stat_of_tests_tests_test_id_fk
 			references tests
 				on update cascade on delete cascade,

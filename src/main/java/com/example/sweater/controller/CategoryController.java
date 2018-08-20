@@ -1,7 +1,6 @@
 package com.example.sweater.controller;
 
 import com.example.sweater.domain.Category;
-import com.example.sweater.domain.Message;
 import com.example.sweater.domain.User;
 import com.example.sweater.repos.CategoryRepo;
 import com.example.sweater.repos.MessageRepo;
@@ -12,7 +11,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.StringUtils;
 import org.springframework.validation.BindingResult;
-import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -23,10 +21,7 @@ import javax.validation.Valid;
 import java.io.File;
 import java.io.IOException;
 import java.util.Map;
-import java.util.Set;
 import java.util.UUID;
-import java.util.stream.Collector;
-import java.util.stream.Collectors;
 
 @Controller
 public class CategoryController {
@@ -144,6 +139,6 @@ public class CategoryController {
         categoryRepo.save(category);
 
 
-        return "redirect:/edit-category/" + category.getCategory_id();
+        return "redirect:/edit-category/" + category.getCategoryId();
     }
 }

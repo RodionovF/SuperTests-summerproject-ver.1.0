@@ -9,15 +9,15 @@
                     <img src="/img/${category.filename}" class="card-img-top">
                 </#if>
             <#--<div class="m-2">-->
-            <#--<span>${category.category_id}</span><br/>-->
+            <#--<span>${category.categoryId}</span><br/>-->
             <#--</div>-->
                 <div class="card-footer text-muted">
-                        <a class="btn btn-primary" href="/categories/${category.category_id}">
+                        <a class="btn btn-primary" href="/categories/${category.categoryId}">
                             ${category.categoryname}
                         </a>
                         <#if isAdmin>
                             <a class="btn btn-primary"
-                               href="/edit-category/${category.category_id}?сategory=${category.category_id}">
+                               href="/edit-category/${category.categoryId}?сategory=${category.categoryId}">
                                 Редактировать
                             </a>
                         </#if>
