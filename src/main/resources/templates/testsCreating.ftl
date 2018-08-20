@@ -2,7 +2,7 @@
 <#import "parts/common.ftl" as c>
 
 <@c.page>
-<h3>Here you can create your own test:</h3>
+<h3>Создание теста.</h3>
 
     <#include "parts/testCreater.ftl" />
 
@@ -30,6 +30,7 @@
         event.preventDefault();
         $(this).closest('.form-group').remove();
     });
+
     var count = 1;
     $(document).on('click', '.btn-addd', function (event) {
         var number = ++count;
