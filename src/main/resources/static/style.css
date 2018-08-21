@@ -2,6 +2,10 @@ body {
     color: #f0f;
 }
 
+.panel-default {
+    border-color:  #f0f;
+}
+
 .inputBtnSection{
     display:inline-block;
     vertical-align:top;

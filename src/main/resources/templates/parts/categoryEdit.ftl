@@ -25,7 +25,7 @@
             </div>
 
             <div class="form-group row">
-                <label class="col-sm-2 col-form-label">Имя категории :</label>
+                <label class="col-sm-2 col-form-label">Изобржение :</label>
                 <div class="col-sm-6">
                     <div class="inputBtnSection">
                         <input id="uploadFile" class="disableInputField" placeholder="Choose File" disabled="disabled"/>

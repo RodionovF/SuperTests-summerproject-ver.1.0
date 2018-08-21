@@ -9,6 +9,8 @@
 </@c.page>
 
 <script>
+    var count = 1;
+
     $(document).on('click', '.btn-add', function(event) {
 
 
@@ -23,15 +25,16 @@
                 .toggleClass('btn-remove')
                 .html('✖');
         field_new.find('#output2').val('');
+        field_new.find('#output1').val(0);
         field_new.insertAfter(field);
     });
+
     $(document).on('click', '.btn-remove', function(event) {
         $(this).closest('.cards').find('#output').val(function(i, val) { return val*1-1 });
         event.preventDefault();
         $(this).closest('.form-group').remove();
     });
 
-    var count = 1;
     $(document).on('click', '.btn-addd', function (event) {
         var number = ++count;
         $('#output3').val(function(i, val) { return number; });
@@ -45,16 +48,23 @@
                 .toggleClass('btn-danger')
                 .toggleClass('btn-remover')
                 .html('✖');
+        field_new.find('#id').replaceWith('<a class="btn btn-primary" id="id'+ number+'" data-toggle="collapse" href="#collapseExample' + number + '" role="button" aria-expanded="false" aria-controls="collapseExample' + number + '">Question editor</a>');
+        field_new.find('#collapseExample').replaceWith('<div class="collapse" id="collapseExample' + number + '">'+field_new.find('#form').html() + '</div>');
         field_new.insertAfter(field);
-        $('#id').replaceWith('<a class="btn btn-primary" id="id'+ number+'" data-toggle="collapse" href="#collapseExample' + number + '" role="button" aria-expanded="false" aria-controls="collapseExample' + number + '">Question editor</a>');
-        $('#collapseExample').replaceWith('<div class="collapse" id="collapseExample' + number + '">'+field_new.find('#form').html() + '</div>');
+        // $('#id').replaceWith('<a class="btn btn-primary" id="id'+ number+'" data-toggle="collapse" href="#collapseExample' + number + '" role="button" aria-expanded="false" aria-controls="collapseExample' + number + '">Question editor</a>');
+        // $('#collapseExample').replaceWith('<div class="collapse" id="collapseExample' + number + '">'+field_new.find('#form').html() + '</div>');
         // $('#output').replaceWith('<label id="output">1</label>');
     });
+
     $(document).on('click', '.btn-remover', function (event) {
         var number =--count;
         $('#output3').val(function(i, val) { return number; });
         event.preventDefault();
-        $(this).closest('.form-group').remove();
+        $(this).closest('.cards').remove();
     });
     ;
+
+    document.getElementById("uploadBtn").onchange = function () {
+        document.getElementById("uploadFile").value = this.value;
+    };
 </script>

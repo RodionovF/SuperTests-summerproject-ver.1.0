@@ -69,7 +69,7 @@ public class TestController {
             @RequestParam("questionimage") List<MultipartFile> listQuestionImage,
             @RequestParam("answer") List<String> listAnswer,
             @RequestParam("counter") List<Long> counter,
-            @RequestParam List<String> active
+            @RequestParam("active") List<String> active
     ) throws IOException {
         Test test = new Test(testname);
         test.setAuthor_id(user);
