@@ -41,7 +41,7 @@
                                 <input id="uploadFile" class="disableInputField" placeholder="Choose File"
                                        disabled="disabled"/>
                                 <label class="fileUpload">
-                                    <input name="image1" id="uploadBtn" type="file" class="upload"/>
+                                    <input name="image2" id="uploadBtn" type="file" class="upload"/>
                                     <span class="uploadBtn">Выбрать файл ...</span>
                                 </label>
                             </div>
@@ -69,8 +69,7 @@
                                 </div>
                                 <label class="col-sm-3 col-form-label">Количество ответов на вопрос :</label>
                                 <input type="text" name="counter" readonly class="col-sm-1 form-control-plaintext"
-                                       id="output"
-                                       value="1">
+                                       id="output" value="1">
 
                             </div>
 
@@ -80,34 +79,43 @@
                                     <div class="form-group row ml-5 mt-3">
                                         <label class="col-sm-2 col-form-label ">Вопрос :</label>
                                         <div class="col-sm-6">
-                                            <input type="text" name="question" class="form-control"
+                                            <input type="text" name="question" id="quest" class="form-control"
                                                    placeholder="Enter the question">
                                         </div>
                                     </div>
 
-                                    <div class="col-sm-8 container-fluid ml-5">
+                                    <div class="col-sm-8 container-fluid ml-5" id="output4">
                                         <div class="form-group input-group">
                                             <div class="input-group-prepend">
                                                 <div class="input-group-text my-3">
 
                                                     <input type="checkbox" name="active" id="output1" value="1"
-                                                           aria-label="Checkbox for following text input" />
+                                                           aria-label="Checkbox for following text input"/>
                                                     <input type="hidden" value="0" name="active"/>
 
                                                 </div>
                                             </div>
                                             <input type="text" name="answer" id="output2" class="form-control my-3"
-                                                   aria-label="Text input with checkbox"
-                                                   placeholder="Enter the answer">
+                                                   aria-label="Text input with checkbox" placeholder="Enter the answer">
 
                                             <span class="input-group-btn my-3"><button type="button"
-                                                                                       class="btn btn-success btn-add">Add answer ✚</button></span>
+                                                                                       class="btn btn-success btn-add">Добавить ответ ✚</button></span>
                                         </div>
                                     </div>
 
-                                    <div class="form-group">
-                                        <div class="custom-file">
-                                            <input type="file" name="questionimage">
+                                    <div class="form-group row ml-5">
+                                        <label class="col-sm-3 col-form-label">Изображение для вопроса :</label>
+                                        <div class="col-sm-6">
+                                            <div class="inputBtnSection">
+                                                <input name="uploadFile" id="uploadFile" class="disableInputField"
+                                                       placeholder="Choose File"
+                                                       disabled="disabled"/>
+                                                <label class="fileUpload">
+                                                    <input name="questionimage" id="uploadBtn" type="file"
+                                                           class="upload"/>
+                                                    <span class="uploadBtn">Выбрать файл ...</span>
+                                                </label>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -115,11 +123,10 @@
                         </div>
                     </div>
                 </div>
-
-                </div>
                 <div class="form-group  my-3">
                     <button type="submit" class="btn btn-dark my-3">Сохранить тест</button>
                 </div>
             </div>
+        </div>
     </form>
 </div>
