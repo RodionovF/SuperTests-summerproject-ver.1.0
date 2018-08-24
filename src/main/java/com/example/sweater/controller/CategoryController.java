@@ -3,7 +3,6 @@ package com.example.sweater.controller;
 import com.example.sweater.domain.Category;
 import com.example.sweater.domain.User;
 import com.example.sweater.repos.CategoryRepo;
-import com.example.sweater.repos.MessageRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
@@ -25,9 +24,6 @@ import java.util.UUID;
 
 @Controller
 public class CategoryController {
-    @Autowired
-    private MessageRepo messageRepo;
-
     @Autowired
     private CategoryRepo categoryRepo;
 

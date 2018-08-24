@@ -13,9 +13,9 @@
                     <i>#${message.tag}</i>
                 </div>
                 <div class="card-footer text-muted">
-                    <a href="/user-messages/${message.author.id}">${message.authorName}</a>
-                    <#if message.author.id == currentUserId>
-                        <a class="btn btn-primary" href="/user-messages/${message.author.id}?message=${message.id}">
+                    <a href="/user-messages/${message.author.userId}">${message.authorName}</a>
+                    <#if message.author.userId == currentUserId>
+                        <a class="btn btn-primary" href="/user-messages/${message.author.userId}?message=${message.userId}">
                             Edit
                         </a>
                     </#if>

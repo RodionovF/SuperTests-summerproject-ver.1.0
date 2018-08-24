@@ -74,7 +74,7 @@ public class UserConroller {
     ){
         userService.subscribe(currentUser, user);
 
-        return "redirect:/user-messages/" + user.getId();
+        return "redirect:/user-messages/" + user.getUserId();
     }
 
     @GetMapping("unsubscribe/{user}")
@@ -85,7 +85,7 @@ public class UserConroller {
     ){
         userService.unsubscribe(currentUser, user);
 
-        return "redirect:/user-messages/" + user.getId();
+        return "redirect:/user-messages/" + user.getUserId();
     }
 
     @GetMapping("{type}/{user}/list")

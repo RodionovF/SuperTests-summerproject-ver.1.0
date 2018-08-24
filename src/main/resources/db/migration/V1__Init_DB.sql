@@ -1,38 +1,9 @@
 create sequence hibernate_sequence start 1 increment 1;
 
-create table message (
-    id int8 not null,
-    filename varchar(255),
-    tag varchar(255),
-    text varchar(2048) not null,
-    user_id int8,
-    primary key (id)
-);
-
 create table user_role (
     user_id int8 not null,
     roles varchar(255)
 );
-
-create table usr (
-    id int8 not null,
-    activation_code varchar(255),
-    active boolean not null,
-    email varchar(255),
-    password varchar(255) not null,
-    username varchar(255) not null,
-    primary key (id)
-);
-
-alter table if exists message
-    add constraint message_user_fk
-    foreign key (user_id) references usr;
-
-alter table if exists user_role
-    add constraint user_role_user_fk
-foreign key (user_id) references usr;
-
------------------------------------------------------------
 
  create table preference_categories
  (
@@ -41,15 +12,40 @@ foreign key (user_id) references usr;
  	category_id int8 not null
  		constraint categories_pk
  			primary key
- )
- ;
+ );
 
- alter table preference_categories owner to postgres
- ;
+alter table preference_categories owner to postgres;
 
 create unique index if not exists categories_category_id_uindex
-	on preference_categories (category_id)
-;
+	on preference_categories (category_id);
+
+
+
+create table usr (
+    user_id int8 not null
+    constraint usr_pkey
+			primary key,
+    activation_code varchar(255),
+    active boolean not null,
+    email varchar(255),
+    password varchar(255) not null,
+    username varchar(255) not null,
+    category_id int8
+		constraint usr_categories_category_id_fk
+			references preference_categories
+				on update cascade on delete cascade
+);
+
+alter table usr owner to postgres;
+
+create unique index if not exists usr_user_id_uindex
+	on usr (user_id);
+
+alter table if exists user_role
+    add constraint user_role_user_fk
+foreign key (user_id) references usr;
+
+-----------------------------------------------------------
 
 create table if not exists roles
 (
@@ -57,11 +53,9 @@ create table if not exists roles
 		constraint roles_pkey
 			primary key,
 	rolename varchar(255) not null
-)
-;
+);
 
-alter table roles owner to postgres
-;
+alter table roles owner to postgres;
 
 create table if not exists users
 (
@@ -80,15 +74,12 @@ create table if not exists users
 		constraint users_roles_role_id_fk
 			references roles
 				on update cascade on delete cascade
-)
-;
+);
 
-alter table users owner to postgres
-;
+alter table users owner to postgres;
 
 create unique index if not exists users_id_uindex
-	on users (user_id)
-;
+	on users (user_id);
 
 -----------------------------------------------------------
 
@@ -109,15 +100,12 @@ create table tests
 		constraint tests_categories_category_id_fk
 			references preference_categories
 				on update cascade on delete cascade
-)
-;
+);
 
-alter table tests owner to postgres
-;
+alter table tests owner to postgres;
 
 create unique index if not exists tests_test_id_uindex
-	on tests (test_id)
-;
+	on tests (test_id);
 
 create table questions
 (
@@ -130,15 +118,12 @@ create table questions
 				on update cascade on delete cascade,
 	question varchar(2048) not null,
 	image_path varchar(255)
-)
-;
+);
 
-alter table questions owner to postgres
-;
+alter table questions owner to postgres;
 
 create unique index if not exists questions_question_id_uindex
-	on questions (question_id)
-;
+	on questions (question_id);
 
 create table answers
 (
@@ -151,15 +136,12 @@ create table answers
 				on update cascade on delete cascade,
 	answer varchar(255) not null,
 	corectness boolean not null
-)
-;
+);
 
-alter table answers owner to postgres
-;
+alter table answers owner to postgres;
 
 create unique index if not exists answers_answer_id_uindex
-	on answers (answer_id)
-;
+	on answers (answer_id);
 
 -----------------------------------------------------------
 
@@ -179,15 +161,12 @@ create table if not exists stat_of_tests
 	final_time time,
 	date time,
 	result integer
-)
-;
+);
 
-alter table stat_of_tests owner to postgres
-;
+alter table stat_of_tests owner to postgres;
 
 create unique index if not exists stat_of_tests_stat_test_id_uindex
-	on stat_of_tests (stat_test_id)
-;
+	on stat_of_tests (stat_test_id);
 
 create table if not exists stat_of_questions
 (
@@ -206,16 +185,12 @@ create table if not exists stat_of_questions
 		constraint stat_of_questions_answers_answer_id_fk
 			references answers
 				on update cascade on delete cascade
-)
-;
+);
 
-alter table stat_of_questions owner to postgres
-;
+alter table stat_of_questions owner to postgres;
 
 create unique index if not exists stat_of_questions_stat_question_id_uindex
-	on stat_of_questions (stat_question_id)
-;
+	on stat_of_questions (stat_question_id);
 
 create unique index if not exists roles_role_id_uindex
-	on roles (role_id)
-;
+	on roles (role_id);
