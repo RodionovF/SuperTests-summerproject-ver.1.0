@@ -18,13 +18,6 @@
                 </div>
             </div>
 
-
-
-        <#--<a href="/categories/${category.categoryId}/${test.test_id}" class="list-group-item list-group-item-action list-group-item-info my-3">${test.testname}</a>-->
-        <#--<#if test.image_path_start??>-->
-        <#--<img src="/img/${test.image_path_start}" class="card-img-top">-->
-        <#--</#if>-->
-
         <#else>
                 <h5>No tests</h5>
         </#list>

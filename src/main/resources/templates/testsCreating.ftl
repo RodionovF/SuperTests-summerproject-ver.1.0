@@ -98,20 +98,4 @@
         $(this).closest('.inputBtnSection').find("#uploadFile").val(filename);
     });
 
-    // $(document).ready( function() {
-    //     $(".fileUpload input[type=file]").change(function(){
-    //         var filename = $(this).val().replace(/.*\\/, "");
-    //         $("#uploadFile").val(filename);
-    //     });
-    // });
-
-
-    // document.getElementById("uploadBtn1").onchange = function () {
-    //     document.getElementById("uploadFile1").value = this.value;
-    // };
-    //
-    // document.getElementById("uploadBtn2").onchange = function () {
-    //     document.getElementById("uploadFile2").value = this.value;
-    // };
-
 </script>

@@ -43,7 +43,7 @@
             </div>
         </div>
         <div class="form-group row">
-            <label class="col-sm-2 col-form-label">E-mail:</label
+            <label class="col-sm-2 col-form-label">E-mail:</label>
             <div class="col-sm-6">
                 <input type="email" name="email" value="<#if user??>${user.email}</#if>"
                        class="form-control ${(emailError??)?string('is-invalid', '')}"

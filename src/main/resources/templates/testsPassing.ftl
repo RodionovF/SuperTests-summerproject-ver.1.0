@@ -2,10 +2,8 @@
 
 <@c.page>
 <div class="row">
+
     <div class="col-8">
-
-
-
         <div class="card my-3">
             <div class="card-header">
                 <#if test.image_path_end??>
@@ -52,8 +50,7 @@
                                 <#else>
                                     No answers
                                 </#list>
-
-                            <a href="#" class="btn btn-primary">Ответить</a>
+                            <button type="button" class="btn btn-primary">Ответить</button>
                         <#else>
                             No questions
                         </#list>
@@ -61,27 +58,16 @@
                 </p>
             </div>
         </div>
+    </div>
 
-
-
-
-<#--<div>-->
-<#--${que.question}-->
-<#--</div>-->
-<#--<#list answers as ans>-->
-<#--<#if ans.questionId.question_id == que.question_id>-->
-<#--<div>-->
-<#--${ans.answer}-->
-<#--</div>-->
-<#--</#if>-->
-<#--<#else>-->
-<#--No answers-->
-<#--</#list>-->
-
-
-
+    <div class="col-3">
 
     </div>
+
+    <div class="col-1">
+        <a class="btn btn-dark my-3" href="/categories/${category.categoryId}">Назад</a>
+    </div>
+
 </div>
 
 
