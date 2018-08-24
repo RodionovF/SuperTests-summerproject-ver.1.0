@@ -18,6 +18,7 @@ import org.springframework.web.multipart.MultipartFile;
 import javax.validation.Valid;
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
@@ -93,7 +94,7 @@ public class TestController {
 
             for (int j = p; j < count; j++, k++, p++) {
                 Answer answer = new Answer(listAnswer.get(j));
-                answer.setQuestion_id(question);
+                answer.setQuestionId(question);
 
                 String isActive = active.get(k);
                 if (isActive.equals("1")) {
@@ -176,19 +177,42 @@ public class TestController {
             @PathVariable Category category,
             @PathVariable Test test
     ) throws IOException {
-        Iterable<Question> questions = questionRepo.findByTestId(test);
-        Iterable<Answer> answers = null;
+        List<Question> questions = questionRepo.findByTestId(test);
+        List<Answer> answers = null;
+        List<ButtonTypes> buttonTypes = new ArrayList<ButtonTypes>();
 
-//        for (Question question : questions) {
-//            answers = answerRepo.findByQuestion_id(question);
-////        }
+        List<Answer> answersOnOneQuestion = null;
+        for (Question question : questions) {
+            answersOnOneQuestion =  answerRepo.findByQuestionId(question);
 
+            int x = 1;
+            for (int z = 0; z < answersOnOneQuestion.size(); z++) {
+                x = x * ((answersOnOneQuestion.get(z).isCorectness() == false) ? 1 : 2);
+            }
+
+
+            if (x >= 4) {
+                ButtonTypes newElement = new ButtonTypes(false, question.getQuestion_id());
+                buttonTypes.add(newElement);
+            } else {
+                ButtonTypes newElement = new ButtonTypes(true, question.getQuestion_id());
+                buttonTypes.add(newElement);
+            }
+
+
+            if (answers == null)
+                answers = answersOnOneQuestion;
+            else {
+                answers.addAll(answersOnOneQuestion);
+            }
+        }
         model.addAttribute("test", test);
         model.addAttribute("category", category);
         model.addAttribute("questions", questions);
-        //       model.addAttribute("answers", answers);
+        model.addAttribute("answers", answers);
+        model.addAttribute("buttonTypes", buttonTypes);
         return "testsPassing";
     }
-
-
 }
+
+

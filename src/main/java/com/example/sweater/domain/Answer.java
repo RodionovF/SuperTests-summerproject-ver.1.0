@@ -13,8 +13,8 @@ public class Answer {
     private Long answer_id;
 
     @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "question_id")
-    private Question question_id;
+    @JoinColumn(name = "questionId")
+    private Question questionId;
 
     @NotBlank(message = "Please fill the answer")
     @Length(max = 255, message = "Answer too long (more than 255)")
@@ -38,12 +38,12 @@ public class Answer {
         this.answer_id = answer_id;
     }
 
-    public Question getQuestion_id() {
-        return question_id;
+    public Question getQuestionId() {
+        return questionId;
     }
 
-    public void setQuestion_id(Question question_id) {
-        this.question_id = question_id;
+    public void setQuestionId(Question questionId) {
+        this.questionId = questionId;
     }
 
     public String getAnswer() {

@@ -1,7 +1,7 @@
 <#import "parts/common.ftl" as c>
 
 <@c.page>
-<h5>Список пользователей</h5>
+<h3>Список пользователей</h3>
 <table>
     <thead>
     <tr>
