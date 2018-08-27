@@ -18,7 +18,10 @@
                     <ol>
                         <#list questions as que>
                             <h4><li class="card-title mt-5">${que.question}</li></h4>
-                            <img src="/img/${que.image_path}" class="card-img-top rounded mb-3">
+
+                            <#if que.image_path??>
+                                <img src="/img/${que.image_path}" class="card-img-top rounded mb-3">
+                            </#if>
                                 <#list answers as ans>
                                     <#if ans.questionId.question_id == que.question_id>
                                         <ul class="list-group checked-list-group">

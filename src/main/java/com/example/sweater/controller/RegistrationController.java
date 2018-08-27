@@ -64,6 +64,10 @@ public class RegistrationController {
                 model.addAttribute("passwordError", "Passwords are different!");
             }
 
+            if (!("1111").equals(user.getEmail())) {
+                model.addAttribute("emailError","ERROR");
+            }
+
             if (isConfirmEmpty || bindingResult.hasErrors() || !response.isSuccess()) {
                 Map<String, String> errors = ControllerUtils.getErrors(bindingResult);
 
@@ -82,7 +86,10 @@ public class RegistrationController {
     }
 
     @GetMapping("/activate/{code}")
-    public String activate(Model model, @PathVariable String code) {
+    public String activate(
+            Model model,
+            @PathVariable String code
+    ) {
         boolean isActivated = userService.activateUser(code);
 
         if (isActivated) {
