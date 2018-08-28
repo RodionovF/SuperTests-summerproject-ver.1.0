@@ -12,7 +12,7 @@ import java.util.Objects;
 import java.util.Set;
 
 @Entity
-@Table(name = "usr")
+@Table(name = "users")
 public class User implements UserDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -29,7 +29,6 @@ public class User implements UserDetails {
 
 //    @OneToMany(mappedBy = "author", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 //    private Set<Message> messages;
-
 
     @ManyToMany
     @JoinTable(
@@ -56,6 +55,11 @@ public class User implements UserDetails {
     @CollectionTable(name = "user_role", joinColumns = @JoinColumn(name = "user_id"))
     @Enumerated(EnumType.STRING)
     private Set<Role> roles;
+
+//    @ElementCollection(targetClass = Role.class, fetch = FetchType.EAGER)
+//    @CollectionTable(name = "roles", joinColumns = @JoinColumn(name = "role_id"))
+//    @Enumerated(EnumType.STRING)
+//    private Set<Role> rolename;
 
     @Override
     public boolean equals(Object o) {
@@ -156,14 +160,9 @@ public class User implements UserDetails {
         this.activationCode = activationCode;
     }
 
-//    public Set<Message> getMessages() {
-//        return messages;
-//    }
+//    public Set<Message> getMessages() { return messages; }
 //
-//    public void setMessages(Set<Message> messages) {
-//        this.messages = messages;
-//    }
-
+//    public void setMessages(Set<Message> messages) { this.messages = messages; }
 
     public Category getCategoryId() {
         return categoryId;
@@ -188,4 +187,10 @@ public class User implements UserDetails {
     public void setSubscriptions(Set<User> subscriptions) {
         this.subscriptions = subscriptions;
     }
+
+//    public Set<Role> getRolename() { return rolename; }
+//
+//    public void setRolename(Set<Role> rolename) {
+//        this.rolename = rolename;
+//    }
 }

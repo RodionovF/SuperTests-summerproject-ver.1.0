@@ -19,11 +19,9 @@ alter table preference_categories owner to postgres;
 create unique index if not exists categories_category_id_uindex
 	on preference_categories (category_id);
 
-
-
-create table usr (
+create table users (
     user_id int8 not null
-    constraint usr_pkey
+    constraint users_pkey
 			primary key,
     activation_code varchar(255),
     active boolean not null,
@@ -31,57 +29,19 @@ create table usr (
     password varchar(255) not null,
     username varchar(255) not null,
     category_id int8
-		constraint usr_categories_category_id_fk
-			references preference_categories
-				on update cascade on delete cascade
-);
-
-alter table usr owner to postgres;
-
-create unique index if not exists usr_user_id_uindex
-	on usr (user_id);
-
-alter table if exists user_role
-    add constraint user_role_user_fk
-foreign key (user_id) references usr;
-
------------------------------------------------------------
-
-create table if not exists roles
-(
-	role_id serial not null
-		constraint roles_pkey
-			primary key,
-	rolename varchar(255) not null
-);
-
-alter table roles owner to postgres;
-
-create table if not exists users
-(
-	user_id serial not null
-		constraint users_pkey
-			primary key,
-	active boolean not null,
-	email varchar,
-	pass varchar not null,
-	username varchar not null,
-	category_id integer
 		constraint users_categories_category_id_fk
 			references preference_categories
-				on update cascade on delete cascade,
-	role_id integer not null
-		constraint users_roles_role_id_fk
-			references roles
 				on update cascade on delete cascade
 );
 
 alter table users owner to postgres;
 
-create unique index if not exists users_id_uindex
+create unique index if not exists users_user_id_uindex
 	on users (user_id);
 
------------------------------------------------------------
+alter table if exists user_role
+    add constraint user_role_user_fk
+foreign key (user_id) references users;
 
 create table tests
 (
@@ -91,7 +51,7 @@ create table tests
 	testname varchar(255) not null,
 	author_id int8 not null
 		constraint tests_users_user_id_fk
-			references usr
+			references users
 				on update cascade on delete cascade,
 	num_of_questions int8 not null,
 	image_path_start varchar(255),
@@ -192,5 +152,42 @@ alter table stat_of_questions owner to postgres;
 create unique index if not exists stat_of_questions_stat_question_id_uindex
 	on stat_of_questions (stat_question_id);
 
-create unique index if not exists roles_role_id_uindex
-	on roles (role_id);
+-----------------------------------------------------------
+--
+-- create table if not exists users
+-- (
+-- 	user_id serial not null
+-- 		constraint users_pkey
+-- 			primary key,
+-- 	active boolean not null,
+-- 	email varchar,
+-- 	pass varchar not null,
+-- 	username varchar not null,
+-- 	category_id integer
+-- 		constraint users_categories_category_id_fk
+-- 			references preference_categories
+-- 				on update cascade on delete cascade,
+-- 	role_id integer not null
+-- 		constraint users_roles_role_id_fk
+-- 			references roles
+-- 				on update cascade on delete cascade
+-- );
+--
+-- alter table users owner to postgres;
+--
+-- create unique index if not exists users_id_uindex
+-- 	on users (user_id);
+--
+-- 	create table roles
+-- (
+-- 	role_id int8 not null
+-- 		constraint roles_pkey
+-- 			primary key,
+-- 	rolename varchar(255) not null
+-- );
+--
+-- alter table roles owner to postgres;
+--
+-- create unique index if not exists roles_role_id_uindex
+-- 	on roles (role_id);
+-----------------------------------------------------------
