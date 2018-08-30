@@ -9,13 +9,11 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.validation.Valid;
+import javax.xml.ws.Response;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -190,7 +188,6 @@ public class TestController {
                 x = x * ((answersOnOneQuestion.get(z).isCorectness() == false) ? 1 : 2);
             }
 
-
             if (x >= 4) {
                 ButtonTypes newElement = new ButtonTypes(false, question.getQuestion_id());
                 buttonTypes.add(newElement);
@@ -198,7 +195,6 @@ public class TestController {
                 ButtonTypes newElement = new ButtonTypes(true, question.getQuestion_id());
                 buttonTypes.add(newElement);
             }
-
 
             if (answers == null)
                 answers = answersOnOneQuestion;
@@ -213,6 +209,22 @@ public class TestController {
         model.addAttribute("buttonTypes", buttonTypes);
         return "testsPassing";
     }
+
+    ///@GetMapping("categories/{category}/{test}")
+
+//    @RequestMapping(value = "/getCharNum", method = RequestMethod.GET)
+//    public @ResponseBody Response getCharNum(@RequestParam String text) {
+//
+//        Response result = new Response();
+//
+//        if (text != null) {
+//            result.setText(text);
+//            result.setCount(text.length());
+//        }
+//
+//        return result;
+//    }
+
 }
 
 

@@ -2,7 +2,10 @@ body {
     color: #f0f;
 }
 
-
+.seconds {
+    padding: 2px 5px;
+    background: lightgreen;
+}
 
 .panel-default {
     border-color:  #f0f;

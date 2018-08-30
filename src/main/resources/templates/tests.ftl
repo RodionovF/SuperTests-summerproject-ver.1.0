@@ -2,7 +2,7 @@
 
 <@c.page>
 <div class="row">
-    <div class="col-4">
+    <div class="col-4 my-3">
         <#list tests as test>
 
             <div class="card my-3">

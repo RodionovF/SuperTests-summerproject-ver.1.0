@@ -58,21 +58,21 @@ create table answers
 
 create table stat_of_tests
 (
-	stat_test_id serial not null,
-	test_id integer not null,
-	user_id integer not null,
-	final_time time,
-	date time,
-	result integer,
+	stat_test_id int8 not null,
+	test_id int8 not null,
+	user_id int8 not null,
+	final_time int8,
+	date date,
+	result int8,
 	primary key (stat_test_id)
 );
 
 create table stat_of_questions
 (
-	stat_question_id serial not null,
-	stat_test_id integer,
-	question_id integer,
-	selected_answer integer,
+	stat_question_id int8 not null,
+	stat_test_id int8,
+	question_id int8,
+	selected_answer int8,
 	primary key (stat_question_id)
 );
 

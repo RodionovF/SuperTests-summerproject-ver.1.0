@@ -6,8 +6,9 @@
     <div class="col-8">
         <div class="card my-3">
             <div class="card-header">
-                <#if test.image_path_end??>
+                <#if test.image_path_start??>
                     <img src="/img/${test.image_path_start}" class="img-thumbnail my-3">
+                <#else>
                 </#if>
 
                 <h3>${test.testname} </h3>
@@ -34,7 +35,7 @@
 
                                                         <#if butType.numberQuestion == que.question_id>
                                                             <#if butType.type == true>
-                                                            <input type="radio" name="radio"aria-label="Radio button for following text input">
+                                                            <input type="radio" name="${que.question}" aria-label="Radio button for following text input">
                                                             <#else>
                                                                 <input type="checkbox" name="active" id="output1" value="1"/>
                                                                 <input type="hidden" value="0" name="active"/>
@@ -62,9 +63,26 @@
             </div>
         </div>
     </div>
+    <div class="col-3 my-3">
+        Время прохождения теста:
+        <span id='timer-counter' style='color:blue;font-size:150%;font-weight:bold;'></span>
+        <script>
+            startdate = new Date();
+            clockStart = startdate.getTime();
+            function initStopwatch() {
+                var thisTime = new Date();
+                return (thisTime.getTime() - clockStart)/1000;
+            }
 
-    <div class="col-3">
-
+            var interval = setInterval(function() {
+                var tSecs = Math.round(initStopwatch());
+                var iSecs = tSecs % 60;
+                var iMins = Math.round((tSecs-30)/60);
+                var sSecs ="" + ((iSecs > 9) ? iSecs : "0" + iSecs);
+                var sMins ="" + ((iMins > 9) ? iMins : "0" + iMins);
+                document.getElementById("timer-counter").innerHTML = sMins+":"+sSecs;
+            }, 1000);
+        </script>
     </div>
 
     <div class="col-1">
@@ -75,5 +93,5 @@
 
 
 
-
 </@c.page>
+
