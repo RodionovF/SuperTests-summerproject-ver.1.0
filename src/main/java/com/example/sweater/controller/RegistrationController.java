@@ -9,10 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.StringUtils;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestTemplate;
 
 import javax.validation.Valid;
@@ -24,6 +21,15 @@ import java.util.Map;
 public class RegistrationController {
     private final static String CAPTCHA_URL = "https://www.google.com/recaptcha/api/siteverify?secret=%s&response=%s";
 
+    private static final int WEAK_STREGTH = 1;
+    private static final int MID_STREGTH = 5;
+    private static final int STRONG_STREGTH = 8;
+
+    private static final String BLACK_COLOR = "#000000";
+    private static final String WEAK_COLOR = "#FF0000";
+    private static final String MID_COLOR = "#FF9900";
+    private static final String STRONG_COLOR = "#0099CC";
+
     @Autowired
     private UserService userService;
 
@@ -33,8 +39,24 @@ public class RegistrationController {
     @Autowired
     private RestTemplate restTemplate;
 
+
     @GetMapping("/registration")
-    public String registration() {
+    public String registration(
+            @RequestParam(required = false, defaultValue = "") String password,
+            Model model
+    ) {
+        model.addAttribute("strength", "");
+        model.addAttribute("color", BLACK_COLOR);
+        if (password.length() >= WEAK_STREGTH & password.length() < MID_STREGTH) {
+            model.addAttribute("strength", "Слабый");
+            model.addAttribute("color", WEAK_COLOR);
+        } else if (password.length() >= MID_STREGTH & password.length() < STRONG_STREGTH) {
+            model.addAttribute("strength", "Cредний");
+            model.addAttribute("color", MID_COLOR);
+        } else if (password.length() >= STRONG_STREGTH) {
+            model.addAttribute("strength", "Сильный");
+            model.addAttribute("color", STRONG_COLOR);
+        }
         return "registration";
     }
 
@@ -102,4 +124,19 @@ public class RegistrationController {
 
         return "login";
     }
+
+//    @RequestMapping(value = "/checkStrength", method = RequestMethod.GET, produces = {"text/html; charset=UTF-8"})
+//    public @ResponseBody
+//    String checkStrength(
+//            @RequestParam(required = false, defaultValue = "") String password2
+//    ) {
+//        if (password2.length() >= WEAK_STREGTH & password2.length() < MID_STREGTH) {
+//            return "Слабый";
+//        } else if (password2.length() >= MID_STREGTH & password2.length() < STRONG_STREGTH) {
+//            return "Средний";
+//        } else if (password2.length() >= STRONG_STREGTH) {
+//            return "Сильный";
+//        }
+//        return "";
+//    }
 }

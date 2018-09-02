@@ -22,6 +22,7 @@ import java.util.UUID;
 
 @Controller
 public class TestController {
+    private static final int twoTrueAns = 4;
 
     @Autowired
     private TestRepo testRepo;
@@ -183,12 +184,12 @@ public class TestController {
         for (Question question : questions) {
             answersOnOneQuestion =  answerRepo.findByQuestionId(question);
 
-            int x = 1;
+            int numTrueAns = 1;
             for (int z = 0; z < answersOnOneQuestion.size(); z++) {
-                x = x * ((answersOnOneQuestion.get(z).isCorectness() == false) ? 1 : 2);
+                numTrueAns = numTrueAns * ((answersOnOneQuestion.get(z).isCorectness() == false) ? 1 : 2);
             }
 
-            if (x >= 4) {
+            if (numTrueAns >= twoTrueAns) {
                 ButtonTypes newElement = new ButtonTypes(false, question.getQuestion_id());
                 buttonTypes.add(newElement);
             } else {
@@ -209,21 +210,6 @@ public class TestController {
         model.addAttribute("buttonTypes", buttonTypes);
         return "testsPassing";
     }
-
-    ///@GetMapping("categories/{category}/{test}")
-
-//    @RequestMapping(value = "/getCharNum", method = RequestMethod.GET)
-//    public @ResponseBody Response getCharNum(@RequestParam String text) {
-//
-//        Response result = new Response();
-//
-//        if (text != null) {
-//            result.setText(text);
-//            result.setCount(text.length());
-//        }
-//
-//        return result;
-//    }
 
 }
 

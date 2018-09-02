@@ -8,9 +8,6 @@
                 <#if category.filename??>
                     <img src="/img/${category.filename}" class="card-img-top">
                 </#if>
-            <#--<div class="m-2">-->
-            <#--<span>${category.categoryId}</span><br/>-->
-            <#--</div>-->
                 <div class="card-footer text-muted">
                         <a class="btn btn-primary" href="/categories/${category.categoryId}">
                             ${category.categoryname}

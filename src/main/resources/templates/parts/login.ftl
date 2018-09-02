@@ -18,14 +18,22 @@
     <div class="form-group row">
         <label class="col-sm-2 col-form-label">Пароль :</label>
         <div class="col-sm-6">
-            <input type="password" name="password"
+            <input type="password" name="password" id="password"
                    class="form-control ${(passwordError??)?string('is-invalid', '')}"
-                   placeholder="Password" />
+                   placeholder="Password" onkeyup="doAjax()"/>
             <#if passwordError??>
                 <div class="invalid-feedback">
                     ${passwordError}
                 </div>
             </#if>
+            <#if strength??>
+                <input type="hidden" id="strengthValue1" value="${strength}"/>
+            </#if>
+            <#if color??>
+                <input type="hidden" id="color" value="${color}"/>
+            </#if>
+            <input type="text" style="float: right;" readonly class="form-control-plaintext" id="strengthValue"
+                   name="num_of_questions">
         </div>
     </div>
     <#if isRegisterForm>
