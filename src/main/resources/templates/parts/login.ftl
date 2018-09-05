@@ -26,14 +26,35 @@
                     ${passwordError}
                 </div>
             </#if>
-            <#if strength??>
-                <input type="hidden" id="strengthValue1" value="${strength}"/>
+            <#if isRegisterForm>
+                <#if strength??>
+                        <input type="hidden" id="strengthValue1" value="${strength}"/>
+                </#if>
+                <#if color??>
+                        <input type="hidden" id="color" value="${color}"/>
+                </#if>
+                    <input type="text" style="float: right;" readonly class="form-control-plaintext" id="strengthValue"
+                           name="num_of_questions">
+
+                    <script type="text/javascript">
+                        function doAjax() {
+                            $.ajax({
+                                url: 'registration',
+                                type: 'GET',
+                                data: ({password: $('#password').val()}),
+                                success: function (data) {
+                                    var power = $(data).find('#strengthValue1').val();
+                                    var color = $(data).find('#color').val();
+
+                                    $('#strengthValue').replaceWith('<input type="text" style="float: right; color:' + color
+                                            + ';" readonly class="form-control-plaintext" id="strengthValue"'
+                                            + 'name="num_of_questions" value="' + power + '">');
+                                    // $('#strengthValue').val($(data).find('#strengthValue1').val());
+                                }
+                            })
+                        }
+                    </script>
             </#if>
-            <#if color??>
-                <input type="hidden" id="color" value="${color}"/>
-            </#if>
-            <input type="text" style="float: right;" readonly class="form-control-plaintext" id="strengthValue"
-                   name="num_of_questions">
         </div>
     </div>
     <#if isRegisterForm>
@@ -80,7 +101,7 @@
 
 <#macro logout>
 <form action="/logout" method="post">
-    <input type="hidden" name="_csrf" value="${_csrf.token}" />
+    <input type="hidden" name="_csrf" value="${_csrf.token}"/>
     <button class="btn btn-primary" type="submit"><#if user??>Выйти<#else>Войти</#if></button>
 </form>
 </#macro>

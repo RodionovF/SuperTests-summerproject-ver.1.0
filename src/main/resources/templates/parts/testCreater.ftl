@@ -4,24 +4,24 @@
             <div class="custom-file">
 
                 <div class="form-group row">
-                    <label class="col-sm-3 col-form-label ">Имя теста :</label>
+                    <label class="col-sm-3 col-form-label ">Имя теста:</label>
                     <div class="col-sm-6">
                         <input type="text" name="testname" class="col-sm-6 form-control"
-                               placeholder="Enter the testname">
+                               placeholder="Enter the testname"/>
                     </div>
                 </div>
 
                 <div class="form-group row">
-                    <label class="col-sm-3 col-form-label">Количество вопросов в тесте :</label>
+                    <label class="col-sm-3 col-form-label">Количество вопросов в тесте:</label>
                     <div class="col-sm-1">
                         <input type="text" readonly class="form-control-plaintext" id="output3" value="1"
-                               name="num_of_questions">
+                               name="num_of_questions"/>
                     </div>
                 </div>
 
                 <div class="form-group my-3">
                     <div class="form-group row">
-                        <label class="col-sm-3 col-form-label">Начальное изображение :</label>
+                        <label class="col-sm-3 col-form-label">Начальное изображение:</label>
                         <div class="col-sm-6">
                             <div class="inputBtnSection">
                                 <input id="uploadFile" class="disableInputField" placeholder="Choose File"
@@ -35,7 +35,7 @@
                     </div>
 
                     <div class="form-group row">
-                        <label class="col-sm-3 col-form-label">Изображение после теста :</label>
+                        <label class="col-sm-3 col-form-label">Изображение после теста:</label>
                         <div class="col-sm-6">
                             <div class="inputBtnSection">
                                 <input id="uploadFile" class="disableInputField" placeholder="Choose File"
@@ -67,7 +67,7 @@
                                     <span class="input-group-btn"><button type="button"
                                                                           class="btn btn-success btn-addd">Добавить вопрос ✚</button></span>
                                 </div>
-                                <label class="col-sm-3 col-form-label">Количество ответов на вопрос :</label>
+                                <label class="col-sm-3 col-form-label">Количество ответов на вопрос:</label>
                                 <input type="text" name="counter" readonly class="col-sm-1 form-control-plaintext"
                                        id="output" value="1">
 
@@ -77,10 +77,10 @@
                                 <div class="form-group mt-3" id="form">
 
                                     <div class="form-group row ml-5 mt-3">
-                                        <label class="col-sm-2 col-form-label ">Вопрос :</label>
+                                        <label class="col-sm-2 col-form-label ">Вопрос:</label>
                                         <div class="col-sm-6">
                                             <input type="text" name="question" id="quest" class="form-control"
-                                                   placeholder="Enter the question">
+                                                   placeholder="Enter the question"/>
                                         </div>
                                     </div>
 
@@ -104,7 +104,7 @@
                                     </div>
 
                                     <div class="form-group row ml-5">
-                                        <label class="col-sm-3 col-form-label">Изображение для вопроса :</label>
+                                        <label class="col-sm-3 col-form-label">Изображение для вопроса:</label>
                                         <div class="col-sm-6">
                                             <div class="inputBtnSection">
                                                 <input name="uploadFile" id="uploadFile" class="disableInputField"

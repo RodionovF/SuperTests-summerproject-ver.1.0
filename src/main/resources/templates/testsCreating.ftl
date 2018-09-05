@@ -13,7 +13,6 @@
 
     $(document).on('click', '.btn-add', function (event) {
 
-
         $(this).closest('.cards').find('#output').val(function (i, val) {
             return val * 1 + 1
         });
@@ -27,7 +26,7 @@
                 .toggleClass('btn-remove')
                 .html('✖');
         field_new.insertAfter(field);
-        $(this).closest('.form-group').find('#output1').replaceWith('<input type="checkbox" name="active" id="output1" value="1"\n' +
+        $(this).closest('.form-group').find('#output1').replaceWith('<input type="checkbox" name="active" id="output1" value="1"' +
                 'aria-label="Checkbox for following text input" />');
         $(this).closest('.form-group').find('#output2').val('');
     });
@@ -92,10 +91,8 @@
         $(this).closest('.cards').remove();
     });
 
-
     $(document).on('change', '.fileUpload', function (event) {
         var filename = $(this).closest('.fileUpload').find('#uploadBtn').val().replace(/.*\\/, "");
         $(this).closest('.inputBtnSection').find("#uploadFile").val(filename);
     });
-
 </script>

@@ -172,6 +172,7 @@ public class TestController {
 
     @GetMapping("categories/{category}/{test}")
     public String passTest(
+            @RequestParam(required = false, defaultValue = "") List<String> checkboxes,
             Model model,
             @PathVariable Category category,
             @PathVariable Test test
