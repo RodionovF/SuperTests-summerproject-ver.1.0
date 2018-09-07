@@ -10,7 +10,7 @@
                     <img src="/img/${test.image_path_start}" class="img-thumbnail my-3">
                 <#else>
                 </#if>
-                <h3>${test.testname} </h3>
+                <h3>${test.testname}</h3>
             </div>
             <div class="card-body">
                 <p class="card-text">
@@ -28,54 +28,54 @@
                                             <div class="form-group input-group">
                                                 <div class="input-group-prepend">
                                                     <div class="input-group-text mb-1" id="load">
-                                                    <#list buttonTypes as butType>
-                                                        <#if butType.numberQuestion == que.question_id>
-                                                            <#if butType.type == true>
-                                                            <input type="radio" name="${que.question}" id="radios"
-                                                                   aria-label="Radio button for following text input">
+                                                    <#list buttonTypes as buttonType>
+                                                        <#if buttonType.question_id == que.question_id>
+                                                            <#if buttonType.type == true>
+                                                            <input type="radio" name="${que.question}" id="${ans.answer_id}"
+                                                                   aria-label="Radio button for following text input"/>
                                                             <#else>
-                                                                <input type="checkbox" class="check" name="checkbox" id="checkboxes"
-                                                                       value="1"/>
-                                                                <input type="hidden" value="0" class="check" name="checkbox" id="checkboxes"/>
+                                                                <input type="checkbox" class="check"  name="check[]" id="${ans.answer_id}"/>
                                                             </#if>
                                                         </#if>
                                                     </#list>
                                                     </div>
                                                 </div>
-                                                <input type="text" name="answer" id="output2" class="form-control mb-1"
-                                                       value="${ans.answer}" disabled/>
-                                            </div>
-                                        </ul>
+                                                <input type="text" class="form-control mb-1" value="${ans.answer}" disabled/>
+                                            </div>                                        </ul>
                                     </#if>
                                 <#else>
                                     No answers
                                 </#list>
-                            <button type="button" class="btn btn-primary" id="buttonAnswer" OnClick="getAnswers();">
+                            <button type="button" class="btn btn-primary" id="${que.question_id}" OnClick="getAnswers${que.question_id}();">
                                 Ответить
                             </button>
 
                             <script type="text/javascript">
-                                function getAnswers() {
+                                function getAnswers${que.question_id}() {
 
-                                    var listName;
-                                    $(".check").each(function(){
-                                        listName.push($(this).val());
-                                        alert($(this).val());
-                                    })​;
+                                    var checkboxes = [];
+                                    var _name = 'check${que.question_id}[]';
+
+                                    $("input[name='check[]']:checked").each(function () {
+                                        checkboxes.push($(this).attr('id'));
+                                        // checkboxes.push($(this).val());
+                                    });
 
                                     $('#numAnswers').val(function (i, val) {
                                         $.ajax({
                                             url: '/categories/${category.categoryId}/${test.test_id}',
                                             type: 'GET',
-                                            data: {checkboxes:  listName},
+                                            data: {checkboxes: checkboxes},
                                             success: function () {
-                                                alert('Request has returned')
-                                                $('#buttonAnswer').replaceWith('<button type="button" class="btn btn-secondary" OnClick="Answers();" disabled>Ответить</button>');
+                                                alert('Request has returned');
+                                                var param = "'#"+"btnAnswer${que.question_id}'";
+                                                $('#${que.question_id}').replaceWith('<button type="button" class="btn btn-secondary" OnClick="Answers();" disabled>Ответить</button>');
+                                                $("input[name='_name']").prop('checked', false);
                                             }
                                         });
                                         return val * 1 + 1
                                     });
-                                }
+                                };
                             </script>
 
                         <#else>
@@ -89,7 +89,7 @@
 
     <div class="col-3 my-3">
         <label>Время прохождения теста:</label>
-        <span id='timer-counter' style='color:blue;font-size:150%;font-weight:bold;'></span>
+        <span id="timer-counter" style="color:blue;font-size:150%;font-weight:bold;"></span>
 
         <script>
             startdate = new Date();
@@ -121,7 +121,6 @@
     <div class="col-1">
         <a class="btn btn-dark my-3 ml-3" href="/categories/${category.categoryId}">Назад</a>
     </div>
-
 </div>
 
 </@c.page>

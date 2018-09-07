@@ -9,13 +9,16 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.validation.Valid;
-import javax.xml.ws.Response;
 import java.io.File;
 import java.io.IOException;
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
@@ -172,7 +175,7 @@ public class TestController {
 
     @GetMapping("categories/{category}/{test}")
     public String passTest(
-            @RequestParam(required = false, defaultValue = "") List<String> checkboxes,
+            @RequestParam(value="checkboxes[]", required=false) String[] checkboxes,
             Model model,
             @PathVariable Category category,
             @PathVariable Test test
@@ -180,17 +183,17 @@ public class TestController {
         List<Question> questions = questionRepo.findByTestId(test);
         List<Answer> answers = null;
         List<ButtonTypes> buttonTypes = new ArrayList<ButtonTypes>();
-
         List<Answer> answersOnOneQuestion = null;
+
         for (Question question : questions) {
             answersOnOneQuestion =  answerRepo.findByQuestionId(question);
 
-            int numTrueAns = 1;
-            for (int z = 0; z < answersOnOneQuestion.size(); z++) {
-                numTrueAns = numTrueAns * ((answersOnOneQuestion.get(z).isCorectness() == false) ? 1 : 2);
+            int numberOfTrueAns = 1;
+            for (int i = 0; i < answersOnOneQuestion.size(); i++) {
+                numberOfTrueAns = numberOfTrueAns * ((answersOnOneQuestion.get(i).isCorectness() == false) ? 1 : 2);
             }
 
-            if (numTrueAns >= twoTrueAns) {
+            if (numberOfTrueAns >= twoTrueAns) {
                 ButtonTypes newElement = new ButtonTypes(false, question.getQuestion_id());
                 buttonTypes.add(newElement);
             } else {

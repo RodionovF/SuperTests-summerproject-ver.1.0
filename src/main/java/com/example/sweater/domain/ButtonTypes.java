@@ -2,11 +2,11 @@ package com.example.sweater.domain;
 
 public class ButtonTypes {
     private boolean type;
-    private Long numberQuestion;
+    private Long question_id;
 
     public ButtonTypes(boolean type, Long numberQuestion) {
-        this.type = type;
-        this.numberQuestion = numberQuestion;
+        this.type = type; // true == radio; false == checkbox
+        this.question_id = numberQuestion;
     }
 
     public boolean isType() {
@@ -17,11 +17,11 @@ public class ButtonTypes {
         this.type = type;
     }
 
-    public Long getNumberQuestion() {
-        return numberQuestion;
+    public Long getQuestion_id() {
+        return question_id;
     }
 
-    public void setNumberQuestion(Long numberQuestion) {
-        this.numberQuestion = numberQuestion;
+    public void setQuestion_id(Long question_id) {
+        this.question_id = question_id;
     }
 }
