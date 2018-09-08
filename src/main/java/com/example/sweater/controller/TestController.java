@@ -1,9 +1,7 @@
 package com.example.sweater.controller;
 
 import com.example.sweater.domain.*;
-import com.example.sweater.repos.AnswerRepo;
-import com.example.sweater.repos.QuestionRepo;
-import com.example.sweater.repos.TestRepo;
+import com.example.sweater.repos.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
@@ -18,7 +16,6 @@ import org.springframework.web.multipart.MultipartFile;
 import javax.validation.Valid;
 import java.io.File;
 import java.io.IOException;
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
@@ -35,6 +32,12 @@ public class TestController {
 
     @Autowired
     private AnswerRepo answerRepo;
+
+    @Autowired
+    private QuestionStatRepo questionStatRepo;
+
+    @Autowired
+    private TestStatRepo testStatRepo;
 
     @Value("${upload.path}")
     private String uploadPath;
@@ -176,6 +179,7 @@ public class TestController {
     @GetMapping("categories/{category}/{test}")
     public String passTest(
             @RequestParam(value="checkboxes[]", required=false) String[] checkboxes,
+            @RequestParam(required = false, defaultValue = "") String currentQuestion,
             Model model,
             @PathVariable Category category,
             @PathVariable Test test
@@ -207,6 +211,18 @@ public class TestController {
                 answers.addAll(answersOnOneQuestion);
             }
         }
+
+        if (!("").equals(currentQuestion)) {
+            StatOfQuestion statOfQuestion = new StatOfQuestion();
+            statOfQuestion.setStatTestId(test);
+            Question helpQuestion = questionRepo.findByQuestion(currentQuestion);
+            statOfQuestion.setQuestionId(helpQuestion);
+        }
+//        Answer helpAnswer = answerRepo.findByAnswerId(Long.valueOf(checkboxes[0]));
+//        statOfQuestion.setSelectedAnswer(helpAnswer);
+
+
+
         model.addAttribute("test", test);
         model.addAttribute("category", category);
         model.addAttribute("questions", questions);

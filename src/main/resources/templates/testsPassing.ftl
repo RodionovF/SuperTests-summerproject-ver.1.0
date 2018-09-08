@@ -34,7 +34,7 @@
                                                             <input type="radio" name="${que.question}" id="${ans.answer_id}"
                                                                    aria-label="Radio button for following text input"/>
                                                             <#else>
-                                                                <input type="checkbox" class="check"  name="check[]" id="${ans.answer_id}"/>
+                                                                <input type="checkbox" class="check"  name="check${que.question_id}[]" id="${ans.answer_id}"/>
                                                             </#if>
                                                         </#if>
                                                     </#list>
@@ -54,9 +54,8 @@
                                 function getAnswers${que.question_id}() {
 
                                     var checkboxes = [];
-                                    var _name = 'check${que.question_id}[]';
 
-                                    $("input[name='check[]']:checked").each(function () {
+                                    $("input[name='check${que.question_id}[]']:checked").each(function () {
                                         checkboxes.push($(this).attr('id'));
                                         // checkboxes.push($(this).val());
                                     });
@@ -65,12 +64,14 @@
                                         $.ajax({
                                             url: '/categories/${category.categoryId}/${test.test_id}',
                                             type: 'GET',
-                                            data: {checkboxes: checkboxes},
+                                            data: {
+                                                checkboxes: checkboxes,
+                                                currentQuestion: ${que.question}
+                                            },
                                             success: function () {
                                                 alert('Request has returned');
-                                                var param = "'#"+"btnAnswer${que.question_id}'";
                                                 $('#${que.question_id}').replaceWith('<button type="button" class="btn btn-secondary" OnClick="Answers();" disabled>Ответить</button>');
-                                                $("input[name='_name']").prop('checked', false);
+                                                $("input[name='check${que.question_id}[]']").prop('checked', false);
                                             }
                                         });
                                         return val * 1 + 1

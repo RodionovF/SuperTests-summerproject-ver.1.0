@@ -11,4 +11,6 @@ public interface QuestionRepo extends CrudRepository<Question, Long> {
 
     List<Question> findByTestId(Test testId);
 
+    Question findByQuestion(String question);
+
 }

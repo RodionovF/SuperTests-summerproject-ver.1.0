@@ -30,6 +30,10 @@ public class Answer {
         this.answer = answer;
     }
 
+    public Answer(Long answer_id) {
+        this.answer_id = answer_id;
+    }
+
     public Long getAnswer_id() {
         return answer_id;
     }
