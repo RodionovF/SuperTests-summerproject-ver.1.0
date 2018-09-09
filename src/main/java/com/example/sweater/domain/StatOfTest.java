@@ -11,6 +11,10 @@ public class StatOfTest {
     private Long stat_test_id;
 
     @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "test_id")
+    private Test testId;
+
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "user_id")
     private User userId;
 
@@ -58,5 +62,13 @@ public class StatOfTest {
 
     public void setResult(Long result) {
         this.result = result;
+    }
+
+    public Test getTestId() {
+        return testId;
+    }
+
+    public void setTestId(Test testId) {
+        this.testId = testId;
     }
 }

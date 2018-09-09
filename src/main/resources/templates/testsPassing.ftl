@@ -34,7 +34,7 @@
                                                             <input type="radio" name="${que.question}" id="${ans.answer_id}"
                                                                    aria-label="Radio button for following text input"/>
                                                             <#else>
-                                                                <input type="checkbox" class="check"  name="check${que.question_id}[]" id="${ans.answer_id}"/>
+                                                                <input type="checkbox" class="check"  name="check${que.question_id}[]" id="${ans.answer}"/>
                                                             </#if>
                                                         </#if>
                                                     </#list>
@@ -66,7 +66,7 @@
                                             type: 'GET',
                                             data: {
                                                 checkboxes: checkboxes,
-                                                currentQuestion: ${que.question}
+                                                currentQuestion: "${que.question}"
                                             },
                                             success: function () {
                                                 alert('Request has returned');

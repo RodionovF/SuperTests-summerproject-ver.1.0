@@ -10,6 +10,6 @@ public interface AnswerRepo extends CrudRepository<Answer, Long> {
 
     List<Answer> findByQuestionId(Question questionId);
 
-
+    Answer findByAnswer(String answer);
 
 }

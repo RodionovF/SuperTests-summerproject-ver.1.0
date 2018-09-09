@@ -8,7 +8,7 @@ import org.springframework.data.repository.CrudRepository;
 
 import java.util.List;
 
-public interface TestStatRepo extends CrudRepository<Answer, Long> {
+public interface TestStatRepo extends CrudRepository<StatOfTest, Long> {
 
     //List<Answer> findByQuestionId(Question questionId);
 

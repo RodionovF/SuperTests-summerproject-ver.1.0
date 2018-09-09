@@ -16,6 +16,9 @@ import org.springframework.web.multipart.MultipartFile;
 import javax.validation.Valid;
 import java.io.File;
 import java.io.IOException;
+import java.sql.Date;
+import java.time.LocalDate;
+import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
@@ -178,6 +181,7 @@ public class TestController {
 
     @GetMapping("categories/{category}/{test}")
     public String passTest(
+            @AuthenticationPrincipal User user,
             @RequestParam(value="checkboxes[]", required=false) String[] checkboxes,
             @RequestParam(required = false, defaultValue = "") String currentQuestion,
             Model model,
@@ -213,13 +217,23 @@ public class TestController {
         }
 
         if (!("").equals(currentQuestion)) {
-            StatOfQuestion statOfQuestion = new StatOfQuestion();
-            statOfQuestion.setStatTestId(test);
-            Question helpQuestion = questionRepo.findByQuestion(currentQuestion);
-            statOfQuestion.setQuestionId(helpQuestion);
+
+            StatOfTest statOfTest = new StatOfTest();
+            statOfTest.setUserId(user);
+            statOfTest.setTestId(test);
+            LocalDate todayLocalDate = LocalDate.now( ZoneId.of( "America/Montreal" ) );
+            java.sql.Date sqlDate = java.sql.Date.valueOf( todayLocalDate );
+            statOfTest.setDate(sqlDate);
+            testStatRepo.save(statOfTest);
+
+            for(int i = 0; i < checkboxes.length; i++) {
+                StatOfQuestion statOfQuestion = new StatOfQuestion();
+                statOfQuestion.setStatTestId(statOfTest);
+                statOfQuestion.setQuestionId(questionRepo.findByQuestion(currentQuestion));
+                statOfQuestion.setSelectedAnswer(answerRepo.findByAnswer(checkboxes[i]));
+                questionStatRepo.save(statOfQuestion);
+            }
         }
-//        Answer helpAnswer = answerRepo.findByAnswerId(Long.valueOf(checkboxes[0]));
-//        statOfQuestion.setSelectedAnswer(helpAnswer);
 
 
 

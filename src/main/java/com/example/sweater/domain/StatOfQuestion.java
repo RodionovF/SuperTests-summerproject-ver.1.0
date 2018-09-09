@@ -14,7 +14,7 @@ public class StatOfQuestion {
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "stat_test_id")
-    private Test statTestId;
+    private StatOfTest statTestId;
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "question_id")
@@ -36,11 +36,11 @@ public class StatOfQuestion {
         this.stat_question_id = stat_question_id;
     }
 
-    public Test getStatTestId() {
+    public StatOfTest getStatTestId() {
         return statTestId;
     }
 
-    public void setStatTestId(Test statTestId) {
+    public void setStatTestId(StatOfTest statTestId) {
         this.statTestId = statTestId;
     }
 
