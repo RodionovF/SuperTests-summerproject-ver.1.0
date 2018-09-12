@@ -34,7 +34,7 @@
                         <input type="hidden" id="color" value="${color}"/>
                 </#if>
                     <input type="text" style="float: right;" readonly class="form-control-plaintext" id="strengthValue"
-                           name="num_of_questions">
+                           name="num_of_questions"/>
 
                     <script type="text/javascript">
                         function doAjax() {

@@ -34,13 +34,13 @@
                                                     <#list buttonTypes as buttonType>
                                                         <#if buttonType.question_id == que.question_id>
                                                             <#if buttonType.type == true>
-                                                            <input type="radio" name="${que.question}"
-                                                                   id="${ans.answer_id}"
-                                                                   aria-label="Radio button for following text input"/>
+                                                                <input type="radio" class="radio"
+                                                                       name="radio${que.question_id}[]"
+                                                                       id="${ans.answer_id}"/>
                                                             <#else>
-                                                                    <input type="checkbox" class="check"
-                                                                           name="check${que.question_id}[]"
-                                                                           id="${ans.answer_id}"/>
+                                                                <input type="checkbox" class="check"
+                                                                       name="check${que.question_id}[]"
+                                                                       id="${ans.answer_id}"/>
                                                             </#if>
                                                         </#if>
                                                     </#list>
@@ -49,48 +49,67 @@
                                                 <input type="text" class="form-control mb-1" value="${ans.answer}"
                                                        name="${ans.answer}" id="${ans.answer_id}1" disabled/>
                                                 <#if ans.corectness == true>
-                                                    <input type="hidden" id="${ans.answer_id}" name="ansRight${que.question_id}[]"/>
+                                                    <input type="hidden" id="${ans.answer_id}"
+                                                           name="ansRight${que.question_id}[]"/>
                                                 </#if>
                                                 <#if checkedAnswers??>
                                                     <#list checkedAnswers as checkedAnswer>
-                                                         <#if ans.answer_id == checkedAnswer.answer_id>
-                                                            <input type="hidden" id="${ans.answer_id}" name="ansWrong${que.question_id}[]"
-                                                                   value="${checkedAnswer.corectness?c}"/>
-                                                         </#if>
+                                                        <#if ans.answer_id == checkedAnswer.answer_id>
+                                                            <input type="hidden" id="${ans.answer_id}"
+                                                                   name="ansWrong${que.question_id}[]"/>
+                                                        <#--value="${checkedAnswer.corectness?c}"-->
+                                                        </#if>
                                                     </#list>
                                                 </#if>
                                             </div>
                                         </ul>
                                     </#if>
                                 </#list>
-                            <button type="button" class="btn btn-primary" id="${que.question_id}"
-                                    OnClick="getAnswers${que.question_id}();"/>
-                            Ответить
-                            </button>
+                            <div class="form-group row">
+                                <div class="col-2">
+                                    <button type="button" class="btn btn-primary" id="${que.question_id}"
+                                            OnClick="getAnswers${que.question_id}();"/>
+                                    Ответить</button>
+                                </div>
+                                <div class="col-6">
+                                    <input type="text" style="float: right; color: red;" readonly
+                                           class="form-control-plaintext"
+                                           id="nullAnswer${que.question_id}"
+                                           name="num_of_questions"/>
+                                </div>
+                            </div>
 
                             <script type="text/javascript">
                                 function getAnswers${que.question_id}() {
 
-                                    var checkboxes = [];
+                                    var checks = [];
 
                                     $("input[name='check${que.question_id}[]']:checked").each(function () {
-                                        checkboxes.push($(this).attr('id'));
+                                        checks.push($(this).attr('id'));
                                     });
+
+                                    $("input[name='radio${que.question_id}[]']:checked").each(function () {
+                                        checks.push($(this).attr('id'));
+                                    });
+
+                                    if (checks.length == 0) {
+                                        //alert('Выберете ответ');
+                                        $('#nullAnswer${que.question_id}').val('Выберете хотя бы 1 ответ');
+                                        return;
+                                    }
 
                                     $('#numAnswers').val(function (i, val) {
                                         $.ajax({
                                             url: '/categories/${category.categoryId}/${test.test_id}',
                                             type: 'GET',
                                             data: {
-                                                checkboxes: checkboxes,
+                                                checks: checks,
                                                 currentQuestion: "${que.question_id}",
-                                                currentStat: $('#statOfTest').val()
+                                                currentStat: $('#statOfTest').val(),
+                                                numOfRightAnswers: $('#numOfRightAnswers').val()
                                             },
                                             success: function (data) {
-                                                // alert('Request has returned');
-                                                // var valuev = 0;
-                                                // var value1 = '#' + $('#statOfTest').attr('id');
-                                                // var value2 = $(data).find(value1).val();
+                                                //alert('Request has returned');
                                                 $(data).find("input[name='ansWrong${que.question_id}[]']").each(function () {
                                                     var temp = '#' + $(this).attr('id') + '1';
                                                     $(temp).removeClass("form-control mb-1").addClass("form-control mb-1 bg-danger");
@@ -99,18 +118,34 @@
                                                 $("input[name='ansRight${que.question_id}[]']").each(function () {
                                                     var temp = '#' + $(this).attr('id') + '1';
                                                     $(temp).removeClass("form-control mb-1").addClass("form-control mb-1 bg-success");
-
                                                 });
 
                                                 var value = $(data).find('#statOfTest').val();
+                                                var value1 = $(data).find('#numOfRightAnswers').val();
                                                 $('#statOfTest').val(value);
-                                                $('#${que.question_id}').replaceWith('<button type="button" class="btn btn-secondary" OnClick="Answers();" disabled>Ответить</button>');
+                                                $('#${que.question_id}').prop('disabled', true);
                                                 //$("input[name='check${que.question_id}[]']").prop('checked', false);
-                                                $("input[name='check${que.question_id}[]']").prop('disabled',true);
+                                                $("input[name='check${que.question_id}[]']").prop('disabled', true);
+                                                $('#nullAnswer${que.question_id}').val('');
+                                                $('#numOfRightAnswers').val(value1);
+
+                                                var i = $(".progress-bar").get(0).style.width;
+                                                i = i.replace('%', '');
+                                                var answeredQuestion = $('.progress-value > span').text();
+                                                var allQuestion = ${test.num_of_questions};
+                                                answeredQuestion++;
+                                                i = answeredQuestion / allQuestion * 100;
+                                                i = i - (i%1);
+                                                var per_i = i + '%'
+                                                $(".progress-bar").get(0).style.width = per_i;
+                                                $(".progress-bar").text(i + " %");
+                                                $('.progress-value > span').text(answeredQuestion);
                                             }
                                         });
                                         return val * 1 + 1
                                     });
+
+
                                 };
                             </script>
 
@@ -152,11 +187,30 @@
                    name="numAnswers"/>
             <label class="col-sm-7 col-form-label ">из ${test.num_of_questions} вопросов.</label>
         </div>
+
+
+        <div class="form-group row">
+            <label class="col-sm-7 col-form-label ">Количество правильных ответов: </label>
+            <input type="text" readonly class="form-control-plaintext col-sm-2" id="numOfRightAnswers"
+                   value="${numOfRightAnswers}"
+                   name="numAnswers"/>
+        </div>
+
+        <h3 class="progress-title">Вы ответили на</h3>
+        <div class="progress-outer">
+            <div class="progress">
+                <div id="progressbar" class="progress-bar progress-bar-striped progress-bar-danger"
+                     style="width:0%;"></div>
+                <div class="progress-value"><span>0</span>/${test.num_of_questions}</div>
+            </div>
+        </div>
+
     </div>
 
     <div class="col-1">
         <a class="btn btn-dark my-3 ml-3" href="/categories/${category.categoryId}">Назад</a>
     </div>
+
 </div>
 
 </@c.page>

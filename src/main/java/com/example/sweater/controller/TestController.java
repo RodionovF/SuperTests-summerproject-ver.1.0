@@ -180,9 +180,10 @@ public class TestController {
     @GetMapping("categories/{category}/{test}")
     public String passTest(
             @AuthenticationPrincipal User user,
-            @RequestParam(value = "checkboxes[]", required = false) String[] checkboxes,
+            @RequestParam(value = "checks[]", required = false) String[] checks,
             @RequestParam(required = false, defaultValue = "") String currentQuestion,
             @RequestParam(required = false, defaultValue = "") String currentStat,
+            @RequestParam(required = false, defaultValue = "0") String numOfRightAnswers,
             Model model,
             @PathVariable Category category,
             @PathVariable Test test
@@ -192,6 +193,7 @@ public class TestController {
         List<Answer> checkedAnswers = new ArrayList<Answer>();
         List<ButtonTypes> buttonTypes = new ArrayList<ButtonTypes>();
         List<Answer> answersOnOneQuestion = null;
+        Long num = Long.valueOf(numOfRightAnswers);
 
         for (Question question : questions) {
             answersOnOneQuestion = answerRepo.findByQuestionId(question);
@@ -232,23 +234,26 @@ public class TestController {
                 statOfTest = testStatRepo.findById(Long.valueOf(currentStat)).get();
             }
 
-            for (int i = 0; i < checkboxes.length; i++) {
+            for (int i = 0; i < checks.length; i++) {
                 StatOfQuestion statOfQuestion = new StatOfQuestion();
                 statOfQuestion.setStatTestId(statOfTest);
                 statOfQuestion.setQuestionId(questionRepo.findById(Long.valueOf(currentQuestion)).get());
 
-                Answer selectedAnswer = answerRepo.findById(Long.valueOf(checkboxes[i])).get();
+                Answer selectedAnswer = answerRepo.findById(Long.valueOf(checks[i])).get();
                 if (!selectedAnswer.isCorectness())
                     checkedAnswers.add(selectedAnswer);
 
                 statOfQuestion.setSelectedAnswer(selectedAnswer);
                 questionStatRepo.save(statOfQuestion);
             }
+
+            if(checkedAnswers.isEmpty())
+                num++;
+
             model.addAttribute("statOfTest", statOfTest.getStat_test_id());
         } else {
             model.addAttribute("statOfTest", "");
         }
-
 
         model.addAttribute("test", test);
         model.addAttribute("category", category);
@@ -256,6 +261,7 @@ public class TestController {
         model.addAttribute("answers", answers);
         model.addAttribute("buttonTypes", buttonTypes);
         model.addAttribute("checkedAnswers", checkedAnswers);
+        model.addAttribute("numOfRightAnswers", num);
         return "testsPassing";
     }
 
