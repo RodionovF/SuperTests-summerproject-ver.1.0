@@ -52,7 +52,7 @@
                                     // $('#strengthValue').val($(data).find('#strengthValue1').val());
                                 }
                             })
-                        }
+                        }11
                     </script>
             </#if>
         </div>

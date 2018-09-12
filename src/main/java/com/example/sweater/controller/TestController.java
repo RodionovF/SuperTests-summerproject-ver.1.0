@@ -90,15 +90,14 @@ public class TestController {
         int k = 0;
         int p = 0;
         int count = 0;
+
         for (int i = 0; i < listQuestion.size(); i++) {
             Question question = new Question(listQuestion.get(i));
             question.setTestId(test);
             saveQuestionFile(question, listQuestionImage.get(i));
             questionRepo.save(question);
 
-
             count += counter.get(i);
-
 
             for (int j = p; j < count; j++, k++, p++) {
                 Answer answer = new Answer(listAnswer.get(j));
@@ -113,7 +112,6 @@ public class TestController {
 
                 answerRepo.save(answer);
             }
-
 
         }
 
@@ -182,19 +180,21 @@ public class TestController {
     @GetMapping("categories/{category}/{test}")
     public String passTest(
             @AuthenticationPrincipal User user,
-            @RequestParam(value="checkboxes[]", required=false) String[] checkboxes,
+            @RequestParam(value = "checkboxes[]", required = false) String[] checkboxes,
             @RequestParam(required = false, defaultValue = "") String currentQuestion,
+            @RequestParam(required = false, defaultValue = "") String currentStat,
             Model model,
             @PathVariable Category category,
             @PathVariable Test test
     ) throws IOException {
         List<Question> questions = questionRepo.findByTestId(test);
         List<Answer> answers = null;
+        List<Answer> checkedAnswers = new ArrayList<Answer>();
         List<ButtonTypes> buttonTypes = new ArrayList<ButtonTypes>();
         List<Answer> answersOnOneQuestion = null;
 
         for (Question question : questions) {
-            answersOnOneQuestion =  answerRepo.findByQuestionId(question);
+            answersOnOneQuestion = answerRepo.findByQuestionId(question);
 
             int numberOfTrueAns = 1;
             for (int i = 0; i < answersOnOneQuestion.size(); i++) {
@@ -218,23 +218,36 @@ public class TestController {
 
         if (!("").equals(currentQuestion)) {
 
-            StatOfTest statOfTest = new StatOfTest();
-            statOfTest.setUserId(user);
-            statOfTest.setTestId(test);
-            LocalDate todayLocalDate = LocalDate.now( ZoneId.of( "America/Montreal" ) );
-            java.sql.Date sqlDate = java.sql.Date.valueOf( todayLocalDate );
-            statOfTest.setDate(sqlDate);
-            testStatRepo.save(statOfTest);
+            StatOfTest statOfTest;
 
-            for(int i = 0; i < checkboxes.length; i++) {
+            if (("").equals(currentStat)) {
+                statOfTest = new StatOfTest();
+                statOfTest.setUserId(user);
+                statOfTest.setTestId(test);
+                LocalDate todayLocalDate = LocalDate.now(ZoneId.of("America/Montreal"));
+                java.sql.Date sqlDate = java.sql.Date.valueOf(todayLocalDate);
+                statOfTest.setDate(sqlDate);
+                testStatRepo.save(statOfTest);
+            } else {
+                statOfTest = testStatRepo.findById(Long.valueOf(currentStat)).get();
+            }
+
+            for (int i = 0; i < checkboxes.length; i++) {
                 StatOfQuestion statOfQuestion = new StatOfQuestion();
                 statOfQuestion.setStatTestId(statOfTest);
-                statOfQuestion.setQuestionId(questionRepo.findByQuestion(currentQuestion));
-                statOfQuestion.setSelectedAnswer(answerRepo.findByAnswer(checkboxes[i]));
+                statOfQuestion.setQuestionId(questionRepo.findById(Long.valueOf(currentQuestion)).get());
+
+                Answer selectedAnswer = answerRepo.findById(Long.valueOf(checkboxes[i])).get();
+                if (!selectedAnswer.isCorectness())
+                    checkedAnswers.add(selectedAnswer);
+
+                statOfQuestion.setSelectedAnswer(selectedAnswer);
                 questionStatRepo.save(statOfQuestion);
             }
+            model.addAttribute("statOfTest", statOfTest.getStat_test_id());
+        } else {
+            model.addAttribute("statOfTest", "");
         }
-
 
 
         model.addAttribute("test", test);
@@ -242,6 +255,7 @@ public class TestController {
         model.addAttribute("questions", questions);
         model.addAttribute("answers", answers);
         model.addAttribute("buttonTypes", buttonTypes);
+        model.addAttribute("checkedAnswers", checkedAnswers);
         return "testsPassing";
     }
 

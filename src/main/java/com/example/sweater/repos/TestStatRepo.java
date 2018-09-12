@@ -10,6 +10,7 @@ import java.util.List;
 
 public interface TestStatRepo extends CrudRepository<StatOfTest, Long> {
 
-    //List<Answer> findByQuestionId(Question questionId);
-
+   ////StatOfTest findOne(ID stat_test_id);
+    //StatOfTest findByStat_test_id(Long stat_test_id);
 }
+

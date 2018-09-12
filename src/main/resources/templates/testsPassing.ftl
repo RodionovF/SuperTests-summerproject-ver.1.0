@@ -11,6 +11,9 @@
                 <#else>
                 </#if>
                 <h3>${test.testname}</h3>
+                 <#if statOfTest??>
+                        <input type="hidden" id="statOfTest" value="${statOfTest}"/>
+                 </#if>
             </div>
             <div class="card-body">
                 <p class="card-text">
@@ -31,23 +34,38 @@
                                                     <#list buttonTypes as buttonType>
                                                         <#if buttonType.question_id == que.question_id>
                                                             <#if buttonType.type == true>
-                                                            <input type="radio" name="${que.question}" id="${ans.answer_id}"
+                                                            <input type="radio" name="${que.question}"
+                                                                   id="${ans.answer_id}"
                                                                    aria-label="Radio button for following text input"/>
                                                             <#else>
-                                                                <input type="checkbox" class="check"  name="check${que.question_id}[]" id="${ans.answer}"/>
+                                                                    <input type="checkbox" class="check"
+                                                                           name="check${que.question_id}[]"
+                                                                           id="${ans.answer_id}"/>
                                                             </#if>
                                                         </#if>
                                                     </#list>
                                                     </div>
                                                 </div>
-                                                <input type="text" class="form-control mb-1" value="${ans.answer}" disabled/>
-                                            </div>                                        </ul>
+                                                <input type="text" class="form-control mb-1" value="${ans.answer}"
+                                                       name="${ans.answer}" id="${ans.answer_id}1" disabled/>
+                                                <#if ans.corectness == true>
+                                                    <input type="hidden" id="${ans.answer_id}" name="ansRight${que.question_id}[]"/>
+                                                </#if>
+                                                <#if checkedAnswers??>
+                                                    <#list checkedAnswers as checkedAnswer>
+                                                         <#if ans.answer_id == checkedAnswer.answer_id>
+                                                            <input type="hidden" id="${ans.answer_id}" name="ansWrong${que.question_id}[]"
+                                                                   value="${checkedAnswer.corectness?c}"/>
+                                                         </#if>
+                                                    </#list>
+                                                </#if>
+                                            </div>
+                                        </ul>
                                     </#if>
-                                <#else>
-                                    No answers
                                 </#list>
-                            <button type="button" class="btn btn-primary" id="${que.question_id}" OnClick="getAnswers${que.question_id}();">
-                                Ответить
+                            <button type="button" class="btn btn-primary" id="${que.question_id}"
+                                    OnClick="getAnswers${que.question_id}();"/>
+                            Ответить
                             </button>
 
                             <script type="text/javascript">
@@ -57,7 +75,6 @@
 
                                     $("input[name='check${que.question_id}[]']:checked").each(function () {
                                         checkboxes.push($(this).attr('id'));
-                                        // checkboxes.push($(this).val());
                                     });
 
                                     $('#numAnswers').val(function (i, val) {
@@ -66,12 +83,30 @@
                                             type: 'GET',
                                             data: {
                                                 checkboxes: checkboxes,
-                                                currentQuestion: "${que.question}"
+                                                currentQuestion: "${que.question_id}",
+                                                currentStat: $('#statOfTest').val()
                                             },
-                                            success: function () {
-                                                alert('Request has returned');
+                                            success: function (data) {
+                                                // alert('Request has returned');
+                                                // var valuev = 0;
+                                                // var value1 = '#' + $('#statOfTest').attr('id');
+                                                // var value2 = $(data).find(value1).val();
+                                                $(data).find("input[name='ansWrong${que.question_id}[]']").each(function () {
+                                                    var temp = '#' + $(this).attr('id') + '1';
+                                                    $(temp).removeClass("form-control mb-1").addClass("form-control mb-1 bg-danger");
+                                                });
+
+                                                $("input[name='ansRight${que.question_id}[]']").each(function () {
+                                                    var temp = '#' + $(this).attr('id') + '1';
+                                                    $(temp).removeClass("form-control mb-1").addClass("form-control mb-1 bg-success");
+
+                                                });
+
+                                                var value = $(data).find('#statOfTest').val();
+                                                $('#statOfTest').val(value);
                                                 $('#${que.question_id}').replaceWith('<button type="button" class="btn btn-secondary" OnClick="Answers();" disabled>Ответить</button>');
-                                                $("input[name='check${que.question_id}[]']").prop('checked', false);
+                                                //$("input[name='check${que.question_id}[]']").prop('checked', false);
+                                                $("input[name='check${que.question_id}[]']").prop('disabled',true);
                                             }
                                         });
                                         return val * 1 + 1

@@ -24,6 +24,13 @@ public class StatOfTest {
 
     private Long result;
 
+    public StatOfTest() {
+    }
+
+    public StatOfTest(Long stat_test_id) {
+        this.stat_test_id = stat_test_id;
+    }
+
     public Long getStat_test_id() {
         return stat_test_id;
     }
