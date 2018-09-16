@@ -14,7 +14,7 @@
                         </a>
                         <#if isAdmin>
                             <a class="btn btn-primary"
-                               href="/edit-category/${category.categoryId}?сategory=${category.categoryId}">
+                               href="/edit-category/${category.categoryId}">
                                 Редактировать
                             </a>
                         </#if>

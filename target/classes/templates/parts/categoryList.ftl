@@ -8,22 +8,20 @@
                 <#if category.filename??>
                     <img src="/img/${category.filename}" class="card-img-top">
                 </#if>
-                <div class="m-2">
-                    <span>${category.category_id}</span><br/>
-                    <#--<i>#${message.tag}</i>-->
-                </div>
                 <div class="card-footer text-muted">
-                    ${category.categoryname}
-                    <#--<a href="/user-messages/${message.author.id}">${message.authorName}</a>-->
-                    <#--<#if message.author.id == currentUserId>-->
-                        <#--<a class="btn btn-primary" href="/user-messages/${message.author.id}?message=${message.id}">-->
-                            <#--Edit-->
-                        <#--</a>-->
-                    <#--</#if>-->
+                        <a class="btn btn-primary" href="/categories/${category.categoryId}">
+                            ${category.categoryname}
+                        </a>
+                        <#if isAdmin>
+                            <a class="btn btn-primary"
+                               href="/edit-category/${category.categoryId}">
+                                Редактировать
+                            </a>
+                        </#if>
                 </div>
             </div>
         <#else>
-            No message
+            No category
         </#list>
         </div>
     </div>

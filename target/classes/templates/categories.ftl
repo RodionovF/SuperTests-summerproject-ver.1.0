@@ -3,19 +3,28 @@
 
 
 <@c.page>
-<div class="form-row">
+<div class="form-row mt-3">
     <div class="form-group col-md-6">
         <form method="get" action="/categories" class="form-inline">
-            <input type="text" name="filter" class="form-control" value="${filter?ifExists}" placeholder="Search by category name">
-            <button type="submit" class="btn btn-primary ml-2">Search</button>
+            <input type="text" name="filter" class="form-control mr-3" value="${filter?ifExists}"
+                   placeholder="Search by category name">
+            <button type="submit" class="btn btn-primary"> Поиск</button>
         </form>
     </div>
 </div>
 
     <#if isAdmin>
-    <#include "parts/categoryEdit.ftl" />
+        <#include "parts/categoryEdit.ftl" />
     </#if>
+
     <#include "parts/categoryList.ftl" />
 
 </@c.page>
+
+<script>
+    $(document).on('change', '.fileUpload', function (event) {
+        var filename = $(this).closest('.fileUpload').find('#uploadBtn').val().replace(/.*\\/, "");
+        $(this).closest('.inputBtnSection').find("#uploadFile").val(filename);
+    });
+</script>
 

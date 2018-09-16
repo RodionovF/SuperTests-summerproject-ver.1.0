@@ -28,19 +28,23 @@
                 <label class="col-sm-2 col-form-label">Изобржение :</label>
                 <div class="col-sm-6">
                     <div class="inputBtnSection">
-                        <input id="uploadFile" class="disableInputField" placeholder="Choose File" disabled="disabled"/>
+                        <input name="uploadFile" id="uploadFile" class="disableInputField"
+                               placeholder="Choose File"
+                               disabled="disabled"/>
                         <label class="fileUpload">
-                            <input name="file" id="uploadBtn" type="file" class="upload"/>
+                            <input name="file" id="uploadBtn" type="file"
+                                   class="upload"/>
                             <span class="uploadBtn">Выбрать файл ...</span>
                         </label>
                     </div>
                 </div>
             </div>
-            <input type="hidden" name="_csrf" value="${_csrf.token}"/>
-            <input type="hidden" name="id" value="<#if category??>${category.categoryId}</#if>"/>
-            <div class="form-group">
-                <button type="submit" class="btn btn-primary">Сохранить категорию</button>
-            </div>
-        </form>
     </div>
+    <input type="hidden" name="_csrf" value="${_csrf.token}"/>
+    <input type="hidden" name="id" value="<#if category??>${category.categoryId}</#if>"/>
+    <div class="form-group">
+        <button type="submit" class="btn btn-primary">Сохранить категорию</button>
+    </div>
+    </form>
+</div>
 </div>

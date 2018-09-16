@@ -22,8 +22,9 @@
 </@c.page>
 
 <script>
-    document.getElementById("uploadBtn").onchange = function () {
-        document.getElementById("uploadFile").value = this.value;
-    };
+    $(document).on('change', '.fileUpload', function (event) {
+        var filename = $(this).closest('.fileUpload').find('#uploadBtn').val().replace(/.*\\/, "");
+        $(this).closest('.inputBtnSection').find("#uploadFile").val(filename);
+    });
 </script>
 
