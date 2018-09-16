@@ -13,12 +13,13 @@
             <div class="form-group row">
                 <label class="col-sm-2 col-form-label">Имя категории :</label>
                 <div class="col-sm-6">
-                    <input type="text" class="form-control ${(textError??)?string('is-invalid', '')}"
+
+                    <input type="text" class="form-control ${(categorynameError??)?string('is-invalid', '')}"
                            value="<#if category??>${category.categoryname}</#if>" name="categoryname"
                            placeholder="Enter the category name"/>
-                <#if textError??>
+                <#if categorynameError??>
                     <div class="invalid-feedback">
-                        ${textError}
+                        ${categorynameError}
                     </div>
                 </#if>
                 </div>
@@ -41,7 +42,7 @@
             </div>
     </div>
     <input type="hidden" name="_csrf" value="${_csrf.token}"/>
-    <input type="hidden" name="id" value="<#if category??>${category.categoryId}</#if>"/>
+    <#--<input type="hidden" name="id" value="<#if category??>${category.categoryId}</#if>"/>-->
     <div class="form-group">
         <button type="submit" class="btn btn-primary">Сохранить категорию</button>
     </div>

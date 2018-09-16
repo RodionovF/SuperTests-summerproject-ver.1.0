@@ -46,6 +46,7 @@ public class RegistrationController {
     ) {
         model.addAttribute("strength", "");
         model.addAttribute("color", BLACK_COLOR);
+
         if (password.length() >= WEAK_STREGTH & password.length() < MID_STREGTH) {
             model.addAttribute("strength", "Слабый");
             model.addAttribute("color", WEAK_COLOR);
@@ -83,10 +84,6 @@ public class RegistrationController {
 
             if (user.getPassword() != null && !user.getPassword().equals(passwordConfirm)) {
                 model.addAttribute("passwordError", "Passwords are different!");
-            }
-
-            if (!("1111").equals(user.getEmail())) {
-                model.addAttribute("emailError","ERROR");
             }
 
             if (isConfirmEmpty || bindingResult.hasErrors() || !response.isSuccess()) {

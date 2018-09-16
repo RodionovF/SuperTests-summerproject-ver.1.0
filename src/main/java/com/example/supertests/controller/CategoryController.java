@@ -20,6 +20,8 @@ import org.springframework.web.multipart.MultipartFile;
 import javax.validation.Valid;
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
@@ -41,12 +43,14 @@ public class CategoryController {
             @RequestParam(required = false, defaultValue = "") String filter,
             Model model
     ) {
-        Iterable<Category> categories = categoryRepo.findAll();
+
+        Iterable<Category> target = categoryRepo.findAll();
+        List<Category> categories = new ArrayList<>();
+
+        target.forEach(categories::add);
 
         if (filter != null && !filter.isEmpty()) {
-            categories = categoryRepo.findByCategoryname(filter);
-        } else {
-            categories = categoryRepo.findAll();
+            categories.add(categoryRepo.findByCategoryname(filter));
         }
 
         model.addAttribute("categories", categories);
@@ -58,28 +62,30 @@ public class CategoryController {
     @PostMapping("/categories")
     public String add(
             @AuthenticationPrincipal User user,
+            @RequestParam("file") MultipartFile file,
             @Valid Category category,
             BindingResult bindingResult,
-            Model model,
-            @RequestParam("file") MultipartFile file
+            Model model
     ) throws IOException {
-        //message.setAuthor(user);
 
         if (bindingResult.hasErrors()) {
             Map<String, String> errorsMap = ControllerUtils.getErrors(bindingResult);
 
             model.mergeAttributes(errorsMap);
-            model.addAttribute("category", category);
         } else {
-            saveFile(category, file);
 
-            model.addAttribute("category", null);
+            Category categoryFromDb = categoryRepo.findByCategoryname(category.getCategoryname());
 
-            categoryRepo.save(category);
+            if (categoryFromDb != null) {
+                model.addAttribute("categorynameError", "Category exists!");
+            } else {
+                saveFile(category, file);
+                model.addAttribute("category", category);
+                categoryRepo.save(category);
+            }
         }
 
         Iterable<Category> categories = categoryRepo.findAll();
-
         model.addAttribute("categories", categories);
 
         return "categories";
@@ -116,27 +122,37 @@ public class CategoryController {
         model.addAttribute("categories", categories);
         model.addAttribute("category", category);
 
-
         return "categoryEditor";
     }
 
     @PostMapping("/edit-category/{category}")
     public String updateCategory(
-            @PathVariable Category category,
             @RequestParam("categoryname") String categoryname,
-            @RequestParam("file") MultipartFile file
+            @RequestParam("file") MultipartFile file,
+            Model model,
+            @PathVariable Category category
     ) throws IOException {
 
-        if (!StringUtils.isEmpty(categoryname)) {
-            category.setCategoryname(categoryname);
+        boolean isCategoryEmpty = StringUtils.isEmpty(categoryname);
+
+        if (isCategoryEmpty) {
+            model.addAttribute("categorynameError", "Categoryname cannot be empty");
+        } else {
+
+            Category categoryFromDb = categoryRepo.findByCategoryname(categoryname);
+
+            if (categoryFromDb != null) {
+                model.addAttribute("categorynameError", "Category exists!");
+            } else {
+                category.setCategoryname(categoryname);
+                saveFile(category, file);
+                categoryRepo.save(category);
+            }
         }
 
-
-        saveFile(category, file);
-
-        categoryRepo.save(category);
-
-
-        return "redirect:/edit-category/" + category.getCategoryId();
+        Iterable<Category> categories = categoryRepo.findAll();
+        model.addAttribute("categories", categories);
+        model.addAttribute("category", category);
+        return "categoryEditor";
     }
 }
