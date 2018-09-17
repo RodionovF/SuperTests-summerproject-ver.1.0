@@ -13,15 +13,14 @@
             <div class="form-group row">
                 <label class="col-sm-2 col-form-label">Имя категории :</label>
                 <div class="col-sm-6">
-
                     <input type="text" class="form-control ${(categorynameError??)?string('is-invalid', '')}"
                            value="<#if category??>${category.categoryname}</#if>" name="categoryname"
                            placeholder="Enter the category name"/>
-                <#if categorynameError??>
-                    <div class="invalid-feedback">
-                        ${categorynameError}
-                    </div>
-                </#if>
+                    <#if categorynameError??>
+                        <div class="invalid-feedback">
+                            ${categorynameError}
+                        </div>
+                    </#if>
                 </div>
             </div>
 

@@ -57,6 +57,7 @@ public class RegistrationController {
             model.addAttribute("strength", "Сильный");
             model.addAttribute("color", STRONG_COLOR);
         }
+
         return "registration";
     }
 
@@ -120,19 +121,4 @@ public class RegistrationController {
 
         return "login";
     }
-
-//    @RequestMapping(value = "/checkStrength", method = RequestMethod.GET, produces = {"text/html; charset=UTF-8"})
-//    public @ResponseBody
-//    String checkStrength(
-//            @RequestParam(required = false, defaultValue = "") String password2
-//    ) {
-//        if (password2.length() >= WEAK_STREGTH & password2.length() < MID_STREGTH) {
-//            return "Слабый";
-//        } else if (password2.length() >= MID_STREGTH & password2.length() < STRONG_STREGTH) {
-//            return "Средний";
-//        } else if (password2.length() >= STRONG_STREGTH) {
-//            return "Сильный";
-//        }
-//        return "";
-//    }
 }

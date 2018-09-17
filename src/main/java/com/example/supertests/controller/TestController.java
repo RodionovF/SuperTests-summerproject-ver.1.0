@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -20,6 +21,7 @@ import java.time.LocalDate;
 import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.UUID;
 
 @Controller
@@ -59,8 +61,10 @@ public class TestController {
 
     @GetMapping("categories/{category}/create-mode")
     public String viewTest(
-
+            Model model,
+            @PathVariable Category category
     ) {
+        model.addAttribute("category", category);
         return "testsCreating";
     }
 
@@ -68,6 +72,8 @@ public class TestController {
     public String addTest(
             @AuthenticationPrincipal User user,
             @PathVariable Category category,
+            @Valid Test test,
+            BindingResult bindingResult,
             Model model,
             @RequestParam("testname") String testname,
             @RequestParam("num_of_questions") Long num_of_questions,
@@ -79,16 +85,43 @@ public class TestController {
             @RequestParam("counter") List<Long> counter,
             @RequestParam("active") List<String> active
     ) throws IOException {
-        Test test = new Test(testname);
+        model.addAttribute("category", category);
+
+        boolean error = false;
+
+        for (String emptyString : listQuestion) {
+            if (("").equals(emptyString)) {
+                model.addAttribute("questionError", "Please, fill the question");
+                error = true;
+            }
+        }
+
+        for (String emptyString : listAnswer) {
+            if (("").equals(emptyString)) {
+                model.addAttribute("answerError", "Please, fill the answer");
+                error = true;
+            }
+        }
+        
+        if (bindingResult.hasErrors()) {
+            Map<String, String> errors = ControllerUtils.getErrors(bindingResult);
+            model.mergeAttributes(errors);
+            error = true;
+        }
+
+        if (error) {
+            return "testsCreating";
+        }
+        
         test.setAuthor_id(user);
         test.setNum_of_questions(num_of_questions);
         test.setCategoryId(category);
         saveTestsFile(test, image1, image2);
         testRepo.save(test);
 
-        int k = 0;
-        int p = 0;
-        int count = 0;
+        int curentCheckBox = 0;
+        int currentAns = 0;
+        int countAnsInQue = 0;
 
         for (int i = 0; i < listQuestion.size(); i++) {
             Question question = new Question(listQuestion.get(i));
@@ -96,16 +129,16 @@ public class TestController {
             saveQuestionFile(question, listQuestionImage.get(i));
             questionRepo.save(question);
 
-            count += counter.get(i);
+            countAnsInQue += counter.get(i);
 
-            for (int j = p; j < count; j++, k++, p++) {
+            for (int j = currentAns; j < countAnsInQue; j++, curentCheckBox++, currentAns++) {
                 Answer answer = new Answer(listAnswer.get(j));
                 answer.setQuestionId(question);
 
-                String isActive = active.get(k);
+                String isActive = active.get(curentCheckBox);
                 if (isActive.equals("1")) {
                     answer.setCorectness(true);
-                    k++;
+                    curentCheckBox++;
                 } else
                     answer.setCorectness(false);
 
@@ -260,16 +293,13 @@ public class TestController {
                 questionStatRepo.save(statOfQuestion);
             }
 
-//            if (selectedTrueAns == trueAns)
-//                num++;
-
             model.addAttribute("statOfTest", statOfTest.getStat_test_id());
         } else {
             model.addAttribute("statOfTest", "");
         }
 
-        if (selectedTrueAns == trueAns)
-        num++;
+        if ((selectedTrueAns == trueAns) && (trueAns > 0))
+            num++;
 
         model.addAttribute("test", test);
         model.addAttribute("category", category);

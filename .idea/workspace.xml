@@ -2,19 +2,21 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="a3e6a637-e154-40b4-9e8b-b1dc86c1d579" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources/02dbbe72-019d-497c-9f8d-33af2c6b81ca.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/02dbbe72-019d-497c-9f8d-33af2c6b81ca.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources/02dbbe72-019d-497c-9f8d-33af2c6b81ca/storage_v2/_src_/database/supertests.hlO4mg/schema/public.abK9xQ.meta" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/02dbbe72-019d-497c-9f8d-33af2c6b81ca/storage_v2/_src_/database/supertests.hlO4mg/schema/public.abK9xQ.meta" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/example/supertests/controller/CategoryController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/supertests/controller/CategoryController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/example/supertests/controller/RegistrationController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/supertests/controller/RegistrationController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/supertests/domain/Category.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/supertests/domain/Category.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/supertests/repos/CategoryRepo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/supertests/repos/CategoryRepo.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/supertests/controller/TestController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/supertests/controller/TestController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/supertests/domain/Answer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/supertests/domain/Answer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/supertests/domain/Question.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/supertests/domain/Question.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/supertests/domain/Test.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/supertests/domain/Test.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/templates/parts/categoryEdit.ftl" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/parts/categoryEdit.ftl" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/parts/testCreater.ftl" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/parts/testCreater.ftl" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/testsPassing.ftl" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/testsPassing.ftl" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/com/example/supertests/controller/CategoryController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/example/supertests/controller/CategoryController.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/com/example/supertests/controller/RegistrationController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/example/supertests/controller/RegistrationController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/example/supertests/domain/Category.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/example/supertests/domain/Category.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/example/supertests/repos/CategoryRepo.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/example/supertests/repos/CategoryRepo.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/example/supertests/controller/TestController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/example/supertests/controller/TestController.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/templates/parts/categoryEdit.ftl" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/templates/parts/categoryEdit.ftl" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/templates/parts/testCreater.ftl" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/templates/parts/testCreater.ftl" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/target/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -127,11 +129,12 @@
           <entry key="project.open.time.71" value="1" />
           <entry key="project.open.time.73" value="1" />
           <entry key="project.open.time.78" value="1" />
+          <entry key="project.open.time.79" value="1" />
           <entry key="project.open.time.8" value="1" />
           <entry key="project.open.time.85" value="1" />
           <entry key="project.open.time.93" value="1" />
           <entry key="project.open.time.96" value="1" />
-          <entry key="project.opened" value="25" />
+          <entry key="project.opened" value="26" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.open">
@@ -141,11 +144,11 @@
           <entry key="class" value="25" />
           <entry key="css" value="11" />
           <entry key="factories" value="1" />
-          <entry key="ftl" value="377" />
+          <entry key="ftl" value="382" />
           <entry key="groovy" value="6" />
           <entry key="html" value="4" />
           <entry key="iml" value="1" />
-          <entry key="java" value="382" />
+          <entry key="java" value="399" />
           <entry key="jpg" value="6" />
           <entry key="js" value="1" />
           <entry key="lst" value="2" />
@@ -169,11 +172,11 @@
           <entry key="CLASS" value="25" />
           <entry key="CSS" value="11" />
           <entry key="Database Element" value="31" />
-          <entry key="FTL" value="377" />
+          <entry key="FTL" value="382" />
           <entry key="HTML" value="4" />
           <entry key="IDEA_MODULE" value="1" />
           <entry key="Image" value="6" />
-          <entry key="JAVA" value="382" />
+          <entry key="JAVA" value="399" />
           <entry key="Markdown" value="1" />
           <entry key="PLAIN_TEXT" value="7" />
           <entry key="Properties" value="17" />
@@ -188,8 +191,8 @@
         <counts>
           <entry key="class" value="5" />
           <entry key="css" value="114" />
-          <entry key="ftl" value="9632" />
-          <entry key="java" value="5434" />
+          <entry key="ftl" value="10186" />
+          <entry key="java" value="5921" />
           <entry key="properties" value="71" />
           <entry key="sa" value="9" />
           <entry key="sql" value="548" />
@@ -200,9 +203,9 @@
         <counts>
           <entry key="CLASS" value="5" />
           <entry key="CSS" value="114" />
-          <entry key="FTL" value="9631" />
+          <entry key="FTL" value="10185" />
           <entry key="HTML" value="1" />
-          <entry key="JAVA" value="5434" />
+          <entry key="JAVA" value="5921" />
           <entry key="PLAIN_TEXT" value="11" />
           <entry key="Properties" value="71" />
           <entry key="SPI" value="9" />
@@ -217,21 +220,49 @@
     </session>
   </component>
   <component name="FileEditorManager">
-    <leaf>
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/com/example/supertests/controller/CategoryController.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="160">
-              <caret line="136" selection-start-line="136" selection-end-line="136" />
+            <state relative-caret-position="-1145">
+              <caret line="48" column="40" selection-start-line="48" selection-start-column="40" selection-end-line="48" selection-end-column="40" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/resources/templates/testsCreating.ftl">
+          <provider selected="true" editor-type-id="text-editor" />
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/resources/templates/parts/testCreater.ftl">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="313">
+              <caret line="121" column="98" selection-start-line="121" selection-start-column="98" selection-end-line="121" selection-end-column="98" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/example/supertests/controller/RegistrationController.java">
+        <entry file="file://$PROJECT_DIR$/src/main/resources/templates/testsPassing.ftl">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="75">
-              <caret line="67" column="40" lean-forward="true" selection-start-line="67" selection-start-column="40" selection-end-line="67" selection-end-column="40" />
+            <state relative-caret-position="295">
+              <caret line="193" column="18" selection-start-line="193" selection-start-column="18" selection-end-line="193" selection-end-column="18" />
+              <folding>
+                <element signature="n#style#0;n#span#0;n#div#1;n#div#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#div#0;n#div#0;n#div#2;n#div#1;n#div#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#a#0;n#div#2;n#div#0;n#!!top" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/example/supertests/controller/TestController.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="360">
+              <caret line="300" selection-start-line="300" selection-end-line="300" />
             </state>
           </provider>
         </entry>
@@ -248,7 +279,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>category_</find>
       <find>catego</find>
       <find>categoryID</find>
       <find>I</find>
@@ -277,6 +307,8 @@
       <find>categ</find>
       <find>addAl</find>
       <find>user</find>
+      <find>&quot;id&quot;</find>
+      <find>answer</find>
     </findStrings>
     <replaceStrings>
       <replace>supertests</replace>
@@ -304,7 +336,6 @@
       <list>
         <option value="$PROJECT_DIR$/src/main/java/com/example/supertests/domain/Role.java" />
         <option value="$PROJECT_DIR$/src/main/resources/templates/userMessages.ftl" />
-        <option value="$PROJECT_DIR$/src/main/java/com/example/supertests/domain/Question.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/example/supertests/repos/TestRepo.java" />
         <option value="$PROJECT_DIR$/src/main/resources/templates/userList.ftl" />
         <option value="$PROJECT_DIR$/src/main/java/com/example/supertests/domain/Message.java" />
@@ -313,7 +344,6 @@
         <option value="$PROJECT_DIR$/src/main/resources/templates/parts/messageEdit.ftl" />
         <option value="$PROJECT_DIR$/src/main/java/com/example/supertests/controller/UserConroller.java" />
         <option value="$PROJECT_DIR$/src/main/resources/db/migration/V2__Add_admin.sql" />
-        <option value="$PROJECT_DIR$/src/main/java/com/example/supertests/domain/Test.java" />
         <option value="$PROJECT_DIR$/src/main/resources/db/migration/V3__Encode_passwords.sql" />
         <option value="$PROJECT_DIR$/src/main/resources/db/migration/V4__Add_subscriptions_table.sql" />
         <option value="$PROJECT_DIR$/src/main/java/com/example/supertests/domain/User.java" />
@@ -329,7 +359,6 @@
         <option value="$PROJECT_DIR$/src/main/resources/application-dev.properties" />
         <option value="$PROJECT_DIR$/src/main/java/com/example/supertests/domain/ButtonTypes.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/example/supertests/repos/AnswerStatRepo.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/example/supertests/domain/Answer.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/example/supertests/repos/QuestionStatRepo.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/example/supertests/domain/StatOfQuestion.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/example/supertests/repos/AnswerRepo.java" />
@@ -339,20 +368,23 @@
         <option value="$PROJECT_DIR$/src/main/java/com/example/supertests/domain/CheckedAnswers.java" />
         <option value="$PROJECT_DIR$/src/main/resources/templates/parts/login.ftl" />
         <option value="$PROJECT_DIR$/src/main/resources/static/style.css" />
-        <option value="$PROJECT_DIR$/src/main/resources/templates/testsPassing.ftl" />
-        <option value="$PROJECT_DIR$/src/main/java/com/example/supertests/controller/TestController.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/example/supertests/repos/UserRepo.java" />
         <option value="$PROJECT_DIR$/src/main/resources/templates/tests.ftl" />
-        <option value="$PROJECT_DIR$/src/main/resources/templates/parts/testCreater.ftl" />
         <option value="$PROJECT_DIR$/src/main/resources/templates/categories.ftl" />
         <option value="$PROJECT_DIR$/src/main/resources/templates/parts/categoryList.ftl" />
         <option value="$PROJECT_DIR$/src/main/resources/templates/categoryEditor.ftl" />
         <option value="$PROJECT_DIR$/src/main/java/com/example/supertests/config/EncriptionConfig.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/example/supertests/controller/RegistrationController.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/example/supertests/domain/Category.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/example/supertests/repos/CategoryRepo.java" />
-        <option value="$PROJECT_DIR$/src/main/resources/templates/parts/categoryEdit.ftl" />
+        <option value="$PROJECT_DIR$/src/main/java/com/example/supertests/controller/RegistrationController.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/example/supertests/controller/CategoryController.java" />
+        <option value="$PROJECT_DIR$/src/main/resources/templates/parts/categoryEdit.ftl" />
+        <option value="$PROJECT_DIR$/src/main/java/com/example/supertests/domain/Test.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/example/supertests/domain/Question.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/example/supertests/domain/Answer.java" />
+        <option value="$PROJECT_DIR$/src/main/resources/templates/parts/testCreater.ftl" />
+        <option value="$PROJECT_DIR$/src/main/java/com/example/supertests/controller/TestController.java" />
+        <option value="$PROJECT_DIR$/src/main/resources/templates/testsPassing.ftl" />
       </list>
     </option>
   </component>
@@ -381,38 +413,34 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
             <path>
-              <item name="sweater" type="b2602c69:ProjectViewProjectNode" />
+              <item name="supertestser" type="b2602c69:ProjectViewProjectNode" />
               <item name="supertests" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
-              <item name="sweater" type="b2602c69:ProjectViewProjectNode" />
-              <item name="supertests" type="462c0819:PsiDirectoryNode" />
-              <item name="scripts" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="sweater" type="b2602c69:ProjectViewProjectNode" />
+              <item name="supertestser" type="b2602c69:ProjectViewProjectNode" />
               <item name="supertests" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
-              <item name="sweater" type="b2602c69:ProjectViewProjectNode" />
+              <item name="supertestser" type="b2602c69:ProjectViewProjectNode" />
               <item name="supertests" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="main" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
-              <item name="sweater" type="b2602c69:ProjectViewProjectNode" />
+              <item name="supertestser" type="b2602c69:ProjectViewProjectNode" />
               <item name="supertests" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="main" type="462c0819:PsiDirectoryNode" />
               <item name="java" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
-              <item name="sweater" type="b2602c69:ProjectViewProjectNode" />
+              <item name="supertestser" type="b2602c69:ProjectViewProjectNode" />
               <item name="supertests" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="main" type="462c0819:PsiDirectoryNode" />
@@ -420,16 +448,7 @@
               <item name="supertests" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
-              <item name="sweater" type="b2602c69:ProjectViewProjectNode" />
-              <item name="supertests" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="supertests" type="462c0819:PsiDirectoryNode" />
-              <item name="config" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="sweater" type="b2602c69:ProjectViewProjectNode" />
+              <item name="supertestser" type="b2602c69:ProjectViewProjectNode" />
               <item name="supertests" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="main" type="462c0819:PsiDirectoryNode" />
@@ -438,7 +457,7 @@
               <item name="controller" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
-              <item name="sweater" type="b2602c69:ProjectViewProjectNode" />
+              <item name="supertestser" type="b2602c69:ProjectViewProjectNode" />
               <item name="supertests" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="main" type="462c0819:PsiDirectoryNode" />
@@ -447,32 +466,14 @@
               <item name="domain" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
-              <item name="sweater" type="b2602c69:ProjectViewProjectNode" />
-              <item name="supertests" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="supertests" type="462c0819:PsiDirectoryNode" />
-              <item name="repos" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="sweater" type="b2602c69:ProjectViewProjectNode" />
-              <item name="supertests" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="supertests" type="462c0819:PsiDirectoryNode" />
-              <item name="service" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="sweater" type="b2602c69:ProjectViewProjectNode" />
+              <item name="supertestser" type="b2602c69:ProjectViewProjectNode" />
               <item name="supertests" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="main" type="462c0819:PsiDirectoryNode" />
               <item name="resources" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
-              <item name="sweater" type="b2602c69:ProjectViewProjectNode" />
+              <item name="supertestser" type="b2602c69:ProjectViewProjectNode" />
               <item name="supertests" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="main" type="462c0819:PsiDirectoryNode" />
@@ -480,7 +481,7 @@
               <item name="templates" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
-              <item name="sweater" type="b2602c69:ProjectViewProjectNode" />
+              <item name="supertestser" type="b2602c69:ProjectViewProjectNode" />
               <item name="supertests" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="main" type="462c0819:PsiDirectoryNode" />
@@ -488,17 +489,11 @@
               <item name="templates" type="462c0819:PsiDirectoryNode" />
               <item name="parts" type="462c0819:PsiDirectoryNode" />
             </path>
-            <path>
-              <item name="sweater" type="b2602c69:ProjectViewProjectNode" />
-              <item name="supertests" type="462c0819:PsiDirectoryNode" />
-              <item name="target" type="462c0819:PsiDirectoryNode" />
-            </path>
           </expand>
           <select />
         </subPane>
       </pane>
       <pane id="PackagesPane" />
-      <pane id="Scope" />
       <pane id="AndroidView" />
     </panes>
   </component>
@@ -622,12 +617,13 @@
       <workItem from="1536481122068" duration="34451000" />
       <workItem from="1536754739949" duration="15127000" />
       <workItem from="1537124901246" duration="238000" />
-      <workItem from="1537125254592" duration="9536000" />
+      <workItem from="1537125254592" duration="12077000" />
+      <workItem from="1537221927960" duration="4443000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="275769000" />
+    <option name="totallyTimeSpent" value="282753000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="67" y="25" width="1853" height="1055" extended-state="6" />
@@ -640,7 +636,7 @@
       <window_info id="Web" order="4" side_tool="true" />
       <window_info id="Designer" order="5" />
       <window_info id="Structure" order="6" side_tool="true" weight="0.25" />
-      <window_info active="true" content_ui="combo" id="Project" order="7" visible="true" weight="0.19590482" />
+      <window_info content_ui="combo" id="Project" order="7" visible="true" weight="0.19811843" />
       <window_info id="Learn" order="8" />
       <window_info anchor="bottom" id="Terminal" order="0" weight="0.32936078" />
       <window_info anchor="bottom" id="Quokka" order="1" />
@@ -653,7 +649,7 @@
       <window_info anchor="bottom" id="Message" order="8" />
       <window_info anchor="bottom" id="Find" order="9" weight="0.32972974" />
       <window_info anchor="bottom" id="Run" order="10" weight="0.26378378" />
-      <window_info anchor="bottom" id="Debug" order="11" visible="true" weight="0.32972974" />
+      <window_info active="true" anchor="bottom" id="Debug" order="11" visible="true" weight="0.32972974" />
       <window_info anchor="bottom" id="Cvs" order="12" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="13" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="14" />
@@ -703,40 +699,29 @@
   <component name="VcsContentAnnotationSettings">
     <option name="myLimit" value="2678400000" />
   </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/com/example/supertests/controller/CategoryController.java</url>
+          <line>69</line>
+          <properties />
+          <option name="timeStamp" value="11" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/com/example/supertests/controller/CategoryController.java</url>
+          <line>87</line>
+          <properties />
+          <option name="timeStamp" value="12" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
+  </component>
   <component name="antWorkspaceConfiguration">
     <option name="IS_AUTOSCROLL_TO_SOURCE" value="false" />
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$APPLICATION_CONFIG_DIR$/extensions/com.intellij.database/data/extractors/XML-Groovy.xml.groovy">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="406">
-          <caret line="29" column="27" selection-start-line="29" selection-start-column="27" selection-end-line="29" selection-end-column="27" />
-          <folding>
-            <element signature="n#!!doc" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$MAVEN_REPOSITORY$/org/springframework/data/spring-data-commons/2.0.5.RELEASE/spring-data-commons-2.0.5.RELEASE.jar!/META-INF/spring.factories">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/about.html">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$APPLICATION_CONFIG_DIR$/extensions/com.intellij.database/data/extractors/HTML-JavaScript.html.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-29" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/history_detail.html">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/pom.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-29" />
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/readme.md">
       <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
         <state split_layout="SPLIT">
@@ -794,13 +779,7 @@
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
     <entry file="file://$PROJECT_DIR$/target/classes/com/example/supertests/config/EncriptionConfig.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <folding>
-            <element signature="e#0#601#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
+      <provider selected="true" editor-type-id="text-editor" />
     </entry>
     <entry file="file://$PROJECT_DIR$/target/maven-archiver/pom.properties">
       <provider selected="true" editor-type-id="text-editor" />
@@ -809,31 +788,13 @@
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
     <entry file="file://$PROJECT_DIR$/target/classes/com/example/supertests/domain/dto/CaptchaResponseDto.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <folding>
-            <element signature="e#0#845#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
+      <provider selected="true" editor-type-id="text-editor" />
     </entry>
     <entry file="file://$PROJECT_DIR$/target/classes/com/example/supertests/domain/Role.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <folding>
-            <element signature="e#0#387#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
+      <provider selected="true" editor-type-id="text-editor" />
     </entry>
     <entry file="file://$PROJECT_DIR$/target/classes/com/example/supertests/repos/AnswerRepo.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <folding>
-            <element signature="e#0#481#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
+      <provider selected="true" editor-type-id="text-editor" />
     </entry>
     <entry file="file://$PROJECT_DIR$/scripts/deploy.sh">
       <provider selected="true" editor-type-id="text-editor">
@@ -856,24 +817,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/example/supertests/domain/Category.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="165">
-          <caret line="14" column="34" selection-start-line="14" selection-start-column="34" selection-end-line="14" selection-end-column="34" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/example/supertests/repos/UserRepo.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="60">
           <caret line="5" column="17" selection-start-line="5" selection-start-column="17" selection-end-line="5" selection-end-column="17" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/example/supertests/domain/Question.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="90">
-          <caret line="9" column="13" selection-start-line="9" selection-start-column="13" selection-end-line="9" selection-end-column="13" />
         </state>
       </provider>
     </entry>
@@ -929,21 +876,11 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="120">
           <caret line="8" column="85" lean-forward="true" selection-start-line="8" selection-start-column="39" selection-end-line="8" selection-end-column="85" />
-          <folding>
-            <element signature="n#style#0;n#input#0;n#!!top" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/resources/templates/registration.ftl">
       <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/example/supertests/controller/TestController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="3015">
-          <caret line="221" lean-forward="true" selection-start-line="221" selection-end-line="221" />
-        </state>
-      </provider>
     </entry>
     <entry file="jar://$MAVEN_REPOSITORY$/org/springframework/spring-context/5.0.4.RELEASE/spring-context-5.0.4.RELEASE.jar!/org/springframework/validation/BindingResult.class">
       <provider selected="true" editor-type-id="text-editor">
@@ -966,13 +903,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/resources/templates/parts/categoryEdit.ftl">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="120">
-          <caret line="14" column="29" selection-start-line="14" selection-start-column="28" selection-end-line="14" selection-end-column="29" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/example/supertests/domain/User.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="30">
@@ -980,17 +910,88 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/example/supertests/controller/CategoryController.java">
+    <entry file="file://$PROJECT_DIR$/src/main/resources/templates/parts/categoryEdit.ftl">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="160">
-          <caret line="136" selection-start-line="136" selection-end-line="136" />
+        <state relative-caret-position="285">
+          <caret line="19" column="50" selection-start-line="19" selection-start-column="50" selection-end-line="19" selection-end-column="50" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/example/supertests/controller/RegistrationController.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="75">
-          <caret line="67" column="40" lean-forward="true" selection-start-line="67" selection-start-column="40" selection-end-line="67" selection-end-column="40" />
+        <state relative-caret-position="1020">
+          <caret line="82" column="55" selection-start-line="82" selection-start-column="55" selection-end-line="82" selection-end-column="55" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/example/supertests/domain/Category.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="225">
+          <caret line="18" column="41" lean-forward="true" selection-start-line="18" selection-start-column="41" selection-end-line="18" selection-end-column="41" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/example/supertests/domain/Question.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="255">
+          <caret line="20" column="31" lean-forward="true" selection-start-line="20" selection-start-column="31" selection-end-line="20" selection-end-column="31" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/example/supertests/domain/Answer.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="225">
+          <caret line="18" column="32" selection-start-line="18" selection-start-column="32" selection-end-line="18" selection-end-column="32" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/example/supertests/domain/Test.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="165">
+          <caret line="14" column="32" selection-start-line="14" selection-start-column="32" selection-end-line="14" selection-end-column="32" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/example/supertests/controller/UserConroller.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="90">
+          <caret line="16" column="13" selection-start-line="16" selection-start-column="13" selection-end-line="16" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/example/supertests/controller/CategoryController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-1145">
+          <caret line="48" column="40" selection-start-line="48" selection-start-column="40" selection-end-line="48" selection-end-column="40" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/templates/parts/testCreater.ftl">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="313">
+          <caret line="121" column="98" selection-start-line="121" selection-start-column="98" selection-end-line="121" selection-end-column="98" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/templates/testsCreating.ftl">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/example/supertests/controller/TestController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="360">
+          <caret line="300" selection-start-line="300" selection-end-line="300" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/templates/testsPassing.ftl">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="295">
+          <caret line="193" column="18" selection-start-line="193" selection-start-column="18" selection-end-line="193" selection-end-column="18" />
+          <folding>
+            <element signature="n#style#0;n#span#0;n#div#1;n#div#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#div#0;n#div#0;n#div#2;n#div#1;n#div#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#a#0;n#div#2;n#div#0;n#!!top" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>

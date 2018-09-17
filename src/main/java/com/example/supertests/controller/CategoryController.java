@@ -43,7 +43,6 @@ public class CategoryController {
             @RequestParam(required = false, defaultValue = "") String filter,
             Model model
     ) {
-
         Iterable<Category> target = categoryRepo.findAll();
         List<Category> categories = new ArrayList<>();
 
@@ -73,14 +72,15 @@ public class CategoryController {
 
             model.mergeAttributes(errorsMap);
         } else {
-
             Category categoryFromDb = categoryRepo.findByCategoryname(category.getCategoryname());
 
             if (categoryFromDb != null) {
                 model.addAttribute("categorynameError", "Category exists!");
             } else {
                 saveFile(category, file);
+
                 model.addAttribute("category", category);
+
                 categoryRepo.save(category);
             }
         }
@@ -138,7 +138,6 @@ public class CategoryController {
         if (isCategoryEmpty) {
             model.addAttribute("categorynameError", "Categoryname cannot be empty");
         } else {
-
             Category categoryFromDb = categoryRepo.findByCategoryname(categoryname);
 
             if (categoryFromDb != null) {

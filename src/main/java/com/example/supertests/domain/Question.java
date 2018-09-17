@@ -17,7 +17,7 @@ public class Question {
     private Test testId;
 
 
-    @NotBlank(message = "Please fill the question")
+    @NotBlank(message = "Please, fill the question")
     @Length(max = 2048, message = "Question too long (more than 255)")
     private String question;
 

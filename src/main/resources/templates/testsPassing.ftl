@@ -200,7 +200,7 @@
         <div class="progress-outer">
             <div class="progress">
                 <div id="progressbar" class="progress-bar progress-bar-striped progress-bar-danger"
-                     style="width:0%;"></div>
+                     style="width: 0%;position: fixed;"></div>
                 <div class="progress-value"><span>0</span>/${test.num_of_questions}</div>
             </div>
         </div>
@@ -208,7 +208,7 @@
     </div>
 
     <div class="col-1">
-        <a class="btn btn-dark my-3 ml-3" href="/categories/${category.categoryId}">Назад</a>
+        <a style='position: fixed;' class="btn btn-dark my-3 ml-3 " href="/categories/${category.categoryId}">Назад</a>
     </div>
 
 </div>

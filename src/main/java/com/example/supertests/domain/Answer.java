@@ -16,7 +16,7 @@ public class Answer {
     @JoinColumn(name = "questionId")
     private Question questionId;
 
-    @NotBlank(message = "Please fill the answer")
+    @NotBlank(message = "Please, fill the answer")
     @Length(max = 255, message = "Answer too long (more than 255)")
     private String answer;
 

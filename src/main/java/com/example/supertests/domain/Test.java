@@ -12,7 +12,7 @@ public class Test {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long test_id;
 
-    @NotBlank(message = "Please fill the testname")
+    @NotBlank(message = "Please, fill the testname")
     @Length(max = 2048, message = "Testname too long (more than 255)")
     private String testname;
 
