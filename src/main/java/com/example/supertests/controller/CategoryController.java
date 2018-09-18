@@ -125,6 +125,7 @@ public class CategoryController {
         return "categoryEditor";
     }
 
+    @PreAuthorize("hasAuthority('ADMIN')")
     @PostMapping("/edit-category/{category}")
     public String updateCategory(
             @RequestParam("categoryname") String categoryname,

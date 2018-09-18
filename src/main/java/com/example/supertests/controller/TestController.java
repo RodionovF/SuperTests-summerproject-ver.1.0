@@ -102,7 +102,7 @@ public class TestController {
                 error = true;
             }
         }
-        
+
         if (bindingResult.hasErrors()) {
             Map<String, String> errors = ControllerUtils.getErrors(bindingResult);
             model.mergeAttributes(errors);
@@ -112,7 +112,7 @@ public class TestController {
         if (error) {
             return "testsCreating";
         }
-        
+
         test.setAuthor_id(user);
         test.setNum_of_questions(num_of_questions);
         test.setCategoryId(category);
@@ -216,6 +216,8 @@ public class TestController {
             @RequestParam(required = false, defaultValue = "") String currentQuestion,
             @RequestParam(required = false, defaultValue = "") String currentStat,
             @RequestParam(required = false, defaultValue = "0") String numOfRightAnswers,
+            @RequestParam(required = false, defaultValue = "0") String numAnswers,
+            @RequestParam(required = false, defaultValue = "") String sSecs,
             Model model,
             @PathVariable Category category,
             @PathVariable Test test
@@ -226,7 +228,8 @@ public class TestController {
         List<ButtonTypes> buttonTypes = new ArrayList<ButtonTypes>();
         List<Answer> answersOnOneQuestion = null;
         List<Answer> answersOnOneQuestionCheck = null;
-        Long num = Long.valueOf(numOfRightAnswers);
+        Long numRight = Long.valueOf(numOfRightAnswers);
+        Long numAns = Long.valueOf(numAnswers);
         int trueAns = 0;
         int selectedTrueAns = 0;
 
@@ -269,20 +272,20 @@ public class TestController {
                 statOfTest = testStatRepo.findById(Long.valueOf(currentStat)).get();
             }
 
+
+            StatOfQuestion statOfQuestion = new StatOfQuestion();
+            statOfQuestion.setStatTestId(statOfTest);
+            statOfQuestion.setQuestionId(questionRepo.findById(Long.valueOf(currentQuestion)).get());
+
+            Question currentQue = questionRepo.findById(Long.valueOf(currentQuestion)).get();
+            answersOnOneQuestionCheck = answerRepo.findByQuestionId(currentQue);
+
+            for (Answer ans : answersOnOneQuestionCheck) {
+                if (ans.isCorectness())
+                    trueAns++;
+            }
+
             for (int i = 0; i < checks.length; i++) {
-                StatOfQuestion statOfQuestion = new StatOfQuestion();
-                statOfQuestion.setStatTestId(statOfTest);
-                statOfQuestion.setQuestionId(questionRepo.findById(Long.valueOf(currentQuestion)).get());
-
-                Question currentQue = questionRepo.findById(Long.valueOf(currentQuestion)).get();
-                answersOnOneQuestionCheck = answerRepo.findByQuestionId(currentQue);
-
-                for (Answer ans : answersOnOneQuestionCheck) {
-                    if (ans.isCorectness())
-                        trueAns++;
-                }
-
-
                 Answer selectedAnswer = answerRepo.findById(Long.valueOf(checks[i])).get();
                 if (!selectedAnswer.isCorectness())
                     checkedAnswers.add(selectedAnswer);
@@ -293,23 +296,64 @@ public class TestController {
                 questionStatRepo.save(statOfQuestion);
             }
 
+            numAns++;
+
+            if ((selectedTrueAns == trueAns) && (trueAns > 0))
+                numRight++;
+
+            if (numAns.equals(test.getNum_of_questions())) {
+                statOfTest.setResult(numRight);
+                statOfTest.setFinal_time(Long.valueOf(sSecs));
+            }
+
             model.addAttribute("statOfTest", statOfTest.getStat_test_id());
         } else {
             model.addAttribute("statOfTest", "");
         }
 
-        if ((selectedTrueAns == trueAns) && (trueAns > 0))
-            num++;
-
+        model.addAttribute("numOfRightAnswers", numRight);
         model.addAttribute("test", test);
         model.addAttribute("category", category);
         model.addAttribute("questions", questions);
         model.addAttribute("answers", answers);
         model.addAttribute("buttonTypes", buttonTypes);
         model.addAttribute("checkedAnswers", checkedAnswers);
-        model.addAttribute("numOfRightAnswers", num);
+        model.addAttribute("numOfRightAnswers", numRight);
+        model.addAttribute("numAnswers", numAns);
         return "testsPassing";
     }
+
+    @PostMapping("categories/{category}/{test}")
+    public String endTest(
+            @AuthenticationPrincipal User user,
+            @RequestParam String statOfTest,
+            @RequestParam String numOfRightAnswers,
+            Model model,
+            @PathVariable Category category,
+            @PathVariable Test test
+    ) throws IOException {
+        Iterable<StatOfTest> target = testStatRepo.findByTestId(test);
+        ArrayList<StatOfTest> statOfTests = new ArrayList<>();
+        Long betterThen = Long.valueOf("0");
+
+        target.forEach(statOfTests::add);
+
+        for(int i = 0; i <  statOfTests.size(); i++)
+        {
+            if (betterThen >= statOfTests.get(i).getResult())
+                betterThen++;
+        }
+
+        double ans = betterThen/statOfTests.size();
+
+        model.addAttribute("betterThen", ans);
+        model.addAttribute("numOfTimesPass", statOfTests.size());
+        model.addAttribute("numOfRightAnswers", numOfRightAnswers);
+        model.addAttribute("test", test);
+        model.addAttribute("category", category);
+        return "testEnding";
+    }
+
 
 }
 

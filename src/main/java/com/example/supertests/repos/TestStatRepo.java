@@ -1,11 +1,15 @@
 package com.example.supertests.repos;
 
 import com.example.supertests.domain.StatOfTest;
+import com.example.supertests.domain.Test;
 import org.springframework.data.repository.CrudRepository;
+
+
+import java.util.List;
+
 
 public interface TestStatRepo extends CrudRepository<StatOfTest, Long> {
 
-   ////StatOfTest findOne(ID stat_test_id);
-    //StatOfTest findByStat_test_id(Long stat_test_id);
+    List<StatOfTest> findByTestId(Test testId);
 }
 
