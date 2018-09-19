@@ -2,9 +2,9 @@
 
 <div class="container">
     <div class="row">
-        <div class="card-columns">
+        <div class="card-columns mx-3">
         <#list categories as category>
-            <div class="card my-3">
+            <div class="card mt-3">
                 <#if category.filename??>
                     <img src="/img/${category.filename}" class="card-img-top">
                 </#if>

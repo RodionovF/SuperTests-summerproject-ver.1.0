@@ -6,6 +6,7 @@
         Добавить категорию
     </#if>
 </a>
+
 <div class="collapse <#if category??>show</#if>" id="collapseExample">
     <div class="form-group mt-3">
         <form method="post" enctype="multipart/form-data">
@@ -39,6 +40,7 @@
                     </div>
                 </div>
             </div>
+
             <input type="hidden" name="_csrf" value="${_csrf.token}"/>
         <#--<input type="hidden" name="id" value="<#if category??>${category.categoryId}</#if>"/>-->
             <div class="form-group">

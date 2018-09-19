@@ -4,6 +4,7 @@ import com.example.supertests.domain.*;
 import com.example.supertests.repos.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -59,6 +60,7 @@ public class TestController {
         return "tests";
     }
 
+    @PreAuthorize("hasAuthority('ADMIN')")
     @GetMapping("categories/{category}/create-mode")
     public String viewTest(
             Model model,
@@ -68,6 +70,7 @@ public class TestController {
         return "testsCreating";
     }
 
+    @PreAuthorize("hasAuthority('ADMIN')")
     @PostMapping("categories/{category}/create-mode")
     public String addTest(
             @AuthenticationPrincipal User user,
@@ -334,17 +337,20 @@ public class TestController {
     ) throws IOException {
         Iterable<StatOfTest> target = testStatRepo.findByTestId(test);
         ArrayList<StatOfTest> statOfTests = new ArrayList<>();
-        Long betterThen = Long.valueOf("0");
-
+        //StatOfTest currentStatOfTest = testStatRepo.findById(Long.valueOf(statOfTest)).get();
+        Long betterThen = 0L;
+        Long result = Long.valueOf(numOfRightAnswers);
         target.forEach(statOfTests::add);
 
         for(int i = 0; i <  statOfTests.size(); i++)
         {
-            if (betterThen >= statOfTests.get(i).getResult())
+            if(statOfTests.get(i).getResult() == null)
+                betterThen++;
+            else  if (result >= statOfTests.get(i).getResult())
                 betterThen++;
         }
 
-        double ans = betterThen/statOfTests.size();
+        double ans = betterThen*100/statOfTests.size();
 
         model.addAttribute("betterThen", ans);
         model.addAttribute("numOfTimesPass", statOfTests.size());
@@ -353,8 +359,6 @@ public class TestController {
         model.addAttribute("category", category);
         return "testEnding";
     }
-
-
 }
 
 

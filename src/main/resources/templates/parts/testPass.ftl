@@ -1,16 +1,15 @@
 <div class="row">
-    <div class="col-8">
+    <div class="col-sm-8">
         <div class="card my-3">
             <div class="card-header">
                 <#if test.image_path_start??>
                     <img src="/img/${test.image_path_start}" class="img-thumbnail my-3">
-                <#else>
                 </#if>
                 <h3>${test.testname}</h3>
             </div>
             <div class="card-body">
                 <p class="card-text">
-                <ol>
+                    <ol>
                         <#list questions as que>
                             <h4>
                                 <li class="card-title mt-5">${que.question}</li>
@@ -24,19 +23,19 @@
                                             <div class="form-group input-group">
                                                 <div class="input-group-prepend">
                                                     <div class="input-group-text mb-1" id="load">
-                                                    <#list buttonTypes as buttonType>
-                                                        <#if buttonType.question_id == que.question_id>
-                                                            <#if buttonType.type == true>
-                                                                <input type="radio" class="radio"
-                                                                       name="radio${que.question_id}[]"
-                                                                       id="${ans.answer_id}"/>
-                                                            <#else>
-                                                                <input type="checkbox" class="check"
-                                                                       name="check${que.question_id}[]"
-                                                                       id="${ans.answer_id}"/>
+                                                        <#list buttonTypes as buttonType>
+                                                            <#if buttonType.question_id == que.question_id>
+                                                                <#if buttonType.type == true>
+                                                                    <input type="radio" class="radio"
+                                                                           name="radio${que.question_id}[]"
+                                                                           id="${ans.answer_id}"/>
+                                                                <#else>
+                                                                    <input type="checkbox" class="check"
+                                                                           name="check${que.question_id}[]"
+                                                                           id="${ans.answer_id}"/>
+                                                                </#if>
                                                             </#if>
-                                                        </#if>
-                                                    </#list>
+                                                        </#list>
                                                     </div>
                                                 </div>
                                                 <input type="text" class="form-control mb-1" value="${ans.answer}"
@@ -50,7 +49,6 @@
                                                         <#if ans.answer_id == checkedAnswer.answer_id>
                                                             <input type="hidden" id="${ans.answer_id}"
                                                                    name="ansWrong${que.question_id}[]"/>
-                                                        <#--value="${checkedAnswer.corectness?c}"-->
                                                         </#if>
                                                     </#list>
                                                 </#if>
@@ -59,13 +57,13 @@
                                     </#if>
                                 </#list>
                             <div class="form-group row">
-                                <div class="col-2">
+                                <div class="col-sm-2">
                                     <button type="button" class="btn btn-primary" id="${que.question_id}"
                                             OnClick="getAnswers${que.question_id}();">
                                         Ответить
                                     </button>
                                 </div>
-                                <div class="col-6">
+                                <div class="col-sm-6">
                                     <input type="text" style="float: right; color: red;" readonly
                                            class="form-control-plaintext"
                                            id="emptyAnswer${que.question_id}"
@@ -75,7 +73,6 @@
 
                             <script type="text/javascript">
                                 function getAnswers${que.question_id}() {
-
                                     var checks = [];
 
                                     $("input[name='check${que.question_id}[]']:checked").each(function () {
@@ -87,7 +84,6 @@
                                     });
 
                                     if (checks.length == 0) {
-                                        //alert('Выберете ответ');
                                         $('#emptyAnswer${que.question_id}').val('Выберете хотя бы 1 ответ');
                                         return;
                                     }
@@ -150,20 +146,18 @@
                         <#else>
                             No questions
                         </#list>
-                </ol>
+                    </ol>
                 </p>
             </div>
         </div>
     </div>
 
-
-    <div class="col-4">
+    <div class="col-sm-4">
         <div id="fixed">
             <form method="post" enctype="multipart/form-data">
                 <div class="row">
-                    <div class="col-10 my-3">
-
-                        <label>Время прохождения теста:</label>
+                    <div class="col-sm-10 my-3">
+                        <label>Время прохождения теста :</label>
                         <span id="timer-counter" style="color:blue;font-size:150%;font-weight:bold;"></span>
 
                         <script>
@@ -187,22 +181,18 @@
                         </script>
 
                         <input type="hidden" id="sSecs" value="" name="sSecs"/>
-
                         <input type="hidden" id="numAnswers" value="${numAnswers}" name="numAnswers"/>
-
                         <#if statOfTest??>
                             <input type="hidden" id="statOfTest" value="${statOfTest}" name="statOfTest"/>
                         </#if>
-
                         <input type="hidden" readonly class="form-control-plaintext col-3" id="numOfRightAnswers"
                                value="${numOfRightAnswers}" name="numOfRightAnswers"/>
                     </div>
 
-                    <div class="col-2 my-3">
+                    <div class="col-sm-2 my-3">
                         <a class="btn btn-dark ml-3 " href="/categories/${category.categoryId}">Назад</a>
                     </div>
                 </div>
-
                 <h3 class="progress-title">Вы ответили на</h3>
                 <div class="progress-outer">
                     <div class="progress" style="height: 2rem; border-radius: .75rem;">
@@ -211,9 +201,7 @@
                         <div class="progress-value"><span>0</span>/${test.num_of_questions}</div>
                     </div>
                 </div>
-
                 <input type="hidden" name="_csrf" value="${_csrf.token}"/>
-
                 <div class="form-group">
                     <button type="submit" class="btn btn-primary" id="endTest" disabled>Завершить тест</button>
                 </div>

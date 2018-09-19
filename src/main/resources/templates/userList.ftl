@@ -2,12 +2,12 @@
 
 <@c.page>
 <h3>Список пользователей</h3>
-<table>
+<table class="table table-sm">
     <thead>
     <tr>
-        <th>Имя пользователя</th>
-        <th>Роль</th>
-        <th></th>
+        <th scope="col">Имя пользователя</th>
+        <th scope="col">Роль</th>
+        <th scope="col"></th>
     </tr>
     </thead>
     <tbody>

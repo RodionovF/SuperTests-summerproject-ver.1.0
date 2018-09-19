@@ -2,7 +2,8 @@
 <#import "parts/common.ftl" as c>
 
 <@c.page>
-<h3>Создание теста.</h3>
+
+    <h3>Создание теста.</h3>
 
     <#include "parts/testCreater.ftl" />
 

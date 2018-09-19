@@ -3,15 +3,21 @@
 
 
 <@c.page>
-<div class="form-row mt-3">
-    <div class="form-group col-md-6">
-        <form method="get" action="/categories" class="form-inline">
-            <input type="text" name="filter" class="form-control mr-3" value="${filter?ifExists}"
-                   placeholder="Search by category name">
-            <button type="submit" class="btn btn-primary"> Поиск</button>
-        </form>
+<form method="get" action="/categories">
+    <div class="form-row">
+        <div class="col-sm-6">
+            <div class="form-row">
+                <div class="col-sm-5">
+                    <input type="text" name="filter" class="form-control mt-3" value="${filter?ifExists}"
+                           placeholder="Search by category name"/>
+                </div>
+                <div class="col-sm-6">
+                    <button type="submit" class="btn btn-primary mt-3"> Поиск</button>
+                </div>
+            </div>
+        </div>
     </div>
-</div>
+</form>
 
     <#if isAdmin>
         <#include "parts/categoryEdit.ftl" />

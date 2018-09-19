@@ -2,6 +2,8 @@
 <#import "parts/login.ftl" as l>
 
 <@c.page>
-<div class="my-3"><h5>Добавление нового пользователя</h5></div>
+<div class="my-3">
+    <h5>Добавление нового пользователя</h5>
+</div>
     <@l.login "/registration" true/>
 </@c.page>

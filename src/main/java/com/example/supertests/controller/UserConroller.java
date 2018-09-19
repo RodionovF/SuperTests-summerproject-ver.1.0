@@ -8,8 +8,10 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.Map;
 
 @Controller
@@ -59,8 +61,27 @@ public class UserConroller {
     public String updateProfile(
             @AuthenticationPrincipal User user,
             @RequestParam String password,
-            @RequestParam String email
-    ){
+            @RequestParam String email,
+            Model model
+    ) {
+        boolean flag = false;
+        if (("").equals(password)) {
+            model.addAttribute("passwordError", "Please, fill the password");
+            flag = true;
+        }
+
+        if (("").equals(email)) {
+            model.addAttribute("emailError", "Please, fill the email");
+            flag = true;
+        }
+
+        if (flag) {
+            model.addAttribute("username", user.getUsername());
+            model.addAttribute("email", user.getEmail());
+
+            return "profile";
+        }
+
         userService.updateProfile(user, password, email);
 
         return "redirect:/user/profile";
@@ -71,7 +92,7 @@ public class UserConroller {
             @AuthenticationPrincipal User currentUser,
             @PathVariable User user
 
-    ){
+    ) {
         userService.subscribe(currentUser, user);
 
         return "redirect:/user-messages/" + user.getUserId();
@@ -82,27 +103,9 @@ public class UserConroller {
             @AuthenticationPrincipal User currentUser,
             @PathVariable User user
 
-    ){
+    ) {
         userService.unsubscribe(currentUser, user);
 
         return "redirect:/user-messages/" + user.getUserId();
-    }
-
-    @GetMapping("{type}/{user}/list")
-    public String userList(
-            Model model,
-            @PathVariable User user,
-            @PathVariable String type
-    ) {
-        model.addAttribute("userChannel", user);
-        model.addAttribute("type", type);
-
-        if ("subscriptions".equals(type)) {
-            model.addAttribute("users", user.getSubscriptions());
-        } else {
-            model.addAttribute("users", user.getSubscribers());
-        }
-
-        return "subscriptions";
     }
 }
