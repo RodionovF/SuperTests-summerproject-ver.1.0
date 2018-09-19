@@ -5,6 +5,4 @@ import org.springframework.data.repository.CrudRepository;
 
 public interface QuestionStatRepo extends CrudRepository<StatOfQuestion, Long> {
 
-    //List<Answer> findByQuestionId(Question questionId);
-
 }

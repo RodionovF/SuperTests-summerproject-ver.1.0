@@ -68,8 +68,7 @@ public class RegistrationController {
             @Valid User user,
             BindingResult bindingResult,
             Model model
-    )
-       {
+    ) {
             String url = String.format(CAPTCHA_URL, secret, captchaResponse);
             CaptchaResponseDto response = restTemplate.postForObject(url, Collections.emptyList(), CaptchaResponseDto.class);
 
@@ -99,7 +98,6 @@ public class RegistrationController {
                 model.addAttribute("usernameError", "User exists!");
                 return "registration";
             }
-
 
         return "redirect:/login";
     }

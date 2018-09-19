@@ -27,25 +27,6 @@ public class User implements UserDetails {
     @JoinColumn(name = "categoryId")
     private Category categoryId;
 
-//    @OneToMany(mappedBy = "author", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-//    private Set<Message> messages;
-
-    @ManyToMany
-    @JoinTable(
-            name = "user_subscriptions",
-            joinColumns = {@JoinColumn(name = "channel_id")},
-            inverseJoinColumns = {@JoinColumn(name = "subscriber_id")}
-    )
-    private Set<User> subscribers = new HashSet<>();
-
-    @ManyToMany
-    @JoinTable(
-            name = "user_subscriptions",
-            joinColumns = {@JoinColumn(name = "subscriber_id")},
-            inverseJoinColumns = {@JoinColumn(name = "channel_id")}
-    )
-    private Set<User> subscriptions = new HashSet<>();
-
     @Email(message = "Email is not correct")
     @NotBlank(message = "Email cannot be empty")
     private String email;
@@ -55,11 +36,6 @@ public class User implements UserDetails {
     @CollectionTable(name = "user_role", joinColumns = @JoinColumn(name = "user_id"))
     @Enumerated(EnumType.STRING)
     private Set<Role> roles;
-
-//    @ElementCollection(targetClass = Role.class, fetch = FetchType.EAGER)
-//    @CollectionTable(name = "roles", joinColumns = @JoinColumn(name = "role_id"))
-//    @Enumerated(EnumType.STRING)
-//    private Set<Role> rolename;
 
     @Override
     public boolean equals(Object o) {
@@ -160,10 +136,6 @@ public class User implements UserDetails {
         this.activationCode = activationCode;
     }
 
-//    public Set<Message> getMessages() { return messages; }
-//
-//    public void setMessages(Set<Message> messages) { this.messages = messages; }
-
     public Category getCategoryId() {
         return categoryId;
     }
@@ -171,26 +143,4 @@ public class User implements UserDetails {
     public void setCategoryId(Category categoryId) {
         this.categoryId = categoryId;
     }
-
-    public Set<User> getSubscribers() {
-        return subscribers;
-    }
-
-    public void setSubscribers(Set<User> subscribers) {
-        this.subscribers = subscribers;
-    }
-
-    public Set<User> getSubscriptions() {
-        return subscriptions;
-    }
-
-    public void setSubscriptions(Set<User> subscriptions) {
-        this.subscriptions = subscriptions;
-    }
-
-//    public Set<Role> getRolename() { return rolename; }
-//
-//    public void setRolename(Set<Role> rolename) {
-//        this.rolename = rolename;
-//    }
 }

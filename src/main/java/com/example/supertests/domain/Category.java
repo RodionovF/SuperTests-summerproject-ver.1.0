@@ -16,10 +16,6 @@ public class Category {
     @Length(max = 255, message = "Message too long (more than 255)")
     private String categoryname;
 
-    //@ManyToOne(fetch = FetchType.EAGER)
-    //@JoinColumn(name = "user_id")
-    //private User author;
-
     private String filename;
 
     public Category() {

@@ -67,6 +67,7 @@ public class TestController {
             @PathVariable Category category
     ) {
         model.addAttribute("category", category);
+
         return "testsCreating";
     }
 
@@ -152,6 +153,7 @@ public class TestController {
 
         model.addAttribute("test", test);
         model.addAttribute("category", category);
+
         return "redirect:/categories/" + category.getCategoryId();
     }
 
@@ -195,7 +197,6 @@ public class TestController {
             @Valid Question question,
             @RequestParam("questionimage") MultipartFile questionimage
     ) throws IOException {
-
         if (questionimage != null && !questionimage.getOriginalFilename().isEmpty()) {
             File uploadDir = new File(uploadPath);
 
@@ -323,6 +324,7 @@ public class TestController {
         model.addAttribute("checkedAnswers", checkedAnswers);
         model.addAttribute("numOfRightAnswers", numRight);
         model.addAttribute("numAnswers", numAns);
+
         return "testsPassing";
     }
 
@@ -357,6 +359,7 @@ public class TestController {
         model.addAttribute("numOfRightAnswers", numOfRightAnswers);
         model.addAttribute("test", test);
         model.addAttribute("category", category);
+
         return "testEnding";
     }
 }

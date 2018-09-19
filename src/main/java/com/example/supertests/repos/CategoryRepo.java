@@ -8,5 +8,4 @@ import java.util.List;
 public interface CategoryRepo extends CrudRepository<Category, Long> {
 
     Category findByCategoryname(String categoryname);
-
 }

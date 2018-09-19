@@ -22,7 +22,9 @@ public class UserConroller {
 
     @PreAuthorize("hasAuthority('ADMIN')")
     @GetMapping
-    public String userList(Model model) {
+    public String userList(
+            Model model
+    ) {
         model.addAttribute("users", userService.findAll());
 
         return "userList";
@@ -30,7 +32,10 @@ public class UserConroller {
 
     @PreAuthorize("hasAuthority('ADMIN')")
     @GetMapping("{user}")
-    public String userEditForm(@PathVariable User user, Model model) {
+    public String userEditForm(
+            @PathVariable User user,
+            Model model
+    ) {
         model.addAttribute("user", user);
         model.addAttribute("roles", Role.values());
 
@@ -50,7 +55,9 @@ public class UserConroller {
     }
 
     @GetMapping("profile")
-    public String getProfile(Model model, @AuthenticationPrincipal User user) {
+    public String getProfile(
+            Model model, @AuthenticationPrincipal User user
+    ) {
         model.addAttribute("username", user.getUsername());
         model.addAttribute("email", user.getEmail());
 
@@ -67,11 +74,13 @@ public class UserConroller {
         boolean flag = false;
         if (("").equals(password)) {
             model.addAttribute("passwordError", "Please, fill the password");
+
             flag = true;
         }
 
         if (("").equals(email)) {
             model.addAttribute("emailError", "Please, fill the email");
+
             flag = true;
         }
 

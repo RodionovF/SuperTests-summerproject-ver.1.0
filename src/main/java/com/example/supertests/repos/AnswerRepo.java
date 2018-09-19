@@ -9,7 +9,4 @@ import java.util.List;
 public interface AnswerRepo extends CrudRepository<Answer, Long> {
 
     List<Answer> findByQuestionId(Question questionId);
-
-    Answer findOneByAnswer(String answer);
-
 }

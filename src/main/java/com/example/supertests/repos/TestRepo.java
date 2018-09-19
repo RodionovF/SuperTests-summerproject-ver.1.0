@@ -9,5 +9,4 @@ import java.util.List;
 public interface TestRepo extends CrudRepository<Test, Long> {
 
     List<Test> findByCategoryId(Category CategoryId);
-
 }

@@ -34,7 +34,9 @@ public class CategoryController {
     private String uploadPath;
 
     @GetMapping("/")
-    public String greeting(Map<String, Object> model) {
+    public String greeting(
+            Map<String, Object> model
+    ) {
         return "greeting";
     }
 
@@ -151,8 +153,10 @@ public class CategoryController {
         }
 
         Iterable<Category> categories = categoryRepo.findAll();
+
         model.addAttribute("categories", categories);
         model.addAttribute("category", category);
+
         return "categoryEditor";
     }
 }
