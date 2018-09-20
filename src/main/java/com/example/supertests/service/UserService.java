@@ -46,8 +46,7 @@ public class UserService implements UserDetailsService {
         if (userFromDb != null) {
             return false;
         }
-
-        user.setActive(true);
+        user.setActive(false);
         user.setRoles(Collections.singleton(Role.USER));
         user.setActivationCode(UUID.randomUUID().toString());
         user.setPassword(passwordEncoder.encode(user.getPassword()));
@@ -80,7 +79,9 @@ public class UserService implements UserDetailsService {
             return false;
         }
 
+
         user.setActivationCode(null);
+        user.setActive(true);
 
         userRepo.save(user);
 
@@ -117,7 +118,7 @@ public class UserService implements UserDetailsService {
 
         if (isEmailChanged){
             user.setEmail(email);
-
+            user.setActive(false);
             if(!StringUtils.isEmpty(email)) {
                 user.setActivationCode(UUID.randomUUID().toString());
             }

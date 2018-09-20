@@ -8,7 +8,8 @@
                             <label class="col-sm-3 col-form-label">Имя теста:</label>
                             <div class="col-sm-6">
                                 <input type="text" name="testname" placeholder="Enter the testname"
-                                       class="col-sm-6 form-control ${(testnameError??)?string('is-invalid', '')}"/>
+                                       class="col-sm-6 form-control ${(testnameError??)?string('is-invalid', '')}"
+                                       value="<#if test??>${test.testname}</#if>" />
                                 <#if testnameError??>
                                     <div class="invalid-feedback">
                                         ${testnameError}
@@ -79,7 +80,7 @@
                                                class="col-sm-1 form-control-plaintext"
                                                id="output" value="1">
                                     </div>
-                                    <div class="collapse" id="collapseExample">
+                                    <div class="collapse <#if test??>show</#if>" id="collapseExample">
                                         <div class="form-group mt-3" id="form">
                                             <div class="form-group row ml-5 mt-3">
                                                 <label class="col-sm-2 col-form-label ">
@@ -107,7 +108,7 @@
                                                         </div>
                                                     </div>
                                                     <input type="text" name="answer" id="output2"
-                                                           class="form-control my-3 ${(answerError??)?string('is-invalid', '')}"
+                                                           class="form-control my-3 ${(answerError??)?string('is-invalid', '')} ${(checkboxError??)?string('is-invalid', '')}"
                                                            aria-label="Text input with checkbox"
                                                            placeholder="Enter the answer" value=" ">
                                                     <span class="input-group-btn my-3">
@@ -120,6 +121,11 @@
                                                             ${answerError}
                                                         </div>
                                                     </#if>
+                                                     <#if checkboxError??>
+                                                                <div class="invalid-feedback">
+                                                                    ${checkboxError}
+                                                                </div>
+                                                     </#if>
                                                 </div>
                                             </div>
                                             <div class="form-group row ml-5">

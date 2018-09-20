@@ -56,7 +56,8 @@ public class UserConroller {
 
     @GetMapping("profile")
     public String getProfile(
-            Model model, @AuthenticationPrincipal User user
+            @AuthenticationPrincipal User user,
+            Model model
     ) {
         model.addAttribute("username", user.getUsername());
         model.addAttribute("email", user.getEmail());
@@ -67,9 +68,9 @@ public class UserConroller {
     @PostMapping("profile")
     public String updateProfile(
             @AuthenticationPrincipal User user,
+            Model model,
             @RequestParam String password,
-            @RequestParam String email,
-            Model model
+            @RequestParam String email
     ) {
         boolean flag = false;
         if (("").equals(password)) {

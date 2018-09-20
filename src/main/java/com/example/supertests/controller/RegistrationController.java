@@ -41,8 +41,8 @@ public class RegistrationController {
 
     @GetMapping("/registration")
     public String registration(
-            @RequestParam(required = false, defaultValue = "") String password,
-            Model model
+            Model model,
+            @RequestParam(required = false, defaultValue = "") String password
     ) {
         model.addAttribute("strength", "");
         model.addAttribute("color", BLACK_COLOR);
@@ -63,11 +63,11 @@ public class RegistrationController {
 
     @PostMapping("/registration")
     public String addUser(
-            @RequestParam("password2") String passwordConfirm,
-            @RequestParam("g-recaptcha-response") String captchaResponse,
             @Valid User user,
             BindingResult bindingResult,
-            Model model
+            Model model,
+            @RequestParam("password2") String passwordConfirm,
+            @RequestParam("g-recaptcha-response") String captchaResponse
     ) {
             String url = String.format(CAPTCHA_URL, secret, captchaResponse);
             CaptchaResponseDto response = restTemplate.postForObject(url, Collections.emptyList(), CaptchaResponseDto.class);
@@ -104,8 +104,8 @@ public class RegistrationController {
 
     @GetMapping("/activate/{code}")
     public String activate(
-            Model model,
-            @PathVariable String code
+            @PathVariable String code,
+            Model model
     ) {
         boolean isActivated = userService.activateUser(code);
 

@@ -42,8 +42,8 @@ public class CategoryController {
 
     @GetMapping("/categories")
     public String main(
-            @RequestParam(required = false, defaultValue = "") String filter,
-            Model model
+            Model model,
+            @RequestParam(required = false, defaultValue = "") String filter
     ) {
         Iterable<Category> target = categoryRepo.findAll();
         List<Category> categories = new ArrayList<>();
@@ -63,10 +63,10 @@ public class CategoryController {
     @PostMapping("/categories")
     public String add(
             @AuthenticationPrincipal User user,
-            @RequestParam("file") MultipartFile file,
             @Valid Category category,
             BindingResult bindingResult,
-            Model model
+            Model model,
+            @RequestParam("file") MultipartFile file
     ) throws IOException {
 
         if (bindingResult.hasErrors()) {
@@ -117,8 +117,8 @@ public class CategoryController {
     @GetMapping("/edit-category/{category}")
     public String editCategorys(
             @AuthenticationPrincipal User currentUser,
-            Model model,
-            @PathVariable Category category
+            @PathVariable Category category,
+            Model model
     ) {
         Iterable<Category> categories = categoryRepo.findAll();
         model.addAttribute("categories", categories);
@@ -130,10 +130,10 @@ public class CategoryController {
     @PreAuthorize("hasAuthority('ADMIN')")
     @PostMapping("/edit-category/{category}")
     public String updateCategory(
+            @PathVariable Category category,
             @RequestParam("categoryname") String categoryname,
             @RequestParam("file") MultipartFile file,
-            Model model,
-            @PathVariable Category category
+            Model model
     ) throws IOException {
 
         boolean isCategoryEmpty = StringUtils.isEmpty(categoryname);
