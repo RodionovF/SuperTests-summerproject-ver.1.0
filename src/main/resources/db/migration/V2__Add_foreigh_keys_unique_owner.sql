@@ -5,7 +5,6 @@ alter table questions owner to postgres;
 alter table answers owner to postgres;
 alter table stat_of_tests owner to postgres;
 alter table stat_of_questions owner to postgres;
------------------------------------------------------------
 
 create unique index if not exists categories_category_id_uindex
 	on preference_categories (category_id);
@@ -27,7 +26,6 @@ create unique index if not exists stat_of_tests_stat_test_id_uindex
 
 create unique index if not exists stat_of_questions_stat_question_id_uindex
 	on stat_of_questions (stat_question_id);
------------------------------------------------------------
 
 alter table if exists user_role
     add constraint user_role_user_fk

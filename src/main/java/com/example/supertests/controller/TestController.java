@@ -4,15 +4,13 @@ import com.example.supertests.domain.*;
 import com.example.supertests.repos.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.http.HttpStatus;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.validation.Valid;
@@ -52,6 +50,8 @@ public class TestController {
             Model model,
             @PathVariable Category category
     ) {
+        if (category.equals(null)) throw new ResourceNotFoundException();
+
         Iterable<Test> tests = testRepo.findByCategoryId(category);
 
         model.addAttribute("tests", tests);
@@ -60,18 +60,20 @@ public class TestController {
         return "tests";
     }
 
-    @PreAuthorize("hasAuthority('ADMIN')")
+    @PreAuthorize("hasAuthority('CREATER')")
     @GetMapping("categories/{category}/create-mode")
     public String viewTest(
             Model model,
             @PathVariable Category category
     ) {
+        if (category.equals(null)) throw new ResourceNotFoundException();
+
         model.addAttribute("category", category);
 
         return "testsCreating";
     }
 
-    @PreAuthorize("hasAuthority('ADMIN')")
+    @PreAuthorize("hasAuthority('CREATER')")
     @PostMapping("categories/{category}/create-mode")
     public String addTest(
             @AuthenticationPrincipal User user,
@@ -226,6 +228,9 @@ public class TestController {
             @PathVariable Category category,
             @PathVariable Test test
     ) throws IOException {
+        if (category.equals(null)) throw new ResourceNotFoundException();
+        if (test.equals(null)) throw new ResourceNotFoundException();
+
         List<Question> questions = questionRepo.findByTestId(test);
         List<Answer> answers = null;
         List<Answer> checkedAnswers = new ArrayList<Answer>();
@@ -276,11 +281,6 @@ public class TestController {
                 statOfTest = testStatRepo.findById(Long.valueOf(currentStat)).get();
             }
 
-
-            StatOfQuestion statOfQuestion = new StatOfQuestion();
-            statOfQuestion.setStatTestId(statOfTest);
-            statOfQuestion.setQuestionId(questionRepo.findById(Long.valueOf(currentQuestion)).get());
-
             Question currentQue = questionRepo.findById(Long.valueOf(currentQuestion)).get();
             answersOnOneQuestionCheck = answerRepo.findByQuestionId(currentQue);
 
@@ -290,6 +290,10 @@ public class TestController {
             }
 
             for (int i = 0; i < checks.length; i++) {
+                StatOfQuestion statOfQuestion = new StatOfQuestion();
+                statOfQuestion.setStatTestId(statOfTest);
+                statOfQuestion.setQuestionId(questionRepo.findById(Long.valueOf(currentQuestion)).get());
+
                 Answer selectedAnswer = answerRepo.findById(Long.valueOf(checks[i])).get();
                 if (!selectedAnswer.isCorectness())
                     checkedAnswers.add(selectedAnswer);
@@ -337,22 +341,24 @@ public class TestController {
             @PathVariable Category category,
             @PathVariable Test test
     ) throws IOException {
+        if (category.equals(null)) throw new ResourceNotFoundException();
+        if (test.equals(null)) throw new ResourceNotFoundException();
+
         Iterable<StatOfTest> target = testStatRepo.findByTestId(test);
         ArrayList<StatOfTest> statOfTests = new ArrayList<>();
-        //StatOfTest currentStatOfTest = testStatRepo.findById(Long.valueOf(statOfTest)).get();
         Long betterThen = 0L;
         Long result = Long.valueOf(numOfRightAnswers);
+
         target.forEach(statOfTests::add);
 
-        for(int i = 0; i <  statOfTests.size(); i++)
-        {
-            if(statOfTests.get(i).getResult() == null)
+        for (int i = 0; i < statOfTests.size(); i++) {
+            if (statOfTests.get(i).getResult() == null)
                 betterThen++;
-            else  if (result >= statOfTests.get(i).getResult())
+            else if (result >= statOfTests.get(i).getResult())
                 betterThen++;
         }
 
-        double ans = betterThen*100/statOfTests.size();
+        double ans = betterThen * 100 / statOfTests.size();
 
         model.addAttribute("betterThen", ans);
         model.addAttribute("numOfTimesPass", statOfTests.size());
@@ -362,6 +368,27 @@ public class TestController {
 
         return "testEnding";
     }
+
+
+    @GetMapping("/categories/{category}/tests-editing/{user}")
+    public String userMessges(
+            @AuthenticationPrincipal User currentUser,
+            @RequestParam(required = false) Test test,
+            Model model,
+            @PathVariable User user,
+            @PathVariable Category category
+    ) {
+        if (category.equals(null)) throw new ResourceNotFoundException();
+        if (user.equals(null)) throw new ResourceNotFoundException();
+
+        model.addAttribute("category", category);
+        model.addAttribute("test", test);
+        model.addAttribute("isCurrentUser", currentUser.equals(user));
+
+        return "userTests";
+    }
+
+
 }
 
 

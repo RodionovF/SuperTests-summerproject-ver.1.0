@@ -16,6 +16,11 @@
                           role="button">Пройти</a></p>
                     <p class="card-text">
                         <small class="text-muted">Тест создал ${test.author_id.username}</small>
+                         <#if test.author_id.getUserId() == currentUserId>
+                            <a class="btn btn-outline-info btn-sm" href="/categories/${category.categoryId}/tests-editing/${test.author_id.getUserId()}?test=${test.test_id}">
+                                Edit
+                            </a>
+                         </#if>
                     </p>
                 </div>
             </div>
@@ -27,7 +32,7 @@
 
     </div>
     <div class="col-sm-3 my-3">
-        <#if isAdmin>
+        <#if isCreater>
             <a class="btn btn-dark" href="/categories/${category.categoryId}/create-mode">Создать новый тест</a>
         </#if>
     </div>

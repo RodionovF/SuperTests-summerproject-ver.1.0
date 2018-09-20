@@ -54,8 +54,6 @@ create table answers
 	primary key (answer_id)
 );
 
------------------------------------------------------------
-
 create table stat_of_tests
 (
 	stat_test_id int8 not null,
@@ -76,45 +74,6 @@ create table stat_of_questions
 	primary key (stat_question_id)
 );
 
------------------------------------------------------------
---
--- create table if not exists users
--- (
--- 	user_id serial not null
--- 		constraint users_pkey
--- 			primary key,
--- 	active boolean not null,
--- 	email varchar,
--- 	pass varchar not null,
--- 	username varchar not null,
--- 	category_id integer
--- 		constraint users_categories_category_id_fk
--- 			references preference_categories
--- 				on update cascade on delete cascade,
--- 	role_id integer not null
--- 		constraint users_roles_role_id_fk
--- 			references roles
--- 				on update cascade on delete cascade
--- );
---
--- alter table users owner to postgres;
---
--- create unique index if not exists users_id_uindex
--- 	on users (user_id);
---
--- 	create table roles
--- (
--- 	role_id int8 not null
--- 		constraint roles_pkey
--- 			primary key,
--- 	rolename varchar(255) not null
--- );
---
--- alter table roles owner to postgres;
---
--- create unique index if not exists roles_role_id_uindex
--- 	on roles (role_id);
------------------------------------------------------------
 
 
 

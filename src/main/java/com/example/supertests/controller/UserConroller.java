@@ -95,26 +95,4 @@ public class UserConroller {
 
         return "redirect:/user/profile";
     }
-
-    @GetMapping("subscribe/{user}")
-    public String subscribe(
-            @AuthenticationPrincipal User currentUser,
-            @PathVariable User user
-
-    ) {
-        userService.subscribe(currentUser, user);
-
-        return "redirect:/user-messages/" + user.getUserId();
-    }
-
-    @GetMapping("unsubscribe/{user}")
-    public String unsubscribe(
-            @AuthenticationPrincipal User currentUser,
-            @PathVariable User user
-
-    ) {
-        userService.unsubscribe(currentUser, user);
-
-        return "redirect:/user-messages/" + user.getUserId();
-    }
 }

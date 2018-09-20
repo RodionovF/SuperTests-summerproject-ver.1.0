@@ -37,6 +37,9 @@ public class User implements UserDetails {
     @Enumerated(EnumType.STRING)
     private Set<Role> roles;
 
+//    @OneToMany(mappedBy = "author_id", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+//    private Set<Test> tests;
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -49,6 +52,10 @@ public class User implements UserDetails {
     public int hashCode() {
 
         return Objects.hash(userId);
+    }
+
+    public boolean isCreater() {
+        return roles.contains(Role.CREATER);
     }
 
     public boolean isAdmin() {
@@ -143,4 +150,12 @@ public class User implements UserDetails {
     public void setCategoryId(Category categoryId) {
         this.categoryId = categoryId;
     }
+
+//    public Set<Test> getTests() {
+//        return tests;
+//    }
+//
+//    public void setTests(Set<Test> tests) {
+//        this.tests = tests;
+//    }
 }
